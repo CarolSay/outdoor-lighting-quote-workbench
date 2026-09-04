@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>保险单生成器 - TradeKit Insurance Policy</title>
+<meta name="description" content="免费生成保险单参考模板，涵盖投保人、受益人、保险条款，支持自动计算保费。">
+<meta name="keywords" content="保险单,insurance policy,货运保险,cargo insurance,投保人,insured,受益人,beneficiary,保费,premium,All Risks">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="http://tradekit.treedeep.cn/insurance-policy.html">
+<link rel="alternate" hreflang="zh" href="http://tradekit.treedeep.cn/insurance-policy.html">
+<link rel="alternate" hreflang="en" href="http://tradekit.treedeep.cn/insurance-policy.html?lang=en">
+<link rel="alternate" hreflang="x-default" href="http://tradekit.treedeep.cn/insurance-policy.html">
+<meta name="geo.region" content="CN">
+<meta name="geo.placename" content="China">
+<meta name="geo.position" content="35.8617;104.1954">
+<meta name="ICBM" content="35.8617, 104.1954">
+<meta name="language" content="zh-CN, en">
+<meta name="content-language" content="zh-CN">
+<meta name="distribution" content="global">
+<meta property="og:type" content="article">
+<meta property="og:title" content="保险单生成器 - TradeKit Insurance Policy">
+<meta property="og:description" content="免费生成保险单参考模板，涵盖投保人、受益人、保险条款，支持自动计算保费。">
+<meta property="og:url" content="http://tradekit.treedeep.cn/insurance-policy.html">
+<meta property="og:site_name" content="TradeKit">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="article:section" content="Trade Documents">
+<meta property="article:tag" content="外贸单证">
+<meta property="article:tag" content="trade document">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="保险单生成器 - TradeKit Insurance Policy">
+<meta name="twitter:description" content="免费生成保险单参考模板，涵盖投保人、受益人、保险条款，支持自动计算保费。">
+<meta name="twitter:label:1" content="文档类型">
+<meta name="twitter:data:1" content="保险单生成器 - TradeKit Insurance Policy">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📦</text></svg>">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "保险单生成器 - TradeKit Insurance Policy",
+  "alternateName": "Insurance Policy Generator - TradeKit",
+  "description": "免费生成保险单参考模板，涵盖投保人、受益人、保险条款，支持自动计算保费。",
+  "url": "http://tradekit.treedeep.cn/insurance-policy.html",
+  "isPartOf": {
+    "@type": "SoftwareApplication",
+    "name": "TradeKit",
+    "url": "http://tradekit.treedeep.cn"
+  },
+  "inLanguage": [
+    "zh-CN",
+    "en-US"
+  ],
+  "about": {
+    "@type": "Thing",
+    "name": "保险单生成器 - TradeKit Insurance Policy",
+    "description": "免费生成保险单参考模板，涵盖投保人、受益人、保险条款，支持自动计算保费。"
+  },
+  "mainEntity": {
+    "@type": "Service",
+    "name": "保险单生成器 - TradeKit Insurance Policy",
+    "description": "免费生成保险单参考模板，涵盖投保人、受益人、保险条款，支持自动计算保费。",
+    "serviceType": "Trade Document Generation",
+    "provider": {
+      "@type": "Organization",
+      "name": "TradeKit",
+      "url": "http://tradekit.treedeep.cn"
+    },
+    "areaServed": "Worldwide",
+    "availableLanguage": [
+      "zh-CN",
+      "en-US"
+    ]
+  }
+}</script>
+<link rel="stylesheet" href="common.css">
+<script src="html2pdf.bundle.min.js"></script>
+</head>
+<body>
+<header class="top-bar">
+  <div class="top-bar-left"><a href="index.html" class="toggle-btn" id="back-btn"><span id="back-icon"></span><span id="back-text"></span></a></div>
+  <div class="top-bar-right">
+    <button class="toggle-btn" id="lang-btn"><span id="lang-icon"></span><span id="lang-label">EN</span></button>
+    <button class="toggle-btn" id="theme-btn"><span id="theme-icon"></span><span id="theme-label">Light</span></button>
+  </div>
+</header>
+<main class="doc-page"><div class="doc-page-content">
+  <div class="doc-header"><h1 id="page-title">Insurance Policy Generator</h1><p id="page-subtitle">保险单</p></div>
+  <div class="tab-bar"><button class="tab-btn active" data-tab="edit" id="tab-edit"></button><button class="tab-btn" data-tab="preview" id="tab-preview"></button><button class="tab-btn" data-tab="history" id="tab-history"></button></div>
+  <div class="tab-panel active" id="panel-edit"><div class="action-bar"><div class="action-bar-left"><button class="btn btn-secondary btn-sm" id="btn-load-sample"></button><button class="btn btn-secondary btn-sm" id="btn-clear"></button></div><div class="action-bar-right"><button class="btn btn-secondary btn-sm" id="btn-switch-preview"></button><button class="btn btn-primary" id="btn-pdf" data-pdf-btn></button></div></div><div id="form-container"></div></div>
+  <div class="tab-panel" id="panel-preview"><div class="action-bar"><div class="action-bar-left"><button class="btn btn-secondary btn-sm" id="btn-back-edit"></button><button class="btn btn-secondary btn-sm" id="btn-preview-lang"></button></div><div class="action-bar-right"><button class="btn btn-primary" id="btn-pdf-preview" data-pdf-btn></button><button class="btn btn-secondary btn-sm" id="btn-print"></button></div></div><div id="preview-container"></div></div>
+  <div class="tab-panel" id="panel-history"><div class="history-search"><input class="input-field" id="history-search" type="text" placeholder=""></div><div id="history-container"></div></div>
+</div></main>
+<div class="clear-modal hidden" id="clear-modal"><div class="clear-modal-content"><div class="clear-modal-title" id="clear-title"></div><div class="clear-modal-msg" id="clear-msg"></div><div class="clear-modal-actions"><button class="btn btn-secondary btn-sm" id="btn-cancel-clear"></button><button class="btn btn-danger" id="btn-confirm-clear"></button></div></div></div>
+<script src="common.js"></script>
+<script>
+var DT='insurance_policy',DT_META=DOC_META[DT],lang=getLang(),dark=isDark(),previewLang='en',data=null,showClearConfirm=false;
+function init(){applyTheme();var s=loadDocData(DT);data=s?s:getDefaultDoc(DT);renderAll();}
+  injectSpaButton();
+  injectBottomCta();
+  injectPageFaq();
+function renderAll(){renderTopBar();renderHeader();renderTabs();renderForm();renderPreview();renderHistory();renderClearModal();}
+function renderTopBar(){var tr=I18N[lang];document.documentElement.lang=lang;document.getElementById('back-icon').innerHTML=svg('ArrowLeft',16);document.getElementById('back-text').textContent=tr.backHome;document.getElementById('lang-icon').innerHTML=svg('Languages',16);document.getElementById('lang-label').textContent=lang==='zh'?'EN':'中文';document.getElementById('theme-icon').innerHTML=svg(dark?'Sun':'Moon',16);document.getElementById('theme-label').textContent=dark?'Light':'Dark';}
+function renderHeader(){document.getElementById('page-title').textContent=DT_META.title;document.getElementById('page-subtitle').textContent=DT_META.titleZh;}
+function renderTabs(){var tr=I18N[lang];document.getElementById('tab-edit').textContent=tr.formEditor;document.getElementById('tab-preview').textContent=tr.previewTab;document.getElementById('tab-history').textContent=tr.historyTab;var ps=['edit','preview','history'];ps.forEach(function(p){document.getElementById('tab-'+p).onclick=function(){ps.forEach(function(pp){document.getElementById('tab-'+pp).classList.toggle('active',pp===p);document.getElementById('panel-'+pp).classList.toggle('active',pp===p);});};});}
+function switchTab(t){['edit','preview','history'].forEach(function(p){document.getElementById('tab-'+p).classList.toggle('active',p===t);document.getElementById('panel-'+p).classList.toggle('active',p===t);});}
+function renderForm(){
+  var tr=I18N[lang],isZh=lang==='zh',d=data;
+  document.getElementById('btn-load-sample').textContent=tr.loadSample;document.getElementById('btn-clear').textContent=tr.clear;
+  document.getElementById('btn-switch-preview').textContent=tr.preview;document.getElementById('btn-pdf').textContent=tr.exportPdf;
+  document.getElementById('btn-back-edit').textContent=tr.backEdit;document.getElementById('btn-preview-lang').textContent=previewLang==='en'?'Switch to 中文':'Switch to English';
+  document.getElementById('btn-pdf-preview').textContent=tr.exportPdf;document.getElementById('btn-print').textContent=tr.print;
+  document.getElementById('history-search').placeholder=tr.searchPlaceholder;
+  document.getElementById('btn-load-sample').onclick=loadSample;document.getElementById('btn-clear').onclick=function(){showClearConfirm=true;renderClearModal();};
+  document.getElementById('btn-switch-preview').onclick=function(){switchTab('preview');renderPreview();};document.getElementById('btn-back-edit').onclick=function(){switchTab('edit');};
+  document.getElementById('btn-pdf').onclick=function(){doExportPdf(DT,data,'preview-content');};document.getElementById('btn-pdf-preview').onclick=function(){doExportPdf(DT,data,'preview-content');};
+  document.getElementById('btn-preview-lang').onclick=function(){previewLang=previewLang==='en'?'zh':'en';renderPreview();};document.getElementById('btn-print').onclick=function(){window.print();};
+  var h='';
+  h+='<div class="section-card"><h3>'+fB(isZh?'保险信息':'Insurance Info','')+'</h3><div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));">';
+  h+=lI(isZh?'保单号':'Policy No.',d.policyNo,'policyNo','');h+=lI(isZh?'发票号':'Invoice No.',d.invoiceNo,'invoiceNo','');
+  h+=lI(isZh?'合同号':'Contract No.',d.contractNo,'contractNo','');h+=lID(isZh?'投保日期':'Date of Insurance',d.dateOfInsurance,'dateOfInsurance');h+='</div></div>';
+  h+='<div class="section-card"><h3>'+fB(isZh?'投保人信息':'Insured Info','')+'</h3><div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));">';
+  h+=lI(isZh?'名称':'Name',d.insuredName,'insuredName','');h+=lI(isZh?'地址':'Address',d.insuredAddress,'insuredAddress','');h+='</div></div>';
+  h+='<div class="section-card"><h3>'+fB(isZh?'受益人信息':'Beneficiary Info','')+'</h3><div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));">';
+  h+=lI(isZh?'名称':'Name',d.beneficiaryName,'beneficiaryName','');h+=lI(isZh?'地址':'Address',d.beneficiaryAddress,'beneficiaryAddress','');h+='</div></div>';
+  h+='<div class="section-card"><h3>'+fB(isZh?'运输信息':'Voyage Info','')+'</h3><div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));">';
+  h+=lI(isZh?'起运地':'Voyage From',d.voyageFrom,'voyageFrom','');h+=lI(isZh?'目的地':'Voyage To',d.voyageTo,'voyageTo','');
+  h+=lI(isZh?'运输方式':'Means of Transport',d.meansOfTransport,'meansOfTransport','');h+=lI(isZh?'船名':'Vessel',d.vessel,'vessel','');h+='</div></div>';
+  h+='<div class="section-card"><h3>'+fB(isZh?'保险条款':'Insurance Terms','')+'</h3><div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));">';
+  h+=lI(isZh?'保险条件':'Insurance Conditions',d.insuranceConditions,'insuranceConditions','');h+=lI(isZh?'保险条款':'Insurance Clauses',d.insuranceClauses,'insuranceClauses','');
+  h+=lI(isZh?'货币':'Currency',d.currency,'currency','');h+=lI(isZh?'保险总金额':'Total Insured Amount',d.totalInsuredAmount,'totalInsuredAmount','');
+  h+=lI(isZh?'保费率':'Premium Rate (%)',d.premiumRate,'premiumRate','');h+=lI(isZh?'保费金额':'Premium Amount',d.premiumAmount,'premiumAmount','');h+='</div></div>';
+  h+='<div class="section-card"><h3>'+fB(isZh?'货品明细':'Goods Details','')+'</h3>';
+  h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">';
+  h+='<p style="font-size:13px;color:var(--text-muted);">'+(isZh?'逐项添加货品。':'Add items.')+'</p>';
+  h+='<button class="btn btn-success btn-sm" onclick="window._ipAddItem()">'+tr.addItem+'</button></div>';
+  h+='<div class="items-table-container"><table class="items-table"><thead><tr>';
+  ['#',isZh?'唛头':'MARKS',isZh?'件数':'NO.PKGS',isZh?'描述':'DESCRIPTION',isZh?'HS编码':'HS Code',isZh?'数量':'QTY',isZh?'投保金额':'Insured Amt',isZh?'操作':'Action'].forEach(function(th){h+='<th>'+th+'</th>';});
+  h+='</tr></thead><tbody>';
+  d.items.forEach(function(it,idx){
+    h+='<tr><td class="row-number">'+(idx+1)+'</td>';
+    h+='<td><input class="input-field input-field-xs" value="'+esc(it.marks)+'" onchange="window._ipItem('+idx+',\'marks\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-center" value="'+esc(it.numberOfPkgs)+'" onchange="window._ipItem('+idx+',\'numberOfPkgs\',this.value)"></td>';
+    h+='<td class="description-cell"><textarea class="input-field input-field-sm" rows="2" onchange="window._ipItem('+idx+',\'description\',this.value)">'+esc(it.description)+'</textarea></td>';
+    h+='<td><input class="input-field input-field-xs" value="'+esc(it.hsCode)+'" onchange="window._ipItem('+idx+',\'hsCode\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-center" value="'+esc(it.quantity)+'" onchange="window._ipItem('+idx+',\'quantity\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-right" value="'+esc(it.insuredAmount)+'" onchange="window._ipItem('+idx+',\'insuredAmount\',this.value)"></td>';
+    h+='<td class="actions"><button class="btn btn-danger" onclick="window._ipRemoveItem('+idx+')" '+(d.items.length<=1?'disabled':'')+'>&times;</button></td></tr>';
+  });
+  h+='</tbody></table></div></div>';
+  h+='<div class="section-card"><h3>'+fB(isZh?'声明与签发':'Declaration & Issue','')+'</h3>';
+  h+='<div><div class="form-label">'+(isZh?'声明内容':'Declaration')+'</div><textarea class="input-field" rows="2" onchange="window._ipSet(\'declaration\',this.value)">'+esc(d.declaration)+'</textarea></div>';
+  h+='<div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));margin-top:12px;">';
+  h+=lI(isZh?'保险人名称':'Insurer Name',d.insurerName,'insurerName','');h+=lID(isZh?'签发日期':'Date',d.signatureDate,'signatureDate');h+='</div></div>';
+  document.getElementById('form-container').innerHTML=h;
+}
+function renderPreview(){
+  var d=data,isZh2=previewLang==='zh';
+  function tr2(en,zh){return isZh2?zh:en;}
+  var h='<div class="invoice-preview" id="preview-content">';
+  h+='<div class="header-title">'+tr2('INSURANCE POLICY','保险单')+'</div>';
+  h+='<table><tbody><tr><th style="width:25%;">'+tr2('POLICY NO.','保单号')+'</th><th style="width:25%;">'+tr2('INVOICE NO.','发票号')+'</th><th style="width:25%;">'+tr2('CONTRACT NO.','合同号')+'</th><th style="width:25%;">'+tr2('DATE','投保日期')+'</th></tr>';
+  h+='<tr><td class="text-center">'+esc(d.policyNo||'—')+'</td><td class="text-center">'+esc(d.invoiceNo||'—')+'</td><td class="text-center">'+esc(d.contractNo||'—')+'</td><td class="text-center">'+esc(d.dateOfInsurance||'—')+'</td></tr></tbody></table>';
+  h+='<table class="mt-2"><tbody><tr><td style="width:50%;"><div class="section-label2">'+tr2('INSURED','投保人')+'</div>';
+  h+='<div class="section-value">'+esc(d.insuredName||'—')+'</div><div class="section-value">'+esc(d.insuredAddress||'—')+'</div></td>';
+  h+='<td style="width:50%;"><div class="section-label2">'+tr2('BENEFICIARY','受益人')+'</div>';
+  h+='<div class="section-value">'+esc(d.beneficiaryName||'—')+'</div><div class="section-value">'+esc(d.beneficiaryAddress||'—')+'</div></td></tr></tbody></table>';
+  h+='<table class="mt-2"><tbody><tr>';
+  [tr2('VOYAGE FROM','起运地'),tr2('VOYAGE TO','目的地'),tr2('TRANSPORT','运输方式'),tr2('VESSEL','船名')].forEach(function(t){h+='<th style="width:25%;">'+t+'</th>';});
+  h+='</tr><tr>';
+  [d.voyageFrom,d.voyageTo,d.meansOfTransport,d.vessel].forEach(function(v){h+='<td class="text-center">'+esc(v||'—')+'</td>';});
+  h+='</tr></tbody></table>';
+  h+='<table class="mt-2"><thead><tr>';
+  ['#',tr2('MARKS','唛头'),tr2('NO.PKGS','件数'),tr2('DESCRIPTION','描述'),tr2('HS CODE','HS编码'),tr2('QTY','数量'),tr2('INSURED AMT','投保金额')].forEach(function(t){h+='<th>'+t+'</th>';});
+  h+='</tr></thead><tbody>';
+  d.items.forEach(function(it,idx){
+    h+='<tr><td class="text-center">'+(idx+1)+'</td><td>'+esc(it.marks||'—')+'</td><td class="text-center">'+esc(it.numberOfPkgs||'—')+'</td>';
+    h+='<td>'+esc(it.description||'—')+'</td><td class="text-center">'+esc(it.hsCode||'—')+'</td><td class="text-center">'+esc(it.quantity||'—')+'</td>';
+    h+='<td class="text-right">'+esc(it.insuredAmount||'—')+'</td></tr>';
+  });
+  h+='</tbody></table>';
+  h+='<table class="mt-2"><tbody>';
+  h+='<tr><td style="width:50%;"><div class="section-label2">'+tr2('INSURANCE CONDITIONS','保险条件')+'</div><div class="section-value">'+esc(d.insuranceConditions||'—')+'</div></td>';
+  h+='<td style="width:50%;"><div class="section-label2">'+tr2('CLAUSES','保险条款')+'</div><div class="section-value">'+esc(d.insuranceClauses||'—')+'</div></td></tr>';
+  h+='<tr><td><div class="section-label2">'+tr2('TOTAL INSURED','总保险金额')+'</div><div class="section-value font-bold">'+esc(d.totalInsuredAmount||'—')+'</div></td>';
+  h+='<td><div class="section-label2">'+tr2('PREMIUM','保费')+'</div><div class="section-value">'+esc(d.premiumRate||'—')+'% / '+esc(d.premiumAmount||'—')+'</div></td></tr>';
+  h+='</tbody></table>';
+  h+='<div class="mt-2"><div class="section-label2">'+tr2('DECLARATION','声明')+'</div><div class="section-value">'+esc(d.declaration)+'</div></div>';
+  h+='<div class="mt-2" style="text-align:right;"><div class="section-label2">'+tr2('INSURER','保险人')+'</div>';
+  h+='<div class="section-value">'+esc(d.insurerName||'—')+'</div><div class="section-value">'+esc(d.signatureDate||'')+'</div></div></div>';
+  document.getElementById('preview-container').innerHTML=h;
+}
+function renderHistory(){
+  var tr=I18N[lang],snaps=loadSnapshots(DT),search=(document.getElementById('history-search').value||'').toLowerCase();
+  if(search)snaps=snaps.filter(function(s){return(s.label||'').toLowerCase().indexOf(search)!==-1||(s.ref||'').toLowerCase().indexOf(search)!==-1;});
+  var h='';if(snaps.length===0){h+='<div class="history-empty">'+svg('Clock',48)+'<p>'+tr.noHistory+'</p></div>';}
+  else{h+='<div style="margin-bottom:12px;font-size:13px;color:var(--text-muted);">'+snaps.length+' '+tr.records+'</div><div class="history-list">';
+  snaps.forEach(function(s){h+='<div class="history-item"><div class="history-item-info"><div class="history-item-label">'+esc(s.label||'draft')+'</div>';
+  h+='<div class="history-item-ref">'+esc(s.ref||'')+' — '+formatDateTime(s.exportedAt)+'</div></div><div class="history-item-actions">';
+  h+='<button class="btn btn-secondary btn-sm" onclick="window._ipRestore(\''+s.id+'\')">'+tr.restore+'</button>';
+  h+='<button class="btn btn-danger btn-sm" onclick="window._ipDeleteSnap(\''+s.id+'\')">'+tr.delete+'</button></div></div>';});
+  h+='</div><div style="margin-top:16px;"><button class="btn btn-secondary btn-sm" onclick="window._ipClearAllHistory()">'+tr.clearAll+'</button></div>';}
+  document.getElementById('history-container').innerHTML=h;document.getElementById('history-search').oninput=function(){renderHistory();};
+}
+function renderClearModal(){var tr=I18N[lang],m=document.getElementById('clear-modal');if(showClearConfirm){m.classList.remove('hidden');
+document.getElementById('clear-title').textContent=tr.clearTitle;document.getElementById('clear-msg').textContent=tr.clearMsg;
+document.getElementById('btn-cancel-clear').textContent=tr.cancel;document.getElementById('btn-confirm-clear').textContent=tr.clear;}else m.classList.add('hidden');}
+document.getElementById('lang-btn').onclick=function(){lang=lang==='zh'?'en':'zh';setLang(lang);renderAll();};
+document.getElementById('theme-btn').onclick=function(){dark=!dark;setTheme(dark);applyTheme();renderAll();};
+  injectSpaButton();
+  injectBottomCta();
+  injectPageFaq();
+document.getElementById('btn-cancel-clear').onclick=function(){showClearConfirm=false;renderClearModal();};
+document.getElementById('btn-confirm-clear').onclick=function(){data=getDefaultDoc(DT);saveDocData(DT,data);showClearConfirm=false;renderClearModal();renderForm();renderPreview();};
+window._ipSet=function(f,v){data[f]=v;saveDocData(DT,data);};
+window._ipItem=function(idx,f,v){data.items[idx][f]=v;saveDocData(DT,data);};
+window._ipAddItem=function(){data.items.push(getEmptyItem(DT));saveDocData(DT,data);renderForm();};
+window._ipRemoveItem=function(idx){if(data.items.length>1){data.items.splice(idx,1);saveDocData(DT,data);renderForm();}};
+window._ipRestore=function(id){var snaps=loadSnapshots(DT),s=snaps.find(function(x){return x.id===id;});if(s&&s.data){data=JSON.parse(JSON.stringify(s.data));saveDocData(DT,data);renderAll();}};
+window._ipDeleteSnap=function(id){deleteSnapshot(DT,id);renderHistory();};window._ipClearAllHistory=function(){clearAllSnapshots(DT);renderHistory();};
+function esc(str){if(!str)return'';return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function fB(t,s){return t+(s?' <span style="font-size:12px;color:var(--text-muted);font-weight:400;">'+s+'</span>':'');}
+function lI(l,v,f,p){return '<div><div class="form-label">'+l+'</div><input class="input-field" value="'+esc(v)+'" onchange="window._ipSet(\''+f+'\',this.value)" placeholder="'+(p||'')+'"></div>';}
+function lID(l,v,f){return '<div><div class="form-label">'+l+'</div><input class="input-field" type="date" value="'+esc(v)+'" onchange="window._ipSet(\''+f+'\',this.value)"></div>';}
+function loadSample(){var s=getDefaultDoc(DT);s.policyNo='POL-2026-001';s.invoiceNo='INV-2026-001';s.contractNo='SC-2026-001';s.dateOfInsurance='2026-05-01';
+s.insuredName='Shanghai Export Co.';s.insuredAddress='No.123 Zhangjiang Rd, Shanghai';
+s.beneficiaryName='ABC Trading LLC';s.beneficiaryAddress='456 Fifth Ave, New York';
+s.voyageFrom='Shanghai, China';s.voyageTo='New York, USA';s.meansOfTransport='By Sea';s.vessel='COSCO SHANGHAI';
+s.insuranceConditions='All Risks';s.insuranceClauses='PICC Ocean Marine Cargo Clauses';s.currency='USD';s.totalInsuredAmount='3500.00';s.premiumRate='0.3';s.premiumAmount='10.50';
+s.items=[{marks:'ABC/NYC',numberOfPkgs:'50',description:'Stainless Steel Water Bottle',hsCode:'7323.93',quantity:'500',insuredAmount:'2000.00'},
+{marks:'ABC/NYC',numberOfPkgs:'20',description:'Thermal Flask',hsCode:'7323.93',quantity:'200',insuredAmount:'1500.00'}];
+s.declaration='This is to certify that the above mentioned goods are insured against All Risks.';
+s.insurerName='China Pacific Insurance Co.';s.signatureDate='2026-05-01';
+data=s;saveDocData(DT,data);renderAll();}
+init();
+</script>
+<!-- GoatCounter -->
+<script data-goatcounter="https://tradekit.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

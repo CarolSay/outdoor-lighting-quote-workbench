@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>原产地证明生成器 - TradeKit Certificate of Origin</title>
+<meta name="description" content="免费生成原产地证明参考模板，包含出口商、收货人、运输路线，支持关税优惠参考。">
+<meta name="keywords" content="原产地证明,certificate of origin,CO,产地证,出口商,exporter,关税优惠,tariff benefit,贸易合规,trade compliance">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="http://tradekit.treedeep.cn/certificate-of-origin.html">
+<link rel="alternate" hreflang="zh" href="http://tradekit.treedeep.cn/certificate-of-origin.html">
+<link rel="alternate" hreflang="en" href="http://tradekit.treedeep.cn/certificate-of-origin.html?lang=en">
+<link rel="alternate" hreflang="x-default" href="http://tradekit.treedeep.cn/certificate-of-origin.html">
+<meta name="geo.region" content="CN">
+<meta name="geo.placename" content="China">
+<meta name="geo.position" content="35.8617;104.1954">
+<meta name="ICBM" content="35.8617, 104.1954">
+<meta name="language" content="zh-CN, en">
+<meta name="content-language" content="zh-CN">
+<meta name="distribution" content="global">
+<meta property="og:type" content="article">
+<meta property="og:title" content="原产地证明生成器 - TradeKit Certificate of Origin">
+<meta property="og:description" content="免费生成原产地证明参考模板，包含出口商、收货人、运输路线，支持关税优惠参考。">
+<meta property="og:url" content="http://tradekit.treedeep.cn/certificate-of-origin.html">
+<meta property="og:site_name" content="TradeKit">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="article:section" content="Trade Documents">
+<meta property="article:tag" content="外贸单证">
+<meta property="article:tag" content="trade document">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="原产地证明生成器 - TradeKit Certificate of Origin">
+<meta name="twitter:description" content="免费生成原产地证明参考模板，包含出口商、收货人、运输路线，支持关税优惠参考。">
+<meta name="twitter:label:1" content="文档类型">
+<meta name="twitter:data:1" content="原产地证明生成器 - TradeKit Certificate of Origin">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📦</text></svg>">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "原产地证明生成器 - TradeKit Certificate of Origin",
+  "alternateName": "Certificate of Origin Generator - TradeKit",
+  "description": "免费生成原产地证明参考模板，包含出口商、收货人、运输路线，支持关税优惠参考。",
+  "url": "http://tradekit.treedeep.cn/certificate-of-origin.html",
+  "isPartOf": {
+    "@type": "SoftwareApplication",
+    "name": "TradeKit",
+    "url": "http://tradekit.treedeep.cn"
+  },
+  "inLanguage": [
+    "zh-CN",
+    "en-US"
+  ],
+  "about": {
+    "@type": "Thing",
+    "name": "原产地证明生成器 - TradeKit Certificate of Origin",
+    "description": "免费生成原产地证明参考模板，包含出口商、收货人、运输路线，支持关税优惠参考。"
+  },
+  "mainEntity": {
+    "@type": "Service",
+    "name": "原产地证明生成器 - TradeKit Certificate of Origin",
+    "description": "免费生成原产地证明参考模板，包含出口商、收货人、运输路线，支持关税优惠参考。",
+    "serviceType": "Trade Document Generation",
+    "provider": {
+      "@type": "Organization",
+      "name": "TradeKit",
+      "url": "http://tradekit.treedeep.cn"
+    },
+    "areaServed": "Worldwide",
+    "availableLanguage": [
+      "zh-CN",
+      "en-US"
+    ]
+  }
+}</script>
+<link rel="stylesheet" href="common.css">
+<script src="html2pdf.bundle.min.js"></script>
+</head>
+<body>
+<header class="top-bar">
+  <div class="top-bar-left"><a href="index.html" class="toggle-btn" id="back-btn"><span id="back-icon"></span><span id="back-text"></span></a></div>
+  <div class="top-bar-right">
+    <button class="toggle-btn" id="lang-btn"><span id="lang-icon"></span><span id="lang-label">EN</span></button>
+    <button class="toggle-btn" id="theme-btn"><span id="theme-icon"></span><span id="theme-label">Light</span></button>
+  </div>
+</header>
+<main class="doc-page"><div class="doc-page-content">
+  <div class="doc-header"><h1 id="page-title">Certificate of Origin Generator</h1><p id="page-subtitle">原产地证明</p></div>
+  <div class="tab-bar"><button class="tab-btn active" data-tab="edit" id="tab-edit"></button><button class="tab-btn" data-tab="preview" id="tab-preview"></button><button class="tab-btn" data-tab="history" id="tab-history"></button></div>
+  <div class="tab-panel active" id="panel-edit"><div class="action-bar"><div class="action-bar-left"><button class="btn btn-secondary btn-sm" id="btn-load-sample"></button><button class="btn btn-secondary btn-sm" id="btn-clear"></button></div><div class="action-bar-right"><button class="btn btn-secondary btn-sm" id="btn-switch-preview"></button><button class="btn btn-primary" id="btn-pdf" data-pdf-btn></button></div></div><div id="form-container"></div></div>
+  <div class="tab-panel" id="panel-preview"><div class="action-bar"><div class="action-bar-left"><button class="btn btn-secondary btn-sm" id="btn-back-edit"></button><button class="btn btn-secondary btn-sm" id="btn-preview-lang"></button></div><div class="action-bar-right"><button class="btn btn-primary" id="btn-pdf-preview" data-pdf-btn></button><button class="btn btn-secondary btn-sm" id="btn-print"></button></div></div><div id="preview-container"></div></div>
+  <div class="tab-panel" id="panel-history"><div class="history-search"><input class="input-field" id="history-search" type="text" placeholder=""></div><div id="history-container"></div></div>
+</div></main>
+<div class="clear-modal hidden" id="clear-modal"><div class="clear-modal-content"><div class="clear-modal-title" id="clear-title"></div><div class="clear-modal-msg" id="clear-msg"></div><div class="clear-modal-actions"><button class="btn btn-secondary btn-sm" id="btn-cancel-clear"></button><button class="btn btn-danger" id="btn-confirm-clear"></button></div></div></div>
+<script src="common.js"></script>
+<script>
+var DT='certificate_of_origin',DT_META=DOC_META[DT],lang=getLang(),dark=isDark(),previewLang='en',data=null,showClearConfirm=false;
+function init(){applyTheme();var s=loadDocData(DT);data=s?s:getDefaultDoc(DT);renderAll();}
+  injectSpaButton();
+  injectBottomCta();
+  injectPageFaq();
+function renderAll(){renderTopBar();renderHeader();renderTabs();renderForm();renderPreview();renderHistory();renderClearModal();}
+function renderTopBar(){var tr=I18N[lang];document.documentElement.lang=lang;document.getElementById('back-icon').innerHTML=svg('ArrowLeft',16);document.getElementById('back-text').textContent=tr.backHome;document.getElementById('lang-icon').innerHTML=svg('Languages',16);document.getElementById('lang-label').textContent=lang==='zh'?'EN':'中文';document.getElementById('theme-icon').innerHTML=svg(dark?'Sun':'Moon',16);document.getElementById('theme-label').textContent=dark?'Light':'Dark';}
+function renderHeader(){document.getElementById('page-title').textContent=DT_META.title;document.getElementById('page-subtitle').textContent=DT_META.titleZh;}
+function renderTabs(){var tr=I18N[lang];document.getElementById('tab-edit').textContent=tr.formEditor;document.getElementById('tab-preview').textContent=tr.previewTab;document.getElementById('tab-history').textContent=tr.historyTab;var ps=['edit','preview','history'];ps.forEach(function(p){document.getElementById('tab-'+p).onclick=function(){ps.forEach(function(pp){document.getElementById('tab-'+pp).classList.toggle('active',pp===p);document.getElementById('panel-'+pp).classList.toggle('active',pp===p);});};});}
+function switchTab(t){['edit','preview','history'].forEach(function(p){document.getElementById('tab-'+p).classList.toggle('active',p===t);document.getElementById('panel-'+p).classList.toggle('active',p===t);});}
+function renderForm(){
+  var tr=I18N[lang],isZh=lang==='zh',d=data;
+  document.getElementById('btn-load-sample').textContent=tr.loadSample;document.getElementById('btn-clear').textContent=tr.clear;
+  document.getElementById('btn-switch-preview').textContent=tr.preview;document.getElementById('btn-pdf').textContent=tr.exportPdf;
+  document.getElementById('btn-back-edit').textContent=tr.backEdit;document.getElementById('btn-preview-lang').textContent=previewLang==='en'?'Switch to 中文':'Switch to English';
+  document.getElementById('btn-pdf-preview').textContent=tr.exportPdf;document.getElementById('btn-print').textContent=tr.print;
+  document.getElementById('history-search').placeholder=tr.searchPlaceholder;
+  document.getElementById('btn-load-sample').onclick=loadSample;document.getElementById('btn-clear').onclick=function(){showClearConfirm=true;renderClearModal();};
+  document.getElementById('btn-switch-preview').onclick=function(){switchTab('preview');renderPreview();};document.getElementById('btn-back-edit').onclick=function(){switchTab('edit');};
+  document.getElementById('btn-pdf').onclick=function(){doExportPdf(DT,data,'preview-content');};document.getElementById('btn-pdf-preview').onclick=function(){doExportPdf(DT,data,'preview-content');};
+  document.getElementById('btn-preview-lang').onclick=function(){previewLang=previewLang==='en'?'zh':'en';renderPreview();};document.getElementById('btn-print').onclick=function(){window.print();};
+  var h='';
+  h+='<div class="section-card"><h3>'+fB(isZh?'出口商信息':'Exporter Info','')+'</h3><div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));">';
+  h+=lI(isZh?'名称':'Name',d.exporterName,'exporterName','');h+=lI(isZh?'地址':'Address',d.exporterAddress,'exporterAddress','');
+  h+=lI(isZh?'国家':'Country',d.exporterCountry,'exporterCountry','');h+='</div></div>';
+  h+='<div class="section-card"><h3>'+fB(isZh?'收货人信息':'Consignee Info','')+'</h3><div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));">';
+  h+=lI(isZh?'名称':'Name',d.consigneeName,'consigneeName','');h+=lI(isZh?'地址':'Address',d.consigneeAddress,'consigneeAddress','');
+  h+=lI(isZh?'国家':'Country',d.consigneeCountry,'consigneeCountry','');h+='</div></div>';
+  h+='<div class="section-card"><h3>'+fB(isZh?'运输信息':'Transport Info','')+'</h3><div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));">';
+  h+=lI(isZh?'运输方式':'Means of Transport',d.meansOfTransport,'meansOfTransport','');h+=lI(isZh?'装货港':'Port of Loading',d.portOfLoading,'portOfLoading','');
+  h+=lI(isZh?'卸货港':'Port of Discharge',d.portOfDischarge,'portOfDischarge','');h+=lI(isZh?'船名':'Vessel',d.vessel,'vessel','');
+  h+=lI(isZh?'原产国':'Country of Origin',d.countryOfOrigin,'countryOfOrigin','');h+=lI(isZh?'目的国':'Destination Country',d.destinationCountry,'destinationCountry','');h+='</div></div>';
+  h+='<div class="section-card"><h3>'+fB(isZh?'发票与日期':'Invoice & Date','')+'</h3><div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));">';
+  h+=lI(isZh?'发票号':'Invoice No.',d.invoiceNo,'invoiceNo','');h+=lID(isZh?'出口日期':'Date of Export',d.dateOfExport,'dateOfExport');h+='</div></div>';
+  h+='<div class="section-card"><h3>'+fB(isZh?'货品明细':'Goods Details','')+'</h3>';
+  h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">';
+  h+='<p style="font-size:13px;color:var(--text-muted);">'+(isZh?'逐项添加货品。':'Add items.')+'</p>';
+  h+='<button class="btn btn-success btn-sm" onclick="window._coAddItem()">'+tr.addItem+'</button></div>';
+  h+='<div class="items-table-container"><table class="items-table"><thead><tr>';
+  ['#',isZh?'唛头':'MARKS',isZh?'件数':'NO.PKGS',isZh?'描述':'DESCRIPTION',isZh?'HS编码':'HS Code',
+   isZh?'毛重':'G.W.',isZh?'数量':'QTY',isZh?'操作':'Action'].forEach(function(th){h+='<th>'+th+'</th>';});
+  h+='</tr></thead><tbody>';
+  d.items.forEach(function(it,idx){
+    h+='<tr><td class="row-number">'+(idx+1)+'</td>';
+    h+='<td><input class="input-field input-field-xs" value="'+esc(it.marks)+'" onchange="window._coItem('+idx+',\'marks\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-center" value="'+esc(it.numberOfPkgs)+'" onchange="window._coItem('+idx+',\'numberOfPkgs\',this.value)"></td>';
+    h+='<td class="description-cell"><textarea class="input-field input-field-sm" rows="2" onchange="window._coItem('+idx+',\'description\',this.value)">'+esc(it.description)+'</textarea></td>';
+    h+='<td><input class="input-field input-field-xs" value="'+esc(it.hsCode)+'" onchange="window._coItem('+idx+',\'hsCode\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-right" value="'+esc(it.grossWeight)+'" onchange="window._coItem('+idx+',\'grossWeight\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-center" value="'+esc(it.quantity)+'" onchange="window._coItem('+idx+',\'quantity\',this.value)"></td>';
+    h+='<td class="actions"><button class="btn btn-danger" onclick="window._coRemoveItem('+idx+')" '+(d.items.length<=1?'disabled':'')+'>&times;</button></td></tr>';
+  });
+  h+='</tbody></table></div></div>';
+  h+='<div class="section-card"><h3>'+fB(isZh?'声明与认证':'Declaration & Certification','')+'</h3>';
+  h+='<div><div class="form-label">'+(isZh?'声明内容':'Declaration')+'</div><textarea class="input-field" rows="3" onchange="window._coSet(\'declaration\',this.value)">'+esc(d.declaration)+'</textarea></div>';
+  h+='<div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));margin-top:12px;">';
+  h+=lI(isZh?'认证机构':'Certifying Authority',d.certifyingAuthority,'certifyingAuthority','');
+  h+=lI(isZh?'认证地点':'Certifying Location',d.certifyingLocation,'certifyingLocation','');
+  h+=lID(isZh?'认证日期':'Certifying Date',d.certifyingDate,'certifyingDate');h+='</div></div>';
+  document.getElementById('form-container').innerHTML=h;
+}
+function renderPreview(){
+  var d=data,isZh2=previewLang==='zh';
+  function tr2(en,zh){return isZh2?zh:en;}
+  var h='<div class="invoice-preview" id="preview-content">';
+  h+='<div class="header-title">'+tr2('CERTIFICATE OF ORIGIN','原产地证明')+'</div>';
+  h+='<table><tbody><tr><td style="width:50%;"><div class="section-label2">'+tr2('EXPORTER','出口商')+'</div>';
+  h+='<div class="section-value">'+esc(d.exporterName||'—')+'</div><div class="section-value">'+esc(d.exporterAddress||'—')+'</div>';
+  h+='<div class="section-value">'+esc(d.exporterCountry||'—')+'</div></td>';
+  h+='<td style="width:50%;"><div class="section-label2">'+tr2('CONSIGNEE','收货人')+'</div>';
+  h+='<div class="section-value">'+esc(d.consigneeName||'—')+'</div><div class="section-value">'+esc(d.consigneeAddress||'—')+'</div>';
+  h+='<div class="section-value">'+esc(d.consigneeCountry||'—')+'</div></td></tr></tbody></table>';
+  h+='<table class="mt-2"><tbody><tr>';
+  [tr2('TRANSPORT','运输方式'),tr2('PORT OF LOADING','装货港'),tr2('PORT OF DISCHARGE','卸货港'),tr2('VESSEL','船名')].forEach(function(t){h+='<th style="width:25%;">'+t+'</th>';});
+  h+='</tr><tr>';
+  [d.meansOfTransport,d.portOfLoading,d.portOfDischarge,d.vessel].forEach(function(v){h+='<td class="text-center">'+esc(v||'—')+'</td>';});
+  h+='</tr></tbody></table>';
+  h+='<table class="mt-2"><tbody><tr>';
+  [tr2('COUNTRY OF ORIGIN','原产国'),tr2('DESTINATION','目的国'),tr2('INVOICE NO.','发票号'),tr2('DATE OF EXPORT','出口日期')].forEach(function(t){h+='<th style="width:25%;">'+t+'</th>';});
+  h+='</tr><tr>';
+  [d.countryOfOrigin,d.destinationCountry,d.invoiceNo,d.dateOfExport].forEach(function(v){h+='<td class="text-center">'+esc(v||'—')+'</td>';});
+  h+='</tr></tbody></table>';
+  h+='<table class="mt-2"><thead><tr>';
+  ['#',tr2('MARKS','唛头'),tr2('NO.PKGS','件数'),tr2('DESCRIPTION','描述'),tr2('HS CODE','HS编码'),tr2('G.W.','毛重'),tr2('QTY','数量')].forEach(function(t){h+='<th>'+t+'</th>';});
+  h+='</tr></thead><tbody>';
+  d.items.forEach(function(it,idx){
+    h+='<tr><td class="text-center">'+(idx+1)+'</td><td>'+esc(it.marks||'—')+'</td><td class="text-center">'+esc(it.numberOfPkgs||'—')+'</td>';
+    h+='<td>'+esc(it.description||'—')+'</td><td class="text-center">'+esc(it.hsCode||'—')+'</td><td class="text-right">'+esc(it.grossWeight||'—')+'</td>';
+    h+='<td class="text-center">'+esc(it.quantity||'—')+'</td></tr>';
+  });
+  h+='</tbody></table>';
+  h+='<div class="mt-2"><div class="section-label2">'+tr2('DECLARATION','声明')+'</div><div class="section-value">'+esc(d.declaration)+'</div></div>';
+  h+='<div class="mt-2" style="text-align:right;"><div class="section-label2">'+tr2('CERTIFICATION','认证')+'</div>';
+  h+='<div class="section-value">'+esc(d.certifyingAuthority||'—')+'</div><div class="section-value">'+esc(d.certifyingLocation||'')+'</div>';
+  h+='<div class="section-value">'+esc(d.certifyingDate||'')+'</div></div></div>';
+  document.getElementById('preview-container').innerHTML=h;
+}
+function renderHistory(){
+  var tr=I18N[lang],snaps=loadSnapshots(DT),search=(document.getElementById('history-search').value||'').toLowerCase();
+  if(search)snaps=snaps.filter(function(s){return(s.label||'').toLowerCase().indexOf(search)!==-1||(s.ref||'').toLowerCase().indexOf(search)!==-1;});
+  var h='';if(snaps.length===0){h+='<div class="history-empty">'+svg('Clock',48)+'<p>'+tr.noHistory+'</p></div>';}
+  else{h+='<div style="margin-bottom:12px;font-size:13px;color:var(--text-muted);">'+snaps.length+' '+tr.records+'</div><div class="history-list">';
+  snaps.forEach(function(s){h+='<div class="history-item"><div class="history-item-info"><div class="history-item-label">'+esc(s.label||'draft')+'</div>';
+  h+='<div class="history-item-ref">'+esc(s.ref||'')+' — '+formatDateTime(s.exportedAt)+'</div></div><div class="history-item-actions">';
+  h+='<button class="btn btn-secondary btn-sm" onclick="window._coRestore(\''+s.id+'\')">'+tr.restore+'</button>';
+  h+='<button class="btn btn-danger btn-sm" onclick="window._coDeleteSnap(\''+s.id+'\')">'+tr.delete+'</button></div></div>';});
+  h+='</div><div style="margin-top:16px;"><button class="btn btn-secondary btn-sm" onclick="window._coClearAllHistory()">'+tr.clearAll+'</button></div>';}
+  document.getElementById('history-container').innerHTML=h;document.getElementById('history-search').oninput=function(){renderHistory();};
+}
+function renderClearModal(){var tr=I18N[lang],m=document.getElementById('clear-modal');if(showClearConfirm){m.classList.remove('hidden');
+document.getElementById('clear-title').textContent=tr.clearTitle;document.getElementById('clear-msg').textContent=tr.clearMsg;
+document.getElementById('btn-cancel-clear').textContent=tr.cancel;document.getElementById('btn-confirm-clear').textContent=tr.clear;}else m.classList.add('hidden');}
+document.getElementById('lang-btn').onclick=function(){lang=lang==='zh'?'en':'zh';setLang(lang);renderAll();};
+document.getElementById('theme-btn').onclick=function(){dark=!dark;setTheme(dark);applyTheme();renderAll();};
+  injectSpaButton();
+  injectBottomCta();
+  injectPageFaq();
+document.getElementById('btn-cancel-clear').onclick=function(){showClearConfirm=false;renderClearModal();};
+document.getElementById('btn-confirm-clear').onclick=function(){data=getDefaultDoc(DT);saveDocData(DT,data);showClearConfirm=false;renderClearModal();renderForm();renderPreview();};
+window._coSet=function(f,v){data[f]=v;saveDocData(DT,data);};
+window._coItem=function(idx,f,v){data.items[idx][f]=v;saveDocData(DT,data);};
+window._coAddItem=function(){data.items.push(getEmptyItem(DT));saveDocData(DT,data);renderForm();};
+window._coRemoveItem=function(idx){if(data.items.length>1){data.items.splice(idx,1);saveDocData(DT,data);renderForm();}};
+window._coRestore=function(id){var snaps=loadSnapshots(DT),s=snaps.find(function(x){return x.id===id;});if(s&&s.data){data=JSON.parse(JSON.stringify(s.data));saveDocData(DT,data);renderAll();}};
+window._coDeleteSnap=function(id){deleteSnapshot(DT,id);renderHistory();};window._coClearAllHistory=function(){clearAllSnapshots(DT);renderHistory();};
+function esc(str){if(!str)return'';return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function fB(t,s){return t+(s?' <span style="font-size:12px;color:var(--text-muted);font-weight:400;">'+s+'</span>':'');}
+function lI(l,v,f,p){return '<div><div class="form-label">'+l+'</div><input class="input-field" value="'+esc(v)+'" onchange="window._coSet(\''+f+'\',this.value)" placeholder="'+(p||'')+'"></div>';}
+function lID(l,v,f){return '<div><div class="form-label">'+l+'</div><input class="input-field" type="date" value="'+esc(v)+'" onchange="window._coSet(\''+f+'\',this.value)"></div>';}
+function loadSample(){var s=getDefaultDoc(DT);s.exporterName='Shanghai Export Co., Ltd.';s.exporterAddress='No.123 Zhangjiang Rd, Pudong, Shanghai';s.exporterCountry='China';
+s.consigneeName='ABC Trading LLC';s.consigneeAddress='456 Fifth Ave, New York, NY 10001';s.consigneeCountry='USA';
+s.meansOfTransport='By Sea';s.portOfLoading='Shanghai';s.portOfDischarge='New York';s.vessel='COSCO SHANGHAI';
+s.countryOfOrigin='China';s.destinationCountry='USA';s.invoiceNo='INV-2026-001';s.dateOfExport='2026-05-15';
+s.items=[{marks:'ABC/NYC',numberOfPkgs:'50',description:'Stainless Steel Water Bottle',hsCode:'7323.93',grossWeight:'140.00',quantity:'500'},
+{marks:'ABC/NYC',numberOfPkgs:'20',description:'Thermal Flask',hsCode:'7323.93',grossWeight:'95.00',quantity:'200'}];
+s.declaration='The undersigned hereby declares that the above details are correct and that the goods described herein originate from China.';
+s.certifyingAuthority='CCPIT';s.certifyingLocation='Shanghai, China';s.certifyingDate='2026-05-10';
+data=s;saveDocData(DT,data);renderAll();}
+init();
+</script>
+<!-- GoatCounter -->
+<script data-goatcounter="https://tradekit.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>唛头生成器 - TradeKit Shipping Mark Generator</title>
+<meta name="description" content="快速生成标准化外箱唛头，三种样式可选，包含收货人、目的港、原产地等信息。">
+<meta name="keywords" content="唛头,shipping mark,外箱唛头,shipping label,唛头生成,mark generator,收货人,consignee,原产地,country of origin">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="http://tradekit.treedeep.cn/shipping-mark.html">
+<link rel="alternate" hreflang="zh" href="http://tradekit.treedeep.cn/shipping-mark.html">
+<link rel="alternate" hreflang="en" href="http://tradekit.treedeep.cn/shipping-mark.html?lang=en">
+<link rel="alternate" hreflang="x-default" href="http://tradekit.treedeep.cn/shipping-mark.html">
+<meta name="geo.region" content="CN">
+<meta name="geo.placename" content="China">
+<meta name="geo.position" content="35.8617;104.1954">
+<meta name="ICBM" content="35.8617, 104.1954">
+<meta name="language" content="zh-CN, en">
+<meta name="content-language" content="zh-CN">
+<meta name="distribution" content="global">
+<meta property="og:type" content="article">
+<meta property="og:title" content="唛头生成器 - TradeKit Shipping Mark Generator">
+<meta property="og:description" content="快速生成标准化外箱唛头，三种样式可选，包含收货人、目的港、原产地等信息。">
+<meta property="og:url" content="http://tradekit.treedeep.cn/shipping-mark.html">
+<meta property="og:site_name" content="TradeKit">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="article:section" content="Trade Documents">
+<meta property="article:tag" content="外贸单证">
+<meta property="article:tag" content="trade document">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="唛头生成器 - TradeKit Shipping Mark Generator">
+<meta name="twitter:description" content="快速生成标准化外箱唛头，三种样式可选，包含收货人、目的港、原产地等信息。">
+<meta name="twitter:label:1" content="文档类型">
+<meta name="twitter:data:1" content="唛头生成器 - TradeKit Shipping Mark Generator">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📦</text></svg>">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "唛头生成器 - TradeKit Shipping Mark Generator",
+  "alternateName": "Shipping Mark Generator - TradeKit",
+  "description": "快速生成标准化外箱唛头，三种样式可选，包含收货人、目的港、原产地等信息。",
+  "url": "http://tradekit.treedeep.cn/shipping-mark.html",
+  "isPartOf": {
+    "@type": "SoftwareApplication",
+    "name": "TradeKit",
+    "url": "http://tradekit.treedeep.cn"
+  },
+  "inLanguage": [
+    "zh-CN",
+    "en-US"
+  ],
+  "about": {
+    "@type": "Thing",
+    "name": "唛头生成器 - TradeKit Shipping Mark Generator",
+    "description": "快速生成标准化外箱唛头，三种样式可选，包含收货人、目的港、原产地等信息。"
+  },
+  "mainEntity": {
+    "@type": "Service",
+    "name": "唛头生成器 - TradeKit Shipping Mark Generator",
+    "description": "快速生成标准化外箱唛头，三种样式可选，包含收货人、目的港、原产地等信息。",
+    "serviceType": "Trade Document Generation",
+    "provider": {
+      "@type": "Organization",
+      "name": "TradeKit",
+      "url": "http://tradekit.treedeep.cn"
+    },
+    "areaServed": "Worldwide",
+    "availableLanguage": [
+      "zh-CN",
+      "en-US"
+    ]
+  }
+}</script>
+<link rel="stylesheet" href="common.css">
+<script src="html2pdf.bundle.min.js"></script>
+</head>
+<body>
+<header class="top-bar">
+  <div class="top-bar-left"><a href="index.html" class="toggle-btn" id="back-btn"><span id="back-icon"></span><span id="back-text"></span></a></div>
+  <div class="top-bar-right">
+    <button class="toggle-btn" id="lang-btn"><span id="lang-icon"></span><span id="lang-label">EN</span></button>
+    <button class="toggle-btn" id="theme-btn"><span id="theme-icon"></span><span id="theme-label">Light</span></button>
+  </div>
+</header>
+<main class="doc-page"><div class="doc-page-content">
+  <div class="doc-header"><h1 id="page-title">Shipping Mark Generator</h1><p id="page-subtitle">唛头生成器</p></div>
+  <div class="tab-bar"><button class="tab-btn active" data-tab="edit" id="tab-edit"></button><button class="tab-btn" data-tab="preview" id="tab-preview"></button><button class="tab-btn" data-tab="history" id="tab-history"></button></div>
+  <div class="tab-panel active" id="panel-edit"><div class="action-bar"><div class="action-bar-left"><button class="btn btn-secondary btn-sm" id="btn-load-sample"></button><button class="btn btn-secondary btn-sm" id="btn-clear"></button></div><div class="action-bar-right"><button class="btn btn-secondary btn-sm" id="btn-switch-preview"></button><button class="btn btn-primary" id="btn-pdf" data-pdf-btn></button></div></div><div id="form-container"></div></div>
+  <div class="tab-panel" id="panel-preview"><div class="action-bar"><div class="action-bar-left"><button class="btn btn-secondary btn-sm" id="btn-back-edit"></button><button class="btn btn-secondary btn-sm" id="btn-preview-lang"></button></div><div class="action-bar-right"><button class="btn btn-primary" id="btn-pdf-preview" data-pdf-btn></button><button class="btn btn-secondary btn-sm" id="btn-print"></button></div></div><div id="preview-container"></div></div>
+  <div class="tab-panel" id="panel-history"><div class="history-search"><input class="input-field" id="history-search" type="text" placeholder=""></div><div id="history-container"></div></div>
+</div></main>
+<div class="clear-modal hidden" id="clear-modal"><div class="clear-modal-content"><div class="clear-modal-title" id="clear-title"></div><div class="clear-modal-msg" id="clear-msg"></div><div class="clear-modal-actions"><button class="btn btn-secondary btn-sm" id="btn-cancel-clear"></button><button class="btn btn-danger" id="btn-confirm-clear"></button></div></div></div>
+<script src="common.js"></script>
+<script>
+var DT='shipping_mark',DT_META=DOC_META[DT],lang=getLang(),dark=isDark(),previewLang='en',data=null,showClearConfirm=false;
+function init(){applyTheme();var s=loadDocData(DT);data=s?s:getDefaultDoc(DT);renderAll();}
+  injectSpaButton();
+  injectBottomCta();
+  injectPageFaq();
+function renderAll(){renderTopBar();renderHeader();renderTabs();renderForm();renderPreview();renderHistory();renderClearModal();}
+function renderTopBar(){var tr=I18N[lang];document.documentElement.lang=lang;document.getElementById('back-icon').innerHTML=svg('ArrowLeft',16);document.getElementById('back-text').textContent=tr.backHome;document.getElementById('lang-icon').innerHTML=svg('Languages',16);document.getElementById('lang-label').textContent=lang==='zh'?'EN':'中文';document.getElementById('theme-icon').innerHTML=svg(dark?'Sun':'Moon',16);document.getElementById('theme-label').textContent=dark?'Light':'Dark';}
+function renderHeader(){document.getElementById('page-title').textContent=DT_META.title;document.getElementById('page-subtitle').textContent=DT_META.titleZh;}
+function renderTabs(){var tr=I18N[lang];document.getElementById('tab-edit').textContent=tr.formEditor;document.getElementById('tab-preview').textContent=tr.previewTab;document.getElementById('tab-history').textContent=tr.historyTab;var ps=['edit','preview','history'];ps.forEach(function(p){document.getElementById('tab-'+p).onclick=function(){ps.forEach(function(pp){document.getElementById('tab-'+pp).classList.toggle('active',pp===p);document.getElementById('panel-'+pp).classList.toggle('active',pp===p);});};});}
+function switchTab(t){['edit','preview','history'].forEach(function(p){document.getElementById('tab-'+p).classList.toggle('active',p===t);document.getElementById('panel-'+p).classList.toggle('active',p===t);});}
+function renderForm(){
+  var tr=I18N[lang],isZh=lang==='zh',d=data;
+  document.getElementById('btn-load-sample').textContent=tr.loadSample;document.getElementById('btn-clear').textContent=tr.clear;
+  document.getElementById('btn-switch-preview').textContent=tr.preview;document.getElementById('btn-pdf').textContent=tr.exportPdf;
+  document.getElementById('btn-back-edit').textContent=tr.backEdit;document.getElementById('btn-preview-lang').textContent=previewLang==='en'?'Switch to 中文':'Switch to English';
+  document.getElementById('btn-pdf-preview').textContent=tr.exportPdf;document.getElementById('btn-print').textContent=tr.print;
+  document.getElementById('history-search').placeholder=tr.searchPlaceholder;
+  document.getElementById('btn-load-sample').onclick=loadSample;document.getElementById('btn-clear').onclick=function(){showClearConfirm=true;renderClearModal();};
+  document.getElementById('btn-switch-preview').onclick=function(){switchTab('preview');renderPreview();};document.getElementById('btn-back-edit').onclick=function(){switchTab('edit');};
+  document.getElementById('btn-pdf').onclick=function(){doExportPdf(DT,data,'preview-content');};document.getElementById('btn-pdf-preview').onclick=function(){doExportPdf(DT,data,'preview-content');};
+  document.getElementById('btn-preview-lang').onclick=function(){previewLang=previewLang==='en'?'zh':'en';renderPreview();};document.getElementById('btn-print').onclick=function(){window.print();};
+  var h='';
+  h+='<div class="section-card"><h3>'+fB(isZh?'唛头样式':'Mark Style','')+'</h3>';
+  h+='<div style="display:flex;gap:12px;">';
+  [{v:'standard',l:isZh?'正唛+侧唛':'Standard'},{v:'side_mark',l:isZh?'侧唛':'Side Mark'},{v:'custom',l:isZh?'自定义':'Custom'}].forEach(function(o){
+    h+='<label style="display:flex;align-items:center;gap:6px;padding:8px 16px;border:2px solid '+(d.markStyle===o.v?'var(--primary)':'var(--border-color)')+';border-radius:6px;cursor:pointer;"><input type="radio" name="markStyle" value="'+o.v+'"'+(d.markStyle===o.v?' checked':'')+' onchange="window._smSet(\'markStyle\',this.value);renderForm();">'+o.l+'</label>';
+  });
+  h+='</div></div>';
+  if(d.markStyle==='standard'||d.markStyle==='side_mark'){
+    h+='<div class="section-card"><h3>'+fB(isZh?'正唛 (Front Mark)':'')+'</h3><div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));">';
+    h+=lI(isZh?'收货人':'Consignee',d.consigneeName,'consigneeName','');h+=lI(isZh?'目的港':'Destination Port',d.destinationPort,'destinationPort','');
+    h+=lI(isZh?'订单号':'PO Number',d.poNumber,'poNumber','');h+=lI(isZh?'起始箱号':'From Carton No.',d.packageNumberStart,'packageNumberStart','');
+    h+=lI(isZh?'结束箱号':'To Carton No.',d.packageNumberEnd,'packageNumberEnd','');h+='</div></div>';
+    if(d.markStyle==='standard'){
+      h+='<div class="section-card"><h3>'+fB(isZh?'侧唛 (Side Mark)':'')+'</h3><div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));">';
+      h+=lI(isZh?'品名':'Item Description',d.itemDescription,'itemDescription','');h+=lI(isZh?'规格':'Specification',d.specification,'specification','');
+      h+=lI(isZh?'净重':'Net Weight',d.netWeight,'netWeight','');h+=lI(isZh?'毛重':'Gross Weight',d.grossWeight,'grossWeight','');h+='</div></div>';
+    }
+    h+='<div class="section-card"><h3>'+fB(isZh?'原产地':'Country of Origin','')+'</h3>';
+    h+=lI(isZh?'原产地':'Country',d.countryOfOrigin,'countryOfOrigin','');h+='</div>';
+  }
+  if(d.markStyle==='custom'){
+    h+='<div class="section-card"><h3>'+fB(isZh?'自定义内容':'Custom Content','')+'</h3>';
+    for(var i=1;i<=5;i++){h+=lI(isZh?'第'+i+'行':'Line '+i,d['customLine'+i],'customLine'+i,'');}
+    h+='</div>';
+  }
+  h+='<div class="section-card"><h3>'+fB(isZh?'尺寸 (长x宽x高)':'Dimensions (LxWxH)','')+'</h3><div class="field-grid" style="grid-template-columns:repeat(3,1fr);">';
+  h+=lI(isZh?'长':'Length (cm)',d.dimensionL,'dimensionL','');h+=lI(isZh?'宽':'Width (cm)',d.dimensionW,'dimensionW','');
+  h+=lI(isZh?'高':'Height (cm)',d.dimensionH,'dimensionH','');h+='</div></div>';
+  document.getElementById('form-container').innerHTML=h;
+}
+function renderPreview(){
+  var d=data,isZh2=previewLang==='zh';
+  function tr2(en,zh){return isZh2?zh:en;}
+  var h='<div class="invoice-preview" id="preview-content">';
+  h+='<div class="header-title">'+tr2('SHIPPING MARK','唛头')+'</div>';
+  h+='<div style="border:2px solid #333;padding:24px;margin:16px 0;background:#fff;font-family:monospace;font-size:14px;">';
+  if(d.markStyle==='standard'){
+    h+='<div style="margin-bottom:16px;padding-bottom:16px;border-bottom:1px dashed #999;">';
+    h+='<div style="font-weight:700;font-size:16px;margin-bottom:8px;">'+esc(d.consigneeName||'—')+'</div>';
+    h+='<div>'+tr2('DESTINATION','目的港')+': '+esc(d.destinationPort||'—')+'</div>';
+    h+='<div>'+tr2('PO NO.','订单号')+': '+esc(d.poNumber||'—')+'</div>';
+    h+='<div>'+tr2('CARTON NO.','箱号')+': '+esc(d.packageNumberStart||'1')+' — '+esc(d.packageNumberEnd||'1')+'</div>';
+    if(d.dimensionL&&d.dimensionW&&d.dimensionH)h+='<div>'+tr2('SIZE','尺寸')+': '+esc(d.dimensionL)+' x '+esc(d.dimensionW)+' x '+esc(d.dimensionH)+' cm</div>';
+    h+='</div>';
+    h+='<div style="padding-top:16px;border-top:1px dashed #999;">';
+    h+='<div style="font-weight:700;font-size:14px;margin-bottom:8px;">'+tr2('SIDE MARK','侧唛')+'</div>';
+    h+='<div>'+tr2('ITEM','品名')+': '+esc(d.itemDescription||'—')+'</div>';
+    if(d.specification)h+='<div>'+tr2('SPEC','规格')+': '+esc(d.specification)+'</div>';
+    if(d.netWeight)h+='<div>'+tr2('N.W.','净重')+': '+esc(d.netWeight)+'</div>';
+    if(d.grossWeight)h+='<div>'+tr2('G.W.','毛重')+': '+esc(d.grossWeight)+'</div>';
+    if(d.countryOfOrigin)h+='<div style="margin-top:8px;font-weight:700;">'+tr2('MADE IN','产地')+': '+esc(d.countryOfOrigin)+'</div>';
+    h+='</div>';
+  } else if(d.markStyle==='side_mark'){
+    h+='<div style="font-weight:700;font-size:16px;margin-bottom:8px;">'+esc(d.consigneeName||'—')+'</div>';
+    h+='<div>'+tr2('DESTINATION','目的港')+': '+esc(d.destinationPort||'—')+'</div>';
+    h+='<div>'+tr2('PO NO.','订单号')+': '+esc(d.poNumber||'—')+'</div>';
+    h+='<div>'+tr2('CARTON NO.','箱号')+': '+esc(d.packageNumberStart||'1')+' — '+esc(d.packageNumberEnd||'1')+'</div>';
+    if(d.itemDescription)h+='<div>'+tr2('ITEM','品名')+': '+esc(d.itemDescription)+'</div>';
+    if(d.specification)h+='<div>'+tr2('SPEC','规格')+': '+esc(d.specification)+'</div>';
+    if(d.netWeight)h+='<div>'+tr2('N.W.','净重')+': '+esc(d.netWeight)+'</div>';
+    if(d.grossWeight)h+='<div>'+tr2('G.W.','毛重')+': '+esc(d.grossWeight)+'</div>';
+    if(d.countryOfOrigin)h+='<div style="margin-top:8px;font-weight:700;">'+tr2('MADE IN','产地')+': '+esc(d.countryOfOrigin)+'</div>';
+  } else {
+    for(var i=1;i<=5;i++){if(d['customLine'+i])h+='<div style="font-size:14px;margin-bottom:4px;">'+esc(d['customLine'+i])+'</div>';}
+    if(d.countryOfOrigin)h+='<div style="margin-top:12px;font-weight:700;">'+tr2('MADE IN','产地')+': '+esc(d.countryOfOrigin)+'</div>';
+  }
+  h+='</div></div>';
+  document.getElementById('preview-container').innerHTML=h;
+}
+function renderHistory(){
+  var tr=I18N[lang],snaps=loadSnapshots(DT),search=(document.getElementById('history-search').value||'').toLowerCase();
+  if(search)snaps=snaps.filter(function(s){return(s.label||'').toLowerCase().indexOf(search)!==-1||(s.ref||'').toLowerCase().indexOf(search)!==-1;});
+  var h='';if(snaps.length===0){h+='<div class="history-empty">'+svg('Clock',48)+'<p>'+tr.noHistory+'</p></div>';}
+  else{h+='<div style="margin-bottom:12px;font-size:13px;color:var(--text-muted);">'+snaps.length+' '+tr.records+'</div><div class="history-list">';
+  snaps.forEach(function(s){h+='<div class="history-item"><div class="history-item-info"><div class="history-item-label">'+esc(s.label||'draft')+'</div>';
+  h+='<div class="history-item-ref">'+esc(s.ref||'')+' — '+formatDateTime(s.exportedAt)+'</div></div><div class="history-item-actions">';
+  h+='<button class="btn btn-secondary btn-sm" onclick="window._smRestore(\''+s.id+'\')">'+tr.restore+'</button>';
+  h+='<button class="btn btn-danger btn-sm" onclick="window._smDeleteSnap(\''+s.id+'\')">'+tr.delete+'</button></div></div>';});
+  h+='</div><div style="margin-top:16px;"><button class="btn btn-secondary btn-sm" onclick="window._smClearAllHistory()">'+tr.clearAll+'</button></div>';}
+  document.getElementById('history-container').innerHTML=h;document.getElementById('history-search').oninput=function(){renderHistory();};
+}
+function renderClearModal(){var tr=I18N[lang],m=document.getElementById('clear-modal');if(showClearConfirm){m.classList.remove('hidden');
+document.getElementById('clear-title').textContent=tr.clearTitle;document.getElementById('clear-msg').textContent=tr.clearMsg;
+document.getElementById('btn-cancel-clear').textContent=tr.cancel;document.getElementById('btn-confirm-clear').textContent=tr.clear;}else m.classList.add('hidden');}
+document.getElementById('lang-btn').onclick=function(){lang=lang==='zh'?'en':'zh';setLang(lang);renderAll();};
+document.getElementById('theme-btn').onclick=function(){dark=!dark;setTheme(dark);applyTheme();renderAll();};
+  injectSpaButton();
+  injectBottomCta();
+  injectPageFaq();
+document.getElementById('btn-cancel-clear').onclick=function(){showClearConfirm=false;renderClearModal();};
+document.getElementById('btn-confirm-clear').onclick=function(){data=getDefaultDoc(DT);saveDocData(DT,data);showClearConfirm=false;renderClearModal();renderForm();renderPreview();};
+window._smSet=function(f,v){data[f]=v;saveDocData(DT,data);};
+window._smRestore=function(id){var snaps=loadSnapshots(DT),s=snaps.find(function(x){return x.id===id;});if(s&&s.data){data=JSON.parse(JSON.stringify(s.data));saveDocData(DT,data);renderAll();}};
+window._smDeleteSnap=function(id){deleteSnapshot(DT,id);renderHistory();};window._smClearAllHistory=function(){clearAllSnapshots(DT);renderHistory();};
+function esc(str){if(!str)return'';return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function fB(t,s){return t+(s?' <span style="font-size:12px;color:var(--text-muted);font-weight:400;">'+s+'</span>':'');}
+function lI(l,v,f,p){return '<div><div class="form-label">'+l+'</div><input class="input-field" value="'+esc(v)+'" onchange="window._smSet(\''+f+'\',this.value)" placeholder="'+(p||'')+'"></div>';}
+function loadSample(){var s=getDefaultDoc(DT);s.consigneeName='ABC TRADING LLC';s.destinationPort='NEW YORK';s.poNumber='PO-2026-042';s.packageNumberStart='1';s.packageNumberEnd='70';
+s.itemDescription='STAINLESS STEEL WATER BOTTLE';s.specification='500ml';s.netWeight='250g';s.grossWeight='280g';
+s.countryOfOrigin='CHINA';s.dimensionL='30';s.dimensionW='25';s.dimensionH='20';s.markStyle='standard';
+data=s;saveDocData(DT,data);renderAll();}
+init();
+</script>
+<!-- GoatCounter -->
+<script data-goatcounter="https://tradekit.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

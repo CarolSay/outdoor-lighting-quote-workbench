@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>详细装箱单生成器 - TradeKit Commercial Packing List</title>
+<meta name="description" content="免费生成详细商业装箱单，逐项记录包装信息，自动计算CBM体积，支持集装箱信息。">
+<meta name="keywords" content="详细装箱单,commercial packing list,装箱单,packing list,CBM计算,CBM calculation,集装箱,container,包装明细,packaging details">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="http://tradekit.treedeep.cn/commercial-packing-list.html">
+<link rel="alternate" hreflang="zh" href="http://tradekit.treedeep.cn/commercial-packing-list.html">
+<link rel="alternate" hreflang="en" href="http://tradekit.treedeep.cn/commercial-packing-list.html?lang=en">
+<link rel="alternate" hreflang="x-default" href="http://tradekit.treedeep.cn/commercial-packing-list.html">
+<meta name="geo.region" content="CN">
+<meta name="geo.placename" content="China">
+<meta name="geo.position" content="35.8617;104.1954">
+<meta name="ICBM" content="35.8617, 104.1954">
+<meta name="language" content="zh-CN, en">
+<meta name="content-language" content="zh-CN">
+<meta name="distribution" content="global">
+<meta property="og:type" content="article">
+<meta property="og:title" content="详细装箱单生成器 - TradeKit Commercial Packing List">
+<meta property="og:description" content="免费生成详细商业装箱单，逐项记录包装信息，自动计算CBM体积，支持集装箱信息。">
+<meta property="og:url" content="http://tradekit.treedeep.cn/commercial-packing-list.html">
+<meta property="og:site_name" content="TradeKit">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="article:section" content="Trade Documents">
+<meta property="article:tag" content="外贸单证">
+<meta property="article:tag" content="trade document">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="详细装箱单生成器 - TradeKit Commercial Packing List">
+<meta name="twitter:description" content="免费生成详细商业装箱单，逐项记录包装信息，自动计算CBM体积，支持集装箱信息。">
+<meta name="twitter:label:1" content="文档类型">
+<meta name="twitter:data:1" content="详细装箱单生成器 - TradeKit Commercial Packing List">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📦</text></svg>">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "详细装箱单生成器 - TradeKit Commercial Packing List",
+  "alternateName": "Commercial Packing List Generator - TradeKit",
+  "description": "免费生成详细商业装箱单，逐项记录包装信息，自动计算CBM体积，支持集装箱信息。",
+  "url": "http://tradekit.treedeep.cn/commercial-packing-list.html",
+  "isPartOf": {
+    "@type": "SoftwareApplication",
+    "name": "TradeKit",
+    "url": "http://tradekit.treedeep.cn"
+  },
+  "inLanguage": [
+    "zh-CN",
+    "en-US"
+  ],
+  "about": {
+    "@type": "Thing",
+    "name": "详细装箱单生成器 - TradeKit Commercial Packing List",
+    "description": "免费生成详细商业装箱单，逐项记录包装信息，自动计算CBM体积，支持集装箱信息。"
+  },
+  "mainEntity": {
+    "@type": "Service",
+    "name": "详细装箱单生成器 - TradeKit Commercial Packing List",
+    "description": "免费生成详细商业装箱单，逐项记录包装信息，自动计算CBM体积，支持集装箱信息。",
+    "serviceType": "Trade Document Generation",
+    "provider": {
+      "@type": "Organization",
+      "name": "TradeKit",
+      "url": "http://tradekit.treedeep.cn"
+    },
+    "areaServed": "Worldwide",
+    "availableLanguage": [
+      "zh-CN",
+      "en-US"
+    ]
+  }
+}</script>
+<link rel="stylesheet" href="common.css">
+<script src="html2pdf.bundle.min.js"></script>
+</head>
+<body>
+<header class="top-bar">
+  <div class="top-bar-left"><a href="index.html" class="toggle-btn" id="back-btn"><span id="back-icon"></span><span id="back-text"></span></a></div>
+  <div class="top-bar-right">
+    <button class="toggle-btn" id="lang-btn"><span id="lang-icon"></span><span id="lang-label">EN</span></button>
+    <button class="toggle-btn" id="theme-btn"><span id="theme-icon"></span><span id="theme-label">Light</span></button>
+  </div>
+</header>
+<main class="doc-page"><div class="doc-page-content">
+  <div class="doc-header"><h1 id="page-title">Commercial Packing List Generator</h1><p id="page-subtitle">详细装箱单</p></div>
+  <div class="tab-bar"><button class="tab-btn active" data-tab="edit" id="tab-edit"></button><button class="tab-btn" data-tab="preview" id="tab-preview"></button><button class="tab-btn" data-tab="history" id="tab-history"></button></div>
+  <div class="tab-panel active" id="panel-edit"><div class="action-bar"><div class="action-bar-left"><button class="btn btn-secondary btn-sm" id="btn-load-sample"></button><button class="btn btn-secondary btn-sm" id="btn-clear"></button></div><div class="action-bar-right"><button class="btn btn-secondary btn-sm" id="btn-switch-preview"></button><button class="btn btn-primary" id="btn-pdf" data-pdf-btn></button></div></div><div id="form-container"></div></div>
+  <div class="tab-panel" id="panel-preview"><div class="action-bar"><div class="action-bar-left"><button class="btn btn-secondary btn-sm" id="btn-back-edit"></button><button class="btn btn-secondary btn-sm" id="btn-preview-lang"></button></div><div class="action-bar-right"><button class="btn btn-primary" id="btn-pdf-preview" data-pdf-btn></button><button class="btn btn-secondary btn-sm" id="btn-print"></button></div></div><div id="preview-container"></div></div>
+  <div class="tab-panel" id="panel-history"><div class="history-search"><input class="input-field" id="history-search" type="text" placeholder=""></div><div id="history-container"></div></div>
+</div></main>
+<div class="clear-modal hidden" id="clear-modal"><div class="clear-modal-content"><div class="clear-modal-title" id="clear-title"></div><div class="clear-modal-msg" id="clear-msg"></div><div class="clear-modal-actions"><button class="btn btn-secondary btn-sm" id="btn-cancel-clear"></button><button class="btn btn-danger" id="btn-confirm-clear"></button></div></div></div>
+<script src="common.js"></script>
+<script>
+var DT='commercial_packing_list',DT_META=DOC_META[DT],lang=getLang(),dark=isDark(),previewLang='en',data=null,showClearConfirm=false;
+function init(){applyTheme();var s=loadDocData(DT);data=s?s:getDefaultDoc(DT);renderAll();}
+  injectSpaButton();
+  injectBottomCta();
+  injectPageFaq();
+function renderAll(){renderTopBar();renderHeader();renderTabs();renderForm();renderPreview();renderHistory();renderClearModal();}
+function renderTopBar(){var tr=I18N[lang];document.documentElement.lang=lang;document.getElementById('back-icon').innerHTML=svg('ArrowLeft',16);document.getElementById('back-text').textContent=tr.backHome;document.getElementById('lang-icon').innerHTML=svg('Languages',16);document.getElementById('lang-label').textContent=lang==='zh'?'EN':'中文';document.getElementById('theme-icon').innerHTML=svg(dark?'Sun':'Moon',16);document.getElementById('theme-label').textContent=dark?'Light':'Dark';}
+function renderHeader(){document.getElementById('page-title').textContent=DT_META.title;document.getElementById('page-subtitle').textContent=DT_META.titleZh;}
+function renderTabs(){var tr=I18N[lang];document.getElementById('tab-edit').textContent=tr.formEditor;document.getElementById('tab-preview').textContent=tr.previewTab;document.getElementById('tab-history').textContent=tr.historyTab;var ps=['edit','preview','history'];ps.forEach(function(p){document.getElementById('tab-'+p).onclick=function(){ps.forEach(function(pp){document.getElementById('tab-'+pp).classList.toggle('active',pp===p);document.getElementById('panel-'+pp).classList.toggle('active',pp===p);});};});}
+function switchTab(t){['edit','preview','history'].forEach(function(p){document.getElementById('tab-'+p).classList.toggle('active',p===t);document.getElementById('panel-'+p).classList.toggle('active',p===t);});}
+function renderForm(){
+  var tr=I18N[lang],isZh=lang==='zh',d=data;
+  document.getElementById('btn-load-sample').textContent=tr.loadSample;document.getElementById('btn-clear').textContent=tr.clear;
+  document.getElementById('btn-switch-preview').textContent=tr.preview;document.getElementById('btn-pdf').textContent=tr.exportPdf;
+  document.getElementById('btn-back-edit').textContent=tr.backEdit;document.getElementById('btn-preview-lang').textContent=previewLang==='en'?'Switch to 中文':'Switch to English';
+  document.getElementById('btn-pdf-preview').textContent=tr.exportPdf;document.getElementById('btn-print').textContent=tr.print;
+  document.getElementById('history-search').placeholder=tr.searchPlaceholder;
+  document.getElementById('btn-load-sample').onclick=loadSample;document.getElementById('btn-clear').onclick=function(){showClearConfirm=true;renderClearModal();};
+  document.getElementById('btn-switch-preview').onclick=function(){switchTab('preview');renderPreview();};document.getElementById('btn-back-edit').onclick=function(){switchTab('edit');};
+  document.getElementById('btn-pdf').onclick=function(){doExportPdf(DT,data,'preview-content');};document.getElementById('btn-pdf-preview').onclick=function(){doExportPdf(DT,data,'preview-content');};
+  document.getElementById('btn-preview-lang').onclick=function(){previewLang=previewLang==='en'?'zh':'en';renderPreview();};document.getElementById('btn-print').onclick=function(){window.print();};
+  var h='';
+  h+='<div class="section-card"><h3>'+fB(isZh?'发货人与收货人':'Shipper & Consignee','')+'</h3><div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));">';
+  h+=lI(isZh?'发货人名称':'Shipper Name',d.shipperName,'shipperName','');h+=lI(isZh?'发货公司':'Shipper Company',d.shipperCompany,'shipperCompany','');
+  h+=lI(isZh?'收货人名称':'Consignee Name',d.consigneeName,'consigneeName','');h+=lI(isZh?'收货公司':'Consignee Company',d.consigneeCompany,'consigneeCompany','');
+  h+='<div style="grid-column:1/-1;"><div class="form-label">'+(isZh?'发货地址':'Shipper Address')+'</div><textarea class="input-field" rows="2" onchange="window._plSet(\'shipperAddress\',this.value)">'+esc(d.shipperAddress)+'</textarea></div>';
+  h+='<div style="grid-column:1/-1;"><div class="form-label">'+(isZh?'收货地址':'Consignee Address')+'</div><textarea class="input-field" rows="2" onchange="window._plSet(\'consigneeAddress\',this.value)">'+esc(d.consigneeAddress)+'</textarea></div>';
+  h+='</div></div>';
+  h+='<div class="section-card"><h3>'+fB(isZh?'运输详情':'Shipping Details','')+'</h3><div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));">';
+  h+=lI(isZh?'发票号':'Invoice No.',d.invoiceNo,'invoiceNo','');h+=lI(isZh?'采购单号':'PO No.',d.poNo,'poNo','');
+  h+=lI(isZh?'合同号':'Contract No.',d.contractNo,'contractNo','');h+=lID(isZh?'装箱日期':'Date of Packing',d.dateOfPacking,'dateOfPacking');
+  h+=lID(isZh?'出口日期':'Date of Export',d.dateOfExport,'dateOfExport');h+=lI(isZh?'唛头':'Shipping Mark',d.shippingMark,'shippingMark','');
+  h+=lI(isZh?'船名':'Vessel',d.vessel,'vessel','');h+=lI(isZh?'装货港':'Port of Loading',d.portOfLoading,'portOfLoading','');
+  h+=lI(isZh?'卸货港':'Port of Discharge',d.portOfDischarge,'portOfDischarge','');h+=lI(isZh?'集装箱号':'Container No.',d.containerNo,'containerNo','');
+  h+=lI(isZh?'封号':'Seal No.',d.sealNo,'sealNo','');h+='</div></div>';
+  h+='<div class="section-card"><h3>'+fB(isZh?'装箱明细':'Packing Details','')+'</h3>';
+  h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">';
+  h+='<p style="font-size:13px;color:var(--text-muted);">'+(isZh?'逐项添加装箱货品。':'Add packed items.')+'</p>';
+  h+='<button class="btn btn-success btn-sm" onclick="window._plAddItem()">'+tr.addItem+'</button></div>';
+  h+='<div class="items-table-container" style="overflow-x:auto;"><table class="items-table"><thead><tr>';
+  ['#','NO.',isZh?'描述':'DESCRIPTION',isZh?'规格':'SPEC',isZh?'件数':'PKGS',isZh?'包装类型':'TYPE',isZh?'每箱数量':'QTY/PKG',
+   isZh?'总数量':'TOTAL QTY','UOM',isZh?'单件净重':'N.W/PKG',isZh?'单件毛重':'G.W/PKG',isZh?'总净重':'TOTAL N.W',
+   isZh?'总毛重':'TOTAL G.W',isZh?'长':'L',isZh?'宽':'W',isZh?'高':'H',isZh?'体积':'CBM',isZh?'操作':'Action'].forEach(function(th){h+='<th>'+th+'</th>';});
+  h+='</tr></thead><tbody>';
+  d.items.forEach(function(it,idx){
+    h+='<tr><td class="row-number">'+(idx+1)+'</td>';
+    h+='<td><input class="input-field input-field-xs" value="'+esc(it.itemNo)+'" onchange="window._plItem('+idx+',\'itemNo\',this.value)"></td>';
+    h+='<td class="description-cell"><textarea class="input-field input-field-sm" rows="2" onchange="window._plItem('+idx+',\'description\',this.value)">'+esc(it.description)+'</textarea></td>';
+    h+='<td><input class="input-field input-field-xs" value="'+esc(it.specification)+'" onchange="window._plItem('+idx+',\'specification\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-center" value="'+esc(it.numberOfPkgs)+'" onchange="window._plItem('+idx+',\'numberOfPkgs\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs" value="'+esc(it.typeOfPackaging)+'" onchange="window._plItem('+idx+',\'typeOfPackaging\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-center" value="'+esc(it.qtyPerPkg)+'" onchange="window._plItem('+idx+',\'qtyPerPkg\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-center" value="'+esc(it.totalQty)+'" onchange="window._plItem('+idx+',\'totalQty\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs" value="'+esc(it.unitOfMeasure)+'" onchange="window._plItem('+idx+',\'unitOfMeasure\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-center" value="'+esc(it.netWeightPerPkg)+'" onchange="window._plItem('+idx+',\'netWeightPerPkg\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-center" value="'+esc(it.grossWeightPerPkg)+'" onchange="window._plItem('+idx+',\'grossWeightPerPkg\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-center" value="'+esc(it.totalNetWeight)+'" onchange="window._plItem('+idx+',\'totalNetWeight\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-center" value="'+esc(it.totalGrossWeight)+'" onchange="window._plItem('+idx+',\'totalGrossWeight\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-center" value="'+esc(it.dimensionL)+'" onchange="window._plItem('+idx+',\'dimensionL\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-center" value="'+esc(it.dimensionW)+'" onchange="window._plItem('+idx+',\'dimensionW\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-center" value="'+esc(it.dimensionH)+'" onchange="window._plItem('+idx+',\'dimensionH\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-center" value="'+esc(it.measurementCBM)+'" onchange="window._plItem('+idx+',\'measurementCBM\',this.value)"></td>';
+    h+='<td class="actions"><button class="btn btn-danger" onclick="window._plRemoveItem('+idx+')" '+(d.items.length<=1?'disabled':'')+'>&times;</button></td></tr>';
+  });
+  h+='</tbody></table></div></div>';
+  h+='<div class="section-card"><h3>'+fB(isZh?'汇总与签署':'Totals & Signature','')+'</h3><div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));">';
+  h+=lI(isZh?'总件数':'Total Packages',d.totalPkgs,'totalPkgs','');h+=lI(isZh?'总净重':'Total Net Weight',d.totalNetWeight,'totalNetWeight','');
+  h+=lI(isZh?'总毛重':'Total Gross Weight',d.totalGrossWeight,'totalGrossWeight','');h+=lI(isZh?'总体积':'Total Measurement',d.totalMeasurement,'totalMeasurement','');
+  h+='</div><div style="margin-top:12px;"><div class="form-label">'+(isZh?'装箱备注':'Packing Remarks')+'</div><textarea class="input-field" rows="2" onchange="window._plSet(\'packingRemarks\',this.value)">'+esc(d.packingRemarks)+'</textarea></div>';
+  h+='<div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));margin-top:12px;">';
+  h+=lI(isZh?'制单人':'Prepared By',d.preparerName,'preparerName','');h+=lI(isZh?'职务':'Title',d.preparerTitle,'preparerTitle','');
+  h+=lID(isZh?'签名日期':'Signature Date',d.signatureDate,'signatureDate');h+='</div></div>';
+  document.getElementById('form-container').innerHTML=h;
+}
+function renderPreview(){
+  var d=data,isZh2=previewLang==='zh';
+  function tr2(en,zh){return isZh2?zh:en;}
+  var h='<div class="invoice-preview" id="preview-content">';
+  h+='<div class="header-title">'+tr2('COMMERCIAL PACKING LIST','详细装箱单')+'</div>';
+  h+='<table><tbody><tr><td style="width:50%;"><div class="section-label2">'+tr2('SHIPPER','发货人')+'</div>';
+  h+='<div class="section-value">'+esc(d.shipperName||'—')+'</div><div class="section-value">'+esc(d.shipperCompany||'—')+'</div>';
+  h+='<div class="section-value">'+esc(d.shipperAddress||'—')+'</div></td>';
+  h+='<td style="width:50%;"><div class="section-label2">'+tr2('CONSIGNEE','收货人')+'</div>';
+  h+='<div class="section-value">'+esc(d.consigneeName||'—')+'</div><div class="section-value">'+esc(d.consigneeCompany||'—')+'</div>';
+  h+='<div class="section-value">'+esc(d.consigneeAddress||'—')+'</div></td></tr></tbody></table>';
+  h+='<table class="mt-2"><tbody><tr>';
+  [tr2('INVOICE NO.','发票号'),tr2('PO NO.','订单号'),tr2('CONTRACT NO.','合同号'),tr2('DATE OF PACKING','装箱日期'),tr2('DATE OF EXPORT','出口日期'),tr2('VESSEL','船名'),tr2('SHIPPING MARK','唛头')].forEach(function(t){h+='<th style="width:12%;">'+t+'</th>';});
+  h+='</tr><tr>';
+  [d.invoiceNo,d.poNo,d.contractNo,d.dateOfPacking,d.dateOfExport,d.vessel,d.shippingMark].forEach(function(v){h+='<td class="text-center">'+esc(v||'—')+'</td>';});
+  h+='</tr></tbody></table>';
+  h+='<table class="mt-2"><thead><tr>';
+  ['#',tr2('DESCRIPTION','描述'),tr2('SPEC','规格'),tr2('PKGS','件数'),tr2('TYPE','类型'),tr2('QTY/PKG','每箱数量'),tr2('TOTAL QTY','总数量'),
+   'UOM',tr2('N.W/PKG','单件净重'),tr2('G.W/PKG','单件毛重'),tr2('TOTAL N.W','总净重'),tr2('TOTAL G.W','总毛重'),
+   'L','W','H',tr2('CBM','体积')].forEach(function(t){h+='<th>'+t+'</th>';});
+  h+='</tr></thead><tbody>';
+  d.items.forEach(function(it,idx){
+    h+='<tr><td class="text-center">'+(idx+1)+'</td><td>'+esc(it.description||'—')+'</td><td class="text-center">'+esc(it.specification||'—')+'</td>';
+    h+='<td class="text-center">'+esc(it.numberOfPkgs||'—')+'</td><td class="text-center">'+esc(it.typeOfPackaging||'—')+'</td><td class="text-center">'+esc(it.qtyPerPkg||'—')+'</td>';
+    h+='<td class="text-center">'+esc(it.totalQty||'—')+'</td><td class="text-center">'+esc(it.unitOfMeasure||'—')+'</td><td class="text-center">'+esc(it.netWeightPerPkg||'—')+'</td>';
+    h+='<td class="text-center">'+esc(it.grossWeightPerPkg||'—')+'</td><td class="text-center">'+esc(it.totalNetWeight||'—')+'</td><td class="text-center">'+esc(it.totalGrossWeight||'—')+'</td>';
+    h+='<td class="text-center">'+esc(it.dimensionL||'—')+'</td><td class="text-center">'+esc(it.dimensionW||'—')+'</td><td class="text-center">'+esc(it.dimensionH||'—')+'</td>';
+    h+='<td class="text-center">'+esc(it.measurementCBM||'—')+'</td></tr>';
+  });
+  h+='</tbody></table>';
+  h+='<table class="mt-2"><tbody><tr>';
+  [tr2('TOTAL PACKAGES','总件数'),tr2('TOTAL NET WEIGHT','总净重'),tr2('TOTAL GROSS WEIGHT','总毛重'),tr2('TOTAL MEASUREMENT','总体积'),
+   tr2('CONTAINER NO.','集装箱号'),tr2('SEAL NO.','封条号'),tr2('PORT OF LOADING','装货港'),tr2('PORT OF DISCHARGE','卸货港')].forEach(function(t){h+='<th style="width:10%;">'+t+'</th>';});
+  h+='</tr><tr>';
+  [d.totalPkgs,d.totalNetWeight,d.totalGrossWeight,d.totalMeasurement,d.containerNo,d.sealNo,d.portOfLoading,d.portOfDischarge].forEach(function(v){h+='<td class="text-center">'+esc(v||'—')+'</td>';});
+  h+='</tr></tbody></table>';
+  if(d.packingRemarks)h+='<div class="mt-2"><div class="section-label2">'+tr2('REMARKS','备注')+'</div><div class="section-value">'+esc(d.packingRemarks)+'</div></div>';
+  h+='<div class="mt-2"><table><tbody><tr><td style="width:33%;"><div class="section-label2">'+tr2('PREPARED BY','编制人')+'</div>';
+  h+='<div class="section-value">'+esc(d.preparerName||'—')+'</div><div class="section-value">'+esc(d.preparerTitle||'—')+'</div>';
+  h+='<div style="margin-top:48px;border-top:1px solid #000;width:140px;"></div></td>';
+  h+='<td style="width:33%;"><div class="section-label2">'+tr2('SIGNATURE DATE','签名日期')+'</div>';
+  h+='<div class="section-value">'+esc(d.signatureDate||'—')+'</div><div style="margin-top:48px;border-top:1px solid #000;width:140px;"></div></td>';
+  h+='<td style="width:33%;"></td></tr></tbody></table></div></div>';
+  document.getElementById('preview-container').innerHTML=h;
+}
+function renderHistory(){
+  var tr=I18N[lang],snaps=loadSnapshots(DT),search=(document.getElementById('history-search').value||'').toLowerCase();
+  if(search)snaps=snaps.filter(function(s){return(s.label||'').toLowerCase().indexOf(search)!==-1||(s.ref||'').toLowerCase().indexOf(search)!==-1;});
+  var h='';if(snaps.length===0){h+='<div class="history-empty">'+svg('Clock',48)+'<p>'+tr.noHistory+'</p></div>';}
+  else{h+='<div style="margin-bottom:12px;font-size:13px;color:var(--text-muted);">'+snaps.length+' '+tr.records+'</div><div class="history-list">';
+  snaps.forEach(function(s){h+='<div class="history-item"><div class="history-item-info"><div class="history-item-label">'+esc(s.label||'draft')+'</div>';
+  h+='<div class="history-item-ref">'+esc(s.ref||'')+' — '+formatDateTime(s.exportedAt)+'</div></div><div class="history-item-actions">';
+  h+='<button class="btn btn-secondary btn-sm" onclick="window._plRestore(\''+s.id+'\')">'+tr.restore+'</button>';
+  h+='<button class="btn btn-danger btn-sm" onclick="window._plDeleteSnap(\''+s.id+'\')">'+tr.delete+'</button></div></div>';});
+  h+='</div><div style="margin-top:16px;"><button class="btn btn-secondary btn-sm" onclick="window._plClearAllHistory()">'+tr.clearAll+'</button></div>';}
+  document.getElementById('history-container').innerHTML=h;document.getElementById('history-search').oninput=function(){renderHistory();};
+}
+function renderClearModal(){var tr=I18N[lang],m=document.getElementById('clear-modal');if(showClearConfirm){m.classList.remove('hidden');
+document.getElementById('clear-title').textContent=tr.clearTitle;document.getElementById('clear-msg').textContent=tr.clearMsg;
+document.getElementById('btn-cancel-clear').textContent=tr.cancel;document.getElementById('btn-confirm-clear').textContent=tr.clear;}else m.classList.add('hidden');}
+document.getElementById('lang-btn').onclick=function(){lang=lang==='zh'?'en':'zh';setLang(lang);renderAll();};
+document.getElementById('theme-btn').onclick=function(){dark=!dark;setTheme(dark);applyTheme();renderAll();};
+  injectSpaButton();
+  injectBottomCta();
+  injectPageFaq();
+document.getElementById('btn-cancel-clear').onclick=function(){showClearConfirm=false;renderClearModal();};
+document.getElementById('btn-confirm-clear').onclick=function(){data=getDefaultDoc(DT);saveDocData(DT,data);showClearConfirm=false;renderClearModal();renderForm();renderPreview();};
+window._plSet=function(f,v){data[f]=v;saveDocData(DT,data);};
+window._plItem=function(idx,f,v){data.items[idx][f]=v;saveDocData(DT,data);};
+window._plAddItem=function(){data.items.push(getEmptyItem(DT));saveDocData(DT,data);renderForm();};
+window._plRemoveItem=function(idx){if(data.items.length>1){data.items.splice(idx,1);saveDocData(DT,data);renderForm();}};
+window._plRestore=function(id){var snaps=loadSnapshots(DT),s=snaps.find(function(x){return x.id===id;});if(s&&s.data){data=JSON.parse(JSON.stringify(s.data));saveDocData(DT,data);renderAll();}};
+window._plDeleteSnap=function(id){deleteSnapshot(DT,id);renderHistory();};window._plClearAllHistory=function(){clearAllSnapshots(DT);renderHistory();};
+function esc(str){if(!str)return'';return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function fB(t,s){return t+(s?' <span style="font-size:12px;color:var(--text-muted);font-weight:400;">'+s+'</span>':'');}
+function lI(l,v,f,p){return '<div><div class="form-label">'+l+'</div><input class="input-field" value="'+esc(v)+'" onchange="window._plSet(\''+f+'\',this.value)" placeholder="'+(p||'')+'"></div>';}
+function lID(l,v,f){return '<div><div class="form-label">'+l+'</div><input class="input-field" type="date" value="'+esc(v)+'" onchange="window._plSet(\''+f+'\',this.value)"></div>';}
+function loadSample(){var s=getDefaultDoc(DT);s.shipperName='Zhang Wei';s.shipperCompany='Shanghai Export Co., Ltd.';
+s.shipperAddress='No.123 Zhangjiang Rd, Pudong, Shanghai, China';
+s.consigneeName='John Smith';s.consigneeCompany='ABC Trading LLC';
+s.consigneeAddress='456 Fifth Ave, Suite 1200, New York, NY 10001, USA';
+s.invoiceNo='INV-2026-001';s.poNo='PO-ABC-2026-001';s.contractNo='SC-2026-001';
+s.dateOfPacking='2026-05-10';s.dateOfExport='2026-05-15';s.shippingMark='ABC/NY/1-120';
+s.vessel='COSCO SHANGHAI';s.portOfLoading='Shanghai';s.portOfDischarge='New York';
+s.containerNo='CNTR-2026-001';s.sealNo='SEAL-SH-2026-001';
+s.items=[{itemNo:'1',description:'Stainless Steel Water Bottle',specification:'500ml',numberOfPkgs:'50',typeOfPackaging:'CTN',qtyPerPkg:'10',totalQty:'500',unitOfMeasure:'pcs',netWeightPerPkg:'3.00',grossWeightPerPkg:'3.50',totalNetWeight:'150.00',totalGrossWeight:'175.00',dimensionL:'60',dimensionW:'40',dimensionH:'35',measurementCBM:'0.084'},
+{itemNo:'2',description:'Thermal Flask',specification:'750ml',numberOfPkgs:'40',typeOfPackaging:'CTN',qtyPerPkg:'5',totalQty:'200',unitOfMeasure:'pcs',netWeightPerPkg:'4.00',grossWeightPerPkg:'4.25',totalNetWeight:'160.00',totalGrossWeight:'170.00',dimensionL:'60',dimensionW:'40',dimensionH:'40',measurementCBM:'0.096'}];
+s.totalPkgs='90';s.totalNetWeight='310.00 KG';s.totalGrossWeight='345.00 KG';s.totalMeasurement='0.180 CBM';
+s.packingRemarks='Pallets: 2 standard export pallets. Handle with care.';
+s.preparerName='Li Mei';s.preparerTitle='Shipping Coordinator';s.signatureDate='2026-05-10';
+data=s;saveDocData(DT,data);renderAll();}
+init();
+</script>
+<!-- GoatCounter -->
+<script data-goatcounter="https://tradekit.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

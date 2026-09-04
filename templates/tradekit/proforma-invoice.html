@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>形式发票生成器 - TradeKit Proforma Invoice</title>
+<meta name="description" content="免费生成形式发票，用于申请进口许可证和开立信用证，装船前发给买方的预开发票。">
+<meta name="keywords" content="形式发票,proforma invoice,信用证,letter of credit,进口许可,import license,预开发票,贸易单证,trade document">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="http://tradekit.treedeep.cn/proforma-invoice.html">
+<link rel="alternate" hreflang="zh" href="http://tradekit.treedeep.cn/proforma-invoice.html">
+<link rel="alternate" hreflang="en" href="http://tradekit.treedeep.cn/proforma-invoice.html?lang=en">
+<link rel="alternate" hreflang="x-default" href="http://tradekit.treedeep.cn/proforma-invoice.html">
+<meta name="geo.region" content="CN">
+<meta name="geo.placename" content="China">
+<meta name="geo.position" content="35.8617;104.1954">
+<meta name="ICBM" content="35.8617, 104.1954">
+<meta name="language" content="zh-CN, en">
+<meta name="content-language" content="zh-CN">
+<meta name="distribution" content="global">
+<meta property="og:type" content="article">
+<meta property="og:title" content="形式发票生成器 - TradeKit Proforma Invoice">
+<meta property="og:description" content="免费生成形式发票，用于申请进口许可证和开立信用证，装船前发给买方的预开发票。">
+<meta property="og:url" content="http://tradekit.treedeep.cn/proforma-invoice.html">
+<meta property="og:site_name" content="TradeKit">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="article:section" content="Trade Documents">
+<meta property="article:tag" content="外贸单证">
+<meta property="article:tag" content="trade document">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="形式发票生成器 - TradeKit Proforma Invoice">
+<meta name="twitter:description" content="免费生成形式发票，用于申请进口许可证和开立信用证，装船前发给买方的预开发票。">
+<meta name="twitter:label:1" content="文档类型">
+<meta name="twitter:data:1" content="形式发票生成器 - TradeKit Proforma Invoice">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📦</text></svg>">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "形式发票生成器 - TradeKit Proforma Invoice",
+  "alternateName": "Proforma Invoice Generator - TradeKit",
+  "description": "免费生成形式发票，用于申请进口许可证和开立信用证，装船前发给买方的预开发票。",
+  "url": "http://tradekit.treedeep.cn/proforma-invoice.html",
+  "isPartOf": {
+    "@type": "SoftwareApplication",
+    "name": "TradeKit",
+    "url": "http://tradekit.treedeep.cn"
+  },
+  "inLanguage": [
+    "zh-CN",
+    "en-US"
+  ],
+  "about": {
+    "@type": "Thing",
+    "name": "形式发票生成器 - TradeKit Proforma Invoice",
+    "description": "免费生成形式发票，用于申请进口许可证和开立信用证，装船前发给买方的预开发票。"
+  },
+  "mainEntity": {
+    "@type": "Service",
+    "name": "形式发票生成器 - TradeKit Proforma Invoice",
+    "description": "免费生成形式发票，用于申请进口许可证和开立信用证，装船前发给买方的预开发票。",
+    "serviceType": "Trade Document Generation",
+    "provider": {
+      "@type": "Organization",
+      "name": "TradeKit",
+      "url": "http://tradekit.treedeep.cn"
+    },
+    "areaServed": "Worldwide",
+    "availableLanguage": [
+      "zh-CN",
+      "en-US"
+    ]
+  }
+}</script>
+<link rel="stylesheet" href="common.css">
+<script src="html2pdf.bundle.min.js"></script>
+</head>
+<body>
+<header class="top-bar">
+  <div class="top-bar-left"><a href="index.html" class="toggle-btn" id="back-btn"><span id="back-icon"></span><span id="back-text"></span></a></div>
+  <div class="top-bar-right">
+    <button class="toggle-btn" id="lang-btn"><span id="lang-icon"></span><span id="lang-label">EN</span></button>
+    <button class="toggle-btn" id="theme-btn"><span id="theme-icon"></span><span id="theme-label">Light</span></button>
+  </div>
+</header>
+<main class="doc-page"><div class="doc-page-content">
+  <div class="doc-header"><h1 id="page-title">Proforma Invoice Generator</h1><p id="page-subtitle">形式发票</p></div>
+  <div class="tab-bar"><button class="tab-btn active" data-tab="edit" id="tab-edit"></button><button class="tab-btn" data-tab="preview" id="tab-preview"></button><button class="tab-btn" data-tab="history" id="tab-history"></button></div>
+  <div class="tab-panel active" id="panel-edit"><div class="action-bar"><div class="action-bar-left"><button class="btn btn-secondary btn-sm" id="btn-load-sample"></button><button class="btn btn-secondary btn-sm" id="btn-clear"></button></div><div class="action-bar-right"><button class="btn btn-secondary btn-sm" id="btn-switch-preview"></button><button class="btn btn-primary" id="btn-pdf" data-pdf-btn></button></div></div><div id="form-container"></div></div>
+  <div class="tab-panel" id="panel-preview"><div class="action-bar"><div class="action-bar-left"><button class="btn btn-secondary btn-sm" id="btn-back-edit"></button><button class="btn btn-secondary btn-sm" id="btn-preview-lang"></button></div><div class="action-bar-right"><button class="btn btn-primary" id="btn-pdf-preview" data-pdf-btn></button><button class="btn btn-secondary btn-sm" id="btn-print"></button></div></div><div id="preview-container"></div></div>
+  <div class="tab-panel" id="panel-history"><div class="history-search"><input class="input-field" id="history-search" type="text" placeholder=""></div><div id="history-container"></div></div>
+</div></main>
+<div class="clear-modal hidden" id="clear-modal"><div class="clear-modal-content"><div class="clear-modal-title" id="clear-title"></div><div class="clear-modal-msg" id="clear-msg"></div><div class="clear-modal-actions"><button class="btn btn-secondary btn-sm" id="btn-cancel-clear"></button><button class="btn btn-danger" id="btn-confirm-clear"></button></div></div></div>
+<script src="common.js"></script>
+<script>
+var DT='proforma_invoice',DT_META=DOC_META[DT],lang=getLang(),dark=isDark(),previewLang='en',data=null,showClearConfirm=false;
+function init(){applyTheme();var s=loadDocData(DT);data=s?s:getDefaultDoc(DT);renderAll();}
+  injectSpaButton();
+  injectBottomCta();
+  injectPageFaq();
+function renderAll(){renderTopBar();renderHeader();renderTabs();renderForm();renderPreview();renderHistory();renderClearModal();}
+function renderTopBar(){var tr=I18N[lang];document.documentElement.lang=lang;document.getElementById('back-icon').innerHTML=svg('ArrowLeft',16);document.getElementById('back-text').textContent=tr.backHome;document.getElementById('lang-icon').innerHTML=svg('Languages',16);document.getElementById('lang-label').textContent=lang==='zh'?'EN':'中文';document.getElementById('theme-icon').innerHTML=svg(dark?'Sun':'Moon',16);document.getElementById('theme-label').textContent=dark?'Light':'Dark';}
+function renderHeader(){document.getElementById('page-title').textContent=DT_META.title;document.getElementById('page-subtitle').textContent=DT_META.titleZh;}
+function renderTabs(){var tr=I18N[lang];document.getElementById('tab-edit').textContent=tr.formEditor;document.getElementById('tab-preview').textContent=tr.previewTab;document.getElementById('tab-history').textContent=tr.historyTab;var ps=['edit','preview','history'];ps.forEach(function(p){document.getElementById('tab-'+p).onclick=function(){ps.forEach(function(pp){document.getElementById('tab-'+pp).classList.toggle('active',pp===p);document.getElementById('panel-'+pp).classList.toggle('active',pp===p);});};});}
+function switchTab(t){['edit','preview','history'].forEach(function(p){document.getElementById('tab-'+p).classList.toggle('active',p===t);document.getElementById('panel-'+p).classList.toggle('active',p===t);});}
+function renderForm(){
+  var tr=I18N[lang],isZh=lang==='zh',d=data;
+  document.getElementById('btn-load-sample').textContent=tr.loadSample;document.getElementById('btn-clear').textContent=tr.clear;
+  document.getElementById('btn-switch-preview').textContent=tr.preview;document.getElementById('btn-pdf').textContent=tr.exportPdf;
+  document.getElementById('btn-back-edit').textContent=tr.backEdit;document.getElementById('btn-preview-lang').textContent=previewLang==='en'?'Switch to 中文':'Switch to English';
+  document.getElementById('btn-pdf-preview').textContent=tr.exportPdf;document.getElementById('btn-print').textContent=tr.print;
+  document.getElementById('history-search').placeholder=tr.searchPlaceholder;
+  document.getElementById('btn-load-sample').onclick=loadSample;document.getElementById('btn-clear').onclick=function(){showClearConfirm=true;renderClearModal();};
+  document.getElementById('btn-switch-preview').onclick=function(){switchTab('preview');renderPreview();};document.getElementById('btn-back-edit').onclick=function(){switchTab('edit');};
+  document.getElementById('btn-pdf').onclick=function(){doExportPdf(DT,data,'preview-content');};document.getElementById('btn-pdf-preview').onclick=function(){doExportPdf(DT,data,'preview-content');};
+  document.getElementById('btn-preview-lang').onclick=function(){previewLang=previewLang==='en'?'zh':'en';renderPreview();};document.getElementById('btn-print').onclick=function(){window.print();};
+  var h='';
+  // Logo
+  h+='<div class="section-card"><h3>'+fB(tr.logoLabel,'')+'</h3>';
+  h+='<div style="display:flex;align-items:center;gap:16px;">';
+  h+='<label class="logo-upload-btn" style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:var(--primary);color:#fff;border-radius:6px;cursor:pointer;font-size:13px;">'+svg('Upload',14)+' '+tr.uploadLogo+'<input type="file" accept="image/*" style="display:none;" onchange="window._piLogoUpload(event)"></label>';
+  h+='<span style="font-size:12px;color:var(--text-muted);">'+tr.logoHint+'</span></div>';
+  if(d.logo){h+='<div style="margin-top:10px;position:relative;display:inline-block;"><img src="'+d.logo+'" style="max-height:60px;border:1px solid var(--border-color);border-radius:4px;padding:4px;background:var(--card-bg);">';
+  h+='<button onclick="window._piRemoveLogo()" style="position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:#ef4444;color:#fff;border:none;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;">&times;</button></div>';}
+  h+='</div>';
+  // Seller/Buyer
+  h+='<div class="section-card"><h3>'+fB(isZh?'卖方信息':'Seller Info','')+'</h3><div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));">';
+  h+=lI(isZh?'姓名':'Name',d.sellerName,'sellerName','');h+=lI(isZh?'地址':'Address',d.sellerAddress,'sellerAddress','');
+  h+=lI(isZh?'电话':'Phone',d.sellerPhone,'sellerPhone','');h+=lI(isZh?'税号':'Tax ID',d.sellerTaxId,'sellerTaxId','');h+='</div></div>';
+  h+='<div class="section-card"><h3>'+fB(isZh?'买方信息':'Buyer Info','')+'</h3><div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));">';
+  h+=lI(isZh?'姓名':'Name',d.buyerName,'buyerName','');h+=lI(isZh?'公司':'Company',d.buyerCompany,'buyerCompany','');
+  h+=lI(isZh?'地址':'Address',d.buyerAddress,'buyerAddress','');h+=lI(isZh?'电话':'Phone',d.buyerPhone,'buyerPhone','');
+  h+=lI(isZh?'税号':'Tax ID',d.buyerTaxId,'buyerTaxId','');h+='</div></div>';
+  // Invoice Info
+  h+='<div class="section-card"><h3>'+fB(isZh?'发票信息':'Invoice Info','')+'</h3><div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));">';
+  h+=lI(isZh?'形式发票号':'Proforma Invoice No.',d.proformaInvoiceNo,'proformaInvoiceNo','');h+=lI(isZh?'订单号':'PO No.',d.poNo,'poNo','');
+  h+=lID(isZh?'开证日期':'Date of Issue',d.dateOfIssue,'dateOfIssue');h+=lI(isZh?'有效期':'Validity Period',d.validityPeriod,'validityPeriod','');
+  h+=lI(isZh?'信用证号':'L/C No.',d.lCNo,'lCNo','');h+=lI(isZh?'运单号':'Waybill No.',d.waybillNo,'waybillNo','');
+  h+=lI(isZh?'货币':'Currency',d.currency,'currency','');h+=lI(isZh?'付款条款':'Payment Terms',d.paymentTerms,'paymentTerms','');
+  h+=lI(isZh?'出口国':'Country of Export',d.countryOfExport,'countryOfExport','');h+=lI(isZh?'目的国':'Destination Country',d.destinationCountry,'destinationCountry','');h+='</div></div>';
+  // Items
+  h+='<div class="section-card"><h3>'+fB(isZh?'货品明细':'Goods Details','')+'</h3>';
+  h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">';
+  h+='<p style="font-size:13px;color:var(--text-muted);">'+(isZh?'逐项添加货品。':'Add items.')+'</p>';
+  h+='<button class="btn btn-success btn-sm" onclick="window._piAddItem()">'+tr.addItem+'</button></div>';
+  h+='<div class="items-table-container"><table class="items-table"><thead><tr>';
+  ['#',isZh?'项号':'Item No.',isZh?'唛头':'MARKS',isZh?'描述':'DESCRIPTION',isZh?'HS编码':'HS Code',
+   isZh?'数量':'QTY',isZh?'单位':'UNIT',isZh?'单价':'Unit Price',isZh?'金额':'Total Amount',
+   isZh?'操作':'Action'].forEach(function(th){h+='<th>'+th+'</th>';});
+  h+='</tr></thead><tbody>';
+  d.items.forEach(function(it,idx){
+    h+='<tr><td class="row-number">'+(idx+1)+'</td>';
+    h+='<td><input class="input-field input-field-xs" value="'+esc(it.itemNo)+'" onchange="window._piItem('+idx+',\'itemNo\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs" value="'+esc(it.marks)+'" onchange="window._piItem('+idx+',\'marks\',this.value)"></td>';
+    h+='<td class="description-cell"><textarea class="input-field input-field-sm" rows="2" onchange="window._piItem('+idx+',\'description\',this.value)">'+esc(it.description)+'</textarea></td>';
+    h+='<td><input class="input-field input-field-xs" value="'+esc(it.hsCode)+'" onchange="window._piItem('+idx+',\'hsCode\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-center" type="number" min="0" value="'+esc(it.qty)+'" onchange="window._piItem('+idx+',\'qty\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-center" value="'+esc(it.unitOfMeasure)+'" onchange="window._piItem('+idx+',\'unitOfMeasure\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-right" type="number" min="0" step="0.01" value="'+esc(it.unitPrice)+'" onchange="window._piItem('+idx+',\'unitPrice\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-right" type="number" min="0" step="0.01" value="'+esc(it.totalAmount)+'" readonly style="background:var(--bg);"></td>';
+    h+='<td class="actions"><button class="btn btn-danger" onclick="window._piRemoveItem('+idx+')" '+(d.items.length<=1?'disabled':'')+'>&times;</button></td></tr>';
+  });
+  h+='</tbody></table></div>';
+  h+='<div class="totals-summary"><div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));gap:12px;">';
+  h+='<div><span style="font-size:12px;color:#6b7280;">'+(isZh?'总件数':'Total Packages')+'</span><br><span style="font-size:18px;font-weight:700;color:#4a0e4e;">'+(d.totalPkgs||'—')+'</span></div>';
+  h+='<div><span style="font-size:12px;color:#6b7280;">'+(isZh?'总重量':'Total Weight')+'</span><br><span style="font-size:18px;font-weight:700;color:#4a0e4e;">'+(d.totalWeight||'—')+'</span></div>';
+  h+='<div><span style="font-size:12px;color:#6b7280;">'+(isZh?'总金额':'Total Invoice Value')+'</span><br><span style="font-size:18px;font-weight:700;color:#4a0e4e;">'+(d.totalInvoiceValue||'—')+'</span></div>';
+  h+='</div></div>';
+  h+='<div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));margin-top:16px;">';
+  h+=lI(isZh?'总件数':'Total Packages',d.totalPkgs,'totalPkgs','');h+=lI(isZh?'总重量':'Total Weight',d.totalWeight,'totalWeight','');
+  h+=lI(isZh?'总金额':'Total Invoice Value',d.totalInvoiceValue,'totalInvoiceValue','');h+='</div></div>';
+  // Declaration & Signature
+  h+='<div class="section-card"><h3>'+fB(isZh?'声明与签名':'Declaration & Signature','')+'</h3>';
+  h+='<div><div class="form-label">'+(isZh?'声明内容':'Declaration')+'</div><textarea class="input-field" rows="3" onchange="window._piSet(\'declaration\',this.value)">'+esc(d.declaration)+'</textarea></div>';
+  h+='<div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));margin-top:12px;">';
+  h+=lI(isZh?'签名人':'Signatory',d.signatureName,'signatureName','');h+=lI(isZh?'职务':'Title',d.signatureTitle,'signatureTitle','');
+  h+=lID(isZh?'签名日期':'Date',d.signatureDate,'signatureDate');h+='</div></div>';
+  document.getElementById('form-container').innerHTML=h;
+}
+function renderPreview(){
+  var d=data,isZh2=previewLang==='zh';
+  function tr2(en,zh){return isZh2?zh:en;}
+  var h='<div class="invoice-preview" id="preview-content">';
+  if(d.logo)h+='<div style="text-align:center;margin-bottom:16px;"><img src="'+esc(d.logo)+'" style="max-height:50px;"></div>';
+  h+='<div class="header-title">'+tr2('PROFORMA INVOICE','形式发票')+'</div>';
+  h+='<table><tbody><tr><td style="width:50%;"><div class="section-label2">'+tr2('SELLER','卖方')+'</div>';
+  h+='<div class="section-value">'+esc(d.sellerName||'—')+'</div><div class="section-value">'+esc(d.sellerAddress||'—')+'</div>';
+  if(d.sellerPhone)h+='<div class="section-value">Tel: '+esc(d.sellerPhone)+'</div>';
+  if(d.sellerTaxId)h+='<div class="section-value">Tax ID: '+esc(d.sellerTaxId)+'</div>';
+  h+='</td><td style="width:50%;"><div class="section-label2">'+tr2('BUYER','买方')+'</div>';
+  h+='<div class="section-value">'+esc(d.buyerName||'—')+'</div>';
+  if(d.buyerCompany)h+='<div class="section-value">'+esc(d.buyerCompany)+'</div>';
+  h+='<div class="section-value">'+esc(d.buyerAddress||'—')+'</div>';
+  if(d.buyerPhone)h+='<div class="section-value">Tel: '+esc(d.buyerPhone)+'</div>';
+  h+='</td></tr></tbody></table>';
+  h+='<table class="mt-2"><tbody><tr>';
+  [tr2('PROFORMA INV. NO.','形式发票号'),tr2('PO NO.','订单号'),tr2('DATE OF ISSUE','开证日期'),tr2('CURRENCY','货币'),tr2('PAYMENT TERMS','付款条款')].forEach(function(t){h+='<th style="width:20%;">'+t+'</th>';});
+  h+='</tr><tr>';
+  [d.proformaInvoiceNo,d.poNo,d.dateOfIssue,d.currency,d.paymentTerms].forEach(function(v){h+='<td class="text-center">'+esc(v||'—')+'</td>';});
+  h+='</tr></tbody></table>';
+  h+='<table class="mt-2"><thead><tr>';
+  ['#',tr2('ITEM NO.','项号'),tr2('DESCRIPTION','描述'),tr2('HS CODE','HS编码'),tr2('QTY','数量'),tr2('UNIT','单位'),tr2('UNIT PRICE','单价'),tr2('TOTAL AMOUNT','金额')].forEach(function(t){h+='<th>'+t+'</th>';});
+  h+='</tr></thead><tbody>';
+  d.items.forEach(function(it,idx){
+    h+='<tr><td class="text-center">'+(idx+1)+'</td><td class="text-center">'+esc(it.itemNo||'—')+'</td><td>'+esc(it.description||'—')+'</td><td class="text-center">'+esc(it.hsCode||'—')+'</td>';
+    h+='<td class="text-center">'+esc(it.qty||'—')+'</td><td class="text-center">'+esc(it.unitOfMeasure||'—')+'</td>';
+    h+='<td class="text-right">'+esc(it.unitPrice||'—')+'</td><td class="text-right">'+esc(it.totalAmount||'—')+'</td></tr>';
+  });
+  h+='</tbody></table>';
+  h+='<div class="mt-2" style="display:flex;justify-content:space-between;">';
+  h+='<div><div class="section-label2">'+tr2('DECLARATION','声明')+'</div><div class="section-value">'+esc(d.declaration)+'</div></div>';
+  h+='<div style="text-align:right;"><div class="section-label2">'+tr2('SIGNATURE','签名')+'</div>';
+  h+='<div class="section-value">'+esc(d.signatureName||'—')+'</div><div class="section-value">'+esc(d.signatureTitle||'')+'</div>';
+  h+='<div class="section-value">'+esc(d.signatureDate||'')+'</div></div></div>';
+  h+='</div>';
+  document.getElementById('preview-container').innerHTML=h;
+}
+function renderHistory(){
+  var tr=I18N[lang],snaps=loadSnapshots(DT),search=(document.getElementById('history-search').value||'').toLowerCase();
+  if(search)snaps=snaps.filter(function(s){return(s.label||'').toLowerCase().indexOf(search)!==-1||(s.ref||'').toLowerCase().indexOf(search)!==-1;});
+  var h='';if(snaps.length===0){h+='<div class="history-empty">'+svg('Clock',48)+'<p>'+tr.noHistory+'</p></div>';}
+  else{h+='<div style="margin-bottom:12px;font-size:13px;color:var(--text-muted);">'+snaps.length+' '+tr.records+'</div><div class="history-list">';
+  snaps.forEach(function(s){h+='<div class="history-item"><div class="history-item-info"><div class="history-item-label">'+esc(s.label||'draft')+'</div>';
+  h+='<div class="history-item-ref">'+esc(s.ref||'')+' — '+formatDateTime(s.exportedAt)+'</div></div><div class="history-item-actions">';
+  h+='<button class="btn btn-secondary btn-sm" onclick="window._piRestore(\''+s.id+'\')">'+tr.restore+'</button>';
+  h+='<button class="btn btn-danger btn-sm" onclick="window._piDeleteSnap(\''+s.id+'\')">'+tr.delete+'</button></div></div>';});
+  h+='</div><div style="margin-top:16px;"><button class="btn btn-secondary btn-sm" onclick="window._piClearAllHistory()">'+tr.clearAll+'</button></div>';}
+  document.getElementById('history-container').innerHTML=h;document.getElementById('history-search').oninput=function(){renderHistory();};
+}
+function renderClearModal(){var tr=I18N[lang],m=document.getElementById('clear-modal');if(showClearConfirm){m.classList.remove('hidden');
+document.getElementById('clear-title').textContent=tr.clearTitle;document.getElementById('clear-msg').textContent=tr.clearMsg;
+document.getElementById('btn-cancel-clear').textContent=tr.cancel;document.getElementById('btn-confirm-clear').textContent=tr.clear;}else m.classList.add('hidden');}
+document.getElementById('lang-btn').onclick=function(){lang=lang==='zh'?'en':'zh';setLang(lang);renderAll();};
+document.getElementById('theme-btn').onclick=function(){dark=!dark;setTheme(dark);applyTheme();renderAll();};
+  injectSpaButton();
+  injectBottomCta();
+  injectPageFaq();
+document.getElementById('btn-cancel-clear').onclick=function(){showClearConfirm=false;renderClearModal();};
+document.getElementById('btn-confirm-clear').onclick=function(){data=getDefaultDoc(DT);saveDocData(DT,data);showClearConfirm=false;renderClearModal();renderForm();renderPreview();};
+window._piSet=function(f,v){data[f]=v;saveDocData(DT,data);};
+window._piItem=function(idx,f,v){data.items[idx][f]=v;autoCalcItem(DT,data.items[idx]);saveDocData(DT,data);};
+window._piAddItem=function(){data.items.push(getEmptyItem(DT));saveDocData(DT,data);renderForm();};
+window._piRemoveItem=function(idx){if(data.items.length>1){data.items.splice(idx,1);saveDocData(DT,data);renderForm();}};
+window._piRestore=function(id){var snaps=loadSnapshots(DT),s=snaps.find(function(x){return x.id===id;});if(s&&s.data){data=JSON.parse(JSON.stringify(s.data));saveDocData(DT,data);renderAll();}};
+window._piDeleteSnap=function(id){deleteSnapshot(DT,id);renderHistory();};window._piClearAllHistory=function(){clearAllSnapshots(DT);renderHistory();};
+window._piLogoUpload=function(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(ev){data.logo=ev.target.result;saveDocData(DT,data);renderForm();};r.readAsDataURL(f);};
+window._piRemoveLogo=function(){data.logo='';saveDocData(DT,data);renderForm();};
+function esc(str){if(!str)return'';return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function fB(t,s){return t+(s?' <span style="font-size:12px;color:var(--text-muted);font-weight:400;">'+s+'</span>':'');}
+function lI(l,v,f,p){return '<div><div class="form-label">'+l+'</div><input class="input-field" value="'+esc(v)+'" onchange="window._piSet(\''+f+'\',this.value)" placeholder="'+(p||'')+'"></div>';}
+function lID(l,v,f){return '<div><div class="form-label">'+l+'</div><input class="input-field" type="date" value="'+esc(v)+'" onchange="window._piSet(\''+f+'\',this.value)"></div>';}
+function loadSample(){var s=getDefaultDoc(DT);s.sellerName='John Wang';s.sellerCompany='Shanghai Export Co.';s.sellerAddress='No.123 Zhangjiang Rd, Shanghai';s.sellerPhone='+86 138 0000 1234';s.sellerTaxId='91310000XXXX';
+s.buyerName='Jane Smith';s.buyerCompany='ABC Trading LLC';s.buyerAddress='456 Fifth Ave, New York, NY';s.buyerPhone='+1 212 555 0123';s.buyerTaxId='US-123456';
+s.proformaInvoiceNo='PI-2026-001';s.poNo='PO-2026-042';s.dateOfIssue='2026-05-01';s.validityPeriod='30 days';s.lCNo='LC-2026-789';s.waybillNo='AWB-123-456';s.currency='USD';s.paymentTerms='30% advance, 70% against B/L copy';s.countryOfExport='China';s.destinationCountry='USA';
+s.items=[{itemNo:'1',marks:'ABC/NYC',description:'Stainless Steel Water Bottle - 500ml',hsCode:'7323.93',qty:'500',unitOfMeasure:'pcs',unitPrice:'3.50',totalAmount:'1750.00'},
+{itemNo:'2',marks:'ABC/NYC',description:'Thermal Flask - 750ml',hsCode:'7323.93',qty:'200',unitOfMeasure:'pcs',unitPrice:'5.80',totalAmount:'1160.00'}];
+s.totalPkgs='70';s.totalWeight='340.00 kg';s.totalInvoiceValue='2910.00 USD';
+s.declaration='This proforma invoice is issued for the purpose of obtaining import license and/or opening L/C.';
+s.signatureName='John Wang';s.signatureTitle='Export Manager';s.signatureDate='2026-05-01';
+data=s;saveDocData(DT,data);renderAll();}
+init();
+</script>
+<!-- GoatCounter -->
+<script data-goatcounter="https://tradekit.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

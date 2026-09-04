@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>发票编号生成器 - TradeKit Invoice Number Generator</title>
+<meta name="description" content="按规则自动生成和管理发票编号，支持批量生成、自定义前缀和重置规则。">
+<meta name="keywords" content="发票编号,invoice number,编号生成,number generator,发票管理,invoice management,自动编号,auto number,编号规则,numbering rule">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="http://tradekit.treedeep.cn/invoice-number.html">
+<link rel="alternate" hreflang="zh" href="http://tradekit.treedeep.cn/invoice-number.html">
+<link rel="alternate" hreflang="en" href="http://tradekit.treedeep.cn/invoice-number.html?lang=en">
+<link rel="alternate" hreflang="x-default" href="http://tradekit.treedeep.cn/invoice-number.html">
+<meta name="geo.region" content="CN">
+<meta name="geo.placename" content="China">
+<meta name="geo.position" content="35.8617;104.1954">
+<meta name="ICBM" content="35.8617, 104.1954">
+<meta name="language" content="zh-CN, en">
+<meta name="content-language" content="zh-CN">
+<meta name="distribution" content="global">
+<meta property="og:type" content="article">
+<meta property="og:title" content="发票编号生成器 - TradeKit Invoice Number Generator">
+<meta property="og:description" content="按规则自动生成和管理发票编号，支持批量生成、自定义前缀和重置规则。">
+<meta property="og:url" content="http://tradekit.treedeep.cn/invoice-number.html">
+<meta property="og:site_name" content="TradeKit">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="article:section" content="Trade Documents">
+<meta property="article:tag" content="外贸单证">
+<meta property="article:tag" content="trade document">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="发票编号生成器 - TradeKit Invoice Number Generator">
+<meta name="twitter:description" content="按规则自动生成和管理发票编号，支持批量生成、自定义前缀和重置规则。">
+<meta name="twitter:label:1" content="文档类型">
+<meta name="twitter:data:1" content="发票编号生成器 - TradeKit Invoice Number Generator">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📦</text></svg>">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "发票编号生成器 - TradeKit Invoice Number Generator",
+  "alternateName": "Invoice Number Generator - TradeKit",
+  "description": "按规则自动生成和管理发票编号，支持批量生成、自定义前缀和重置规则。",
+  "url": "http://tradekit.treedeep.cn/invoice-number.html",
+  "isPartOf": {
+    "@type": "SoftwareApplication",
+    "name": "TradeKit",
+    "url": "http://tradekit.treedeep.cn"
+  },
+  "inLanguage": [
+    "zh-CN",
+    "en-US"
+  ],
+  "about": {
+    "@type": "Thing",
+    "name": "发票编号生成器 - TradeKit Invoice Number Generator",
+    "description": "按规则自动生成和管理发票编号，支持批量生成、自定义前缀和重置规则。"
+  },
+  "mainEntity": {
+    "@type": "Service",
+    "name": "发票编号生成器 - TradeKit Invoice Number Generator",
+    "description": "按规则自动生成和管理发票编号，支持批量生成、自定义前缀和重置规则。",
+    "serviceType": "Trade Document Generation",
+    "provider": {
+      "@type": "Organization",
+      "name": "TradeKit",
+      "url": "http://tradekit.treedeep.cn"
+    },
+    "areaServed": "Worldwide",
+    "availableLanguage": [
+      "zh-CN",
+      "en-US"
+    ]
+  }
+}</script>
+<link rel="stylesheet" href="common.css">
+<script src="html2pdf.bundle.min.js"></script>
+</head>
+<body>
+<header class="top-bar">
+  <div class="top-bar-left"><a href="index.html" class="toggle-btn" id="back-btn"><span id="back-icon"></span><span id="back-text"></span></a></div>
+  <div class="top-bar-right">
+    <button class="toggle-btn" id="lang-btn"><span id="lang-icon"></span><span id="lang-label">EN</span></button>
+    <button class="toggle-btn" id="theme-btn"><span id="theme-icon"></span><span id="theme-label">Light</span></button>
+  </div>
+</header>
+<main class="doc-page"><div class="doc-page-content">
+  <div class="doc-header"><h1 id="page-title">Invoice Number Generator</h1><p id="page-subtitle">发票编号生成器</p></div>
+  <div class="tab-bar"><button class="tab-btn active" data-tab="edit" id="tab-edit"></button><button class="tab-btn" data-tab="preview" id="tab-preview"></button><button class="tab-btn" data-tab="history" id="tab-history"></button></div>
+  <div class="tab-panel active" id="panel-edit"><div class="action-bar"><div class="action-bar-left"><button class="btn btn-secondary btn-sm" id="btn-load-sample"></button><button class="btn btn-secondary btn-sm" id="btn-clear"></button></div><div class="action-bar-right"><button class="btn btn-secondary btn-sm" id="btn-switch-preview"></button><button class="btn btn-primary" id="btn-generate"></button></div></div><div id="form-container"></div></div>
+  <div class="tab-panel" id="panel-preview"><div class="action-bar"><div class="action-bar-left"><button class="btn btn-secondary btn-sm" id="btn-back-edit"></button><button class="btn btn-secondary btn-sm" id="btn-preview-lang"></button></div><div class="action-bar-right"><button class="btn btn-primary" id="btn-pdf-preview" data-pdf-btn></button></div></div><div id="preview-container"></div></div>
+  <div class="tab-panel" id="panel-history"><div class="history-search"><input class="input-field" id="history-search" type="text" placeholder=""></div><div id="history-container"></div></div>
+</div></main>
+<div class="clear-modal hidden" id="clear-modal"><div class="clear-modal-content"><div class="clear-modal-title" id="clear-title"></div><div class="clear-modal-msg" id="clear-msg"></div><div class="clear-modal-actions"><button class="btn btn-secondary btn-sm" id="btn-cancel-clear"></button><button class="btn btn-danger" id="btn-confirm-clear"></button></div></div></div>
+<script src="common.js"></script>
+<script>
+var DT='invoice_number',DT_META=DOC_META[DT],lang=getLang(),dark=isDark(),previewLang='en',data=null,showClearConfirm=false;
+function init(){applyTheme();var s=loadDocData(DT);data=s?s:getDefaultDoc(DT);renderAll();}
+  injectSpaButton();
+  injectBottomCta();
+  injectPageFaq();
+function renderAll(){renderTopBar();renderHeader();renderTabs();renderForm();renderPreview();renderHistory();renderClearModal();}
+function renderTopBar(){var tr=I18N[lang];document.documentElement.lang=lang;document.getElementById('back-icon').innerHTML=svg('ArrowLeft',16);document.getElementById('back-text').textContent=tr.backHome;document.getElementById('lang-icon').innerHTML=svg('Languages',16);document.getElementById('lang-label').textContent=lang==='zh'?'EN':'中文';document.getElementById('theme-icon').innerHTML=svg(dark?'Sun':'Moon',16);document.getElementById('theme-label').textContent=dark?'Light':'Dark';}
+function renderHeader(){document.getElementById('page-title').textContent=DT_META.title;document.getElementById('page-subtitle').textContent=DT_META.titleZh;}
+function renderTabs(){var tr=I18N[lang];document.getElementById('tab-edit').textContent=tr.formEditor;document.getElementById('tab-preview').textContent=tr.previewTab;document.getElementById('tab-history').textContent=tr.historyTab;var ps=['edit','preview','history'];ps.forEach(function(p){document.getElementById('tab-'+p).onclick=function(){ps.forEach(function(pp){document.getElementById('tab-'+pp).classList.toggle('active',pp===p);document.getElementById('panel-'+pp).classList.toggle('active',pp===p);});};});}
+function switchTab(t){['edit','preview','history'].forEach(function(p){document.getElementById('tab-'+p).classList.toggle('active',p===t);document.getElementById('panel-'+p).classList.toggle('active',p===t);});}
+function renderForm(){
+  var tr=I18N[lang],isZh=lang==='zh',d=data;
+  document.getElementById('btn-load-sample').textContent=tr.loadSample;document.getElementById('btn-clear').textContent=tr.clear;
+  document.getElementById('btn-switch-preview').textContent=tr.preview;document.getElementById('btn-generate').textContent=lang==='zh'?'生成编号':'Generate Number';
+  document.getElementById('btn-back-edit').textContent=tr.backEdit;document.getElementById('btn-preview-lang').textContent=previewLang==='en'?'Switch to 中文':'Switch to English';
+  document.getElementById('btn-pdf-preview').textContent=tr.exportPdf;
+  document.getElementById('history-search').placeholder=tr.searchPlaceholder;
+  document.getElementById('btn-load-sample').onclick=loadSample;document.getElementById('btn-clear').onclick=function(){showClearConfirm=true;renderClearModal();};
+  document.getElementById('btn-switch-preview').onclick=function(){switchTab('preview');renderPreview();};document.getElementById('btn-back-edit').onclick=function(){switchTab('edit');};
+  document.getElementById('btn-generate').onclick=generateNumber;
+  document.getElementById('btn-preview-lang').onclick=function(){previewLang=previewLang==='en'?'zh':'en';renderPreview();};document.getElementById('btn-pdf-preview').onclick=function(){doExportPdf(DT,data,'preview-content');};
+  var h='';
+  h+='<div class="section-card"><h3>'+fB(isZh?'编号规则':'Numbering Rules','')+'</h3><div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));">';
+  h+=lI(isZh?'前缀':'Prefix',d.prefix,'prefix','INV');
+  h+='<div><div class="form-label">'+(isZh?'分隔符':'Separator')+'</div><select class="input-field" onchange="window._inSet(\'separator\',this.value)">';
+  ['-', '/', '.', '_'].forEach(function(s){h+='<option value="'+s+'"'+(d.separator===s?' selected':'')+'>'+s+'</option>';});
+  h+='</select></div>';
+  h+='<div><div class="form-label">'+(isZh?'日期格式':'Date Format')+'</div><select class="input-field" onchange="window._inSet(\'dateFormat\',this.value)">';
+  [{v:'YYYYMMDD',l:'YYYYMMDD'},{v:'YYMMDD',l:'YYMMDD'},{v:'YYYY-MM',l:'YYYY-MM'},{v:'YYYY',l:'YYYY'},{v:'',l:'No Date'}].forEach(function(o){h+='<option value="'+o.v+'"'+(d.dateFormat===o.v?' selected':'')+'>'+o.l+'</option>';});
+  h+='</select></div>';
+  h+='<div><div class="form-label">'+(isZh?'序号位数':'Sequence Digits')+'</div><input class="input-field" type="number" min="2" max="8" value="'+d.sequenceDigits+'" onchange="window._inSet(\'sequenceDigits\',parseInt(this.value))"></div>';
+  h+='<div><div class="form-label">'+(isZh?'重置规则':'Reset Rule')+'</div><select class="input-field" onchange="window._inSet(\'resetRule\',this.value)">';
+  [{v:'monthly',l:isZh?'每月':'Monthly'},{v:'yearly',l:isZh?'每年':'Yearly'},{v:'never',l:isZh?'从不':'Never'}].forEach(function(o){h+='<option value="'+o.v+'"'+(d.resetRule===o.v?' selected':'')+'>'+o.l+'</option>';});
+  h+='</select></div></div></div>';
+  // Generated numbers
+  h+='<div class="section-card"><h3>'+fB(isZh?'已生成编号':'Generated Numbers','')+'</h3>';
+  h+='<div style="margin-bottom:12px;"><button class="btn btn-success btn-sm" onclick="window._inGenerate()">'+(isZh?'+ 生成新编号':'+ Generate New')+'</button></div>';
+  if(!data.numbers||data.numbers.length===0){
+    h+='<div class="history-empty">'+svg('Clock',48)+'<p>'+(isZh?'暂无生成的编号':'No numbers generated yet')+'</p></div>';
+  } else {
+    h+='<div class="items-table-container"><table class="items-table"><thead><tr>';
+    ['#',isZh?'编号':'Number',isZh?'生成时间':'Generated At',isZh?'状态':'Status',isZh?'备注':'Note',isZh?'操作':'Action'].forEach(function(th){h+='<th>'+th+'</th>';});
+    h+='</tr></thead><tbody>';
+    data.numbers.forEach(function(n,idx){
+      h+='<tr><td class="row-number">'+(idx+1)+'</td>';
+      h+='<td style="font-weight:600;font-family:monospace;font-size:14px;color:var(--primary);">'+esc(n.number)+'</td>';
+      h+='<td>'+formatDateTime(n.generatedAt)+'</td>';
+      h+='<td><span style="padding:2px 8px;border-radius:4px;font-size:12px;font-weight:500;background:'+(n.status==='active'?'#dcfce7;color:#166534':'#fecaca;color:#991b1b')+'">'+(n.status==='active'?(isZh?'有效':'Active'):(isZh?'已作废':'Voided'))+'</span></td>';
+      h+='<td><input class="input-field input-field-xs" value="'+esc(n.note||'')+'" onchange="window._inNote('+idx+',this.value)"></td>';
+      h+='<td class="actions"><button class="btn btn-danger btn-sm" onclick="window._inVoid('+idx+')" '+(n.status!=='active'?'disabled':'')+'>'+(isZh?'作废':'Void')+'</button>';
+      h+='<button class="btn btn-danger btn-sm" onclick="window._inRemove('+idx+')">&times;</button></td></tr>';
+    });
+    h+='</tbody></table></div>';
+  }
+  h+='</div>';
+  document.getElementById('form-container').innerHTML=h;
+}
+function renderPreview(){
+  var d=data,isZh2=previewLang==='zh';
+  function tr2(en,zh){return isZh2?zh:en;}
+  var h='<div class="invoice-preview" id="preview-content">';
+  h+='<div class="header-title">'+tr2('INVOICE NUMBER LIST','发票编号列表')+'</div>';
+  if(!d.numbers||d.numbers.length===0){
+    h+='<p style="text-align:center;color:#6b7280;padding:40px 0;">'+(isZh2?'暂无编号':'No numbers generated')+'</p>';
+  } else {
+    h+='<table><thead><tr>';
+    h+='<th>#</th><th>'+tr2('NUMBER','编号')+'</th><th>'+tr2('GENERATED AT','生成时间')+'</th><th>'+tr2('STATUS','状态')+'</th><th>'+tr2('NOTE','备注')+'</th>';
+    h+='</tr></thead><tbody>';
+    d.numbers.forEach(function(n,idx){
+      h+='<tr><td class="text-center">'+(idx+1)+'</td><td style="font-family:monospace;font-weight:600;">'+esc(n.number)+'</td>';
+      h+='<td class="text-center">'+formatDateTime(n.generatedAt)+'</td><td class="text-center">'+(n.status==='active'?tr2('Active','有效'):tr2('Voided','已作废'))+'</td>';
+      h+='<td>'+esc(n.note||'')+'</td></tr>';
+    });
+    h+='</tbody></table>';
+  }
+  h+='</div>';
+  document.getElementById('preview-container').innerHTML=h;
+}
+function renderHistory(){
+  var tr=I18N[lang],snaps=loadSnapshots(DT),search=(document.getElementById('history-search').value||'').toLowerCase();
+  if(search)snaps=snaps.filter(function(s){return(s.label||'').toLowerCase().indexOf(search)!==-1||(s.ref||'').toLowerCase().indexOf(search)!==-1;});
+  var h='';if(snaps.length===0){h+='<div class="history-empty">'+svg('Clock',48)+'<p>'+tr.noHistory+'</p></div>';}
+  else{h+='<div style="margin-bottom:12px;font-size:13px;color:var(--text-muted);">'+snaps.length+' '+tr.records+'</div><div class="history-list">';
+  snaps.forEach(function(s){h+='<div class="history-item"><div class="history-item-info"><div class="history-item-label">'+esc(s.label||'draft')+'</div>';
+  h+='<div class="history-item-ref">'+esc(s.ref||'')+' — '+formatDateTime(s.exportedAt)+'</div></div><div class="history-item-actions">';
+  h+='<button class="btn btn-secondary btn-sm" onclick="window._inRestore(\''+s.id+'\')">'+tr.restore+'</button>';
+  h+='<button class="btn btn-danger btn-sm" onclick="window._inDeleteSnap(\''+s.id+'\')">'+tr.delete+'</button></div></div>';});
+  h+='</div><div style="margin-top:16px;"><button class="btn btn-secondary btn-sm" onclick="window._inClearAllHistory()">'+tr.clearAll+'</button></div>';}
+  document.getElementById('history-container').innerHTML=h;document.getElementById('history-search').oninput=function(){renderHistory();};
+}
+function renderClearModal(){var tr=I18N[lang],m=document.getElementById('clear-modal');if(showClearConfirm){m.classList.remove('hidden');
+document.getElementById('clear-title').textContent=tr.clearTitle;document.getElementById('clear-msg').textContent=tr.clearMsg;
+document.getElementById('btn-cancel-clear').textContent=tr.cancel;document.getElementById('btn-confirm-clear').textContent=tr.clear;}else m.classList.add('hidden');}
+function buildNumber(){
+  var now=new Date(),y=now.getFullYear(),m=String(now.getMonth()+1).padStart(2,'0'),d=String(now.getDate()).padStart(2,'0');
+  var datePart='';
+  switch(data.dateFormat){
+    case 'YYYYMMDD':datePart=''+y+m+d;break;case 'YYMMDD':datePart=String(y).slice(2)+m+d;break;
+    case 'YYYY-MM':datePart=y+'-'+m;break;case 'YYYY':datePart=''+y;break;default:datePart='';
+  }
+  var sep=data.separator||'-';
+  var parts=[data.prefix||'INV'];
+  if(datePart)parts.push(datePart);
+  // Determine next sequence
+  var nextSeq=1;
+  if(data.numbers&&data.numbers.length>0)nextSeq=data.numbers.length+1;
+  var seq=String(nextSeq).padStart(data.sequenceDigits||4,'0');
+  parts.push(seq);
+  return parts.join(sep);
+}
+function generateNumber(){var num=buildNumber();if(!data.numbers)data.numbers=[];data.numbers.unshift({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),number:num,generatedAt:new Date().toISOString(),status:'active',note:''});saveDocData(DT,data);renderAll();}
+window._inGenerate=generateNumber;
+window._inSet=function(f,v){data[f]=v;saveDocData(DT,data);};
+window._inNote=function(idx,v){data.numbers[idx].note=v;saveDocData(DT,data);};
+window._inVoid=function(idx){data.numbers[idx].status='voided';saveDocData(DT,data);renderForm();};
+window._inRemove=function(idx){data.numbers.splice(idx,1);saveDocData(DT,data);renderForm();};
+window._inRestore=function(id){var snaps=loadSnapshots(DT),s=snaps.find(function(x){return x.id===id;});if(s&&s.data){data=JSON.parse(JSON.stringify(s.data));saveDocData(DT,data);renderAll();}};
+window._inDeleteSnap=function(id){deleteSnapshot(DT,id);renderHistory();};window._inClearAllHistory=function(){clearAllSnapshots(DT);renderHistory();};
+document.getElementById('lang-btn').onclick=function(){lang=lang==='zh'?'en':'zh';setLang(lang);renderAll();};
+document.getElementById('theme-btn').onclick=function(){dark=!dark;setTheme(dark);applyTheme();renderAll();};
+  injectSpaButton();
+  injectBottomCta();
+  injectPageFaq();
+document.getElementById('btn-cancel-clear').onclick=function(){showClearConfirm=false;renderClearModal();};
+document.getElementById('btn-confirm-clear').onclick=function(){data=getDefaultDoc(DT);saveDocData(DT,data);showClearConfirm=false;renderClearModal();renderForm();renderPreview();};
+function esc(str){if(!str)return'';return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function fB(t,s){return t+(s?' <span style="font-size:12px;color:var(--text-muted);font-weight:400;">'+s+'</span>':'');}
+function lI(l,v,f,p){return '<div><div class="form-label">'+l+'</div><input class="input-field" value="'+esc(v)+'" onchange="window._inSet(\''+f+'\',this.value)" placeholder="'+(p||'')+'"></div>';}
+function loadSample(){var s=getDefaultDoc(DT);s.prefix='INV';s.separator='-';s.dateFormat='YYYYMMDD';s.sequenceDigits=4;s.resetRule='monthly';
+s.numbers=[{id:'1',number:'INV-20260501-0001',generatedAt:'2026-05-01T10:00:00Z',status:'active',note:'First invoice'},
+{id:'2',number:'INV-20260501-0002',generatedAt:'2026-05-01T11:00:00Z',status:'active',note:''},
+{id:'3',number:'INV-20260502-0003',generatedAt:'2026-05-02T09:30:00Z',status:'voided',note:'Cancelled - wrong amount'}];
+data=s;saveDocData(DT,data);renderAll();}
+init();
+</script>
+<!-- GoatCounter -->
+<script data-goatcounter="https://tradekit.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

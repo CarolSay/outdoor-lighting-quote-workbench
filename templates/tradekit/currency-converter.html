@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>汇率换算器 - TradeKit Currency Converter</title>
+<meta name="description" content="免费汇率换算工具，支持多币种批量换算，手动输入汇率，适合外贸报价使用。">
+<meta name="keywords" content="汇率换算,currency converter,汇率,exchange rate,USD,CNY,EUR,外贸汇率,trade rate,货币换算, forex">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="http://tradekit.treedeep.cn/currency-converter.html">
+<link rel="alternate" hreflang="zh" href="http://tradekit.treedeep.cn/currency-converter.html">
+<link rel="alternate" hreflang="en" href="http://tradekit.treedeep.cn/currency-converter.html?lang=en">
+<link rel="alternate" hreflang="x-default" href="http://tradekit.treedeep.cn/currency-converter.html">
+<meta name="geo.region" content="CN">
+<meta name="geo.placename" content="China">
+<meta name="geo.position" content="35.8617;104.1954">
+<meta name="ICBM" content="35.8617, 104.1954">
+<meta name="language" content="zh-CN, en">
+<meta name="content-language" content="zh-CN">
+<meta name="distribution" content="global">
+<meta property="og:type" content="article">
+<meta property="og:title" content="汇率换算器 - TradeKit Currency Converter">
+<meta property="og:description" content="免费汇率换算工具，支持多币种批量换算，手动输入汇率，适合外贸报价使用。">
+<meta property="og:url" content="http://tradekit.treedeep.cn/currency-converter.html">
+<meta property="og:site_name" content="TradeKit">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="article:section" content="Trade Documents">
+<meta property="article:tag" content="外贸单证">
+<meta property="article:tag" content="trade document">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="汇率换算器 - TradeKit Currency Converter">
+<meta name="twitter:description" content="免费汇率换算工具，支持多币种批量换算，手动输入汇率，适合外贸报价使用。">
+<meta name="twitter:label:1" content="文档类型">
+<meta name="twitter:data:1" content="汇率换算器 - TradeKit Currency Converter">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📦</text></svg>">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "汇率换算器 - TradeKit Currency Converter",
+  "alternateName": "Currency Converter - TradeKit",
+  "description": "免费汇率换算工具，支持多币种批量换算，手动输入汇率，适合外贸报价使用。",
+  "url": "http://tradekit.treedeep.cn/currency-converter.html",
+  "isPartOf": {
+    "@type": "SoftwareApplication",
+    "name": "TradeKit",
+    "url": "http://tradekit.treedeep.cn"
+  },
+  "inLanguage": [
+    "zh-CN",
+    "en-US"
+  ],
+  "about": {
+    "@type": "Thing",
+    "name": "汇率换算器 - TradeKit Currency Converter",
+    "description": "免费汇率换算工具，支持多币种批量换算，手动输入汇率，适合外贸报价使用。"
+  },
+  "mainEntity": {
+    "@type": "Service",
+    "name": "汇率换算器 - TradeKit Currency Converter",
+    "description": "免费汇率换算工具，支持多币种批量换算，手动输入汇率，适合外贸报价使用。",
+    "serviceType": "Trade Document Generation",
+    "provider": {
+      "@type": "Organization",
+      "name": "TradeKit",
+      "url": "http://tradekit.treedeep.cn"
+    },
+    "areaServed": "Worldwide",
+    "availableLanguage": [
+      "zh-CN",
+      "en-US"
+    ]
+  }
+}</script>
+<link rel="stylesheet" href="common.css">
+<script src="html2pdf.bundle.min.js"></script>
+</head>
+<body>
+<header class="top-bar">
+  <div class="top-bar-left"><a href="index.html" class="toggle-btn" id="back-btn"><span id="back-icon"></span><span id="back-text"></span></a></div>
+  <div class="top-bar-right">
+    <button class="toggle-btn" id="lang-btn"><span id="lang-icon"></span><span id="lang-label">EN</span></button>
+    <button class="toggle-btn" id="theme-btn"><span id="theme-icon"></span><span id="theme-label">Light</span></button>
+  </div>
+</header>
+<main class="doc-page"><div class="doc-page-content">
+  <div class="doc-header"><h1 id="page-title">Currency Converter</h1><p id="page-subtitle">汇率换算</p></div>
+  <div class="tab-bar"><button class="tab-btn active" data-tab="edit" id="tab-edit"></button><button class="tab-btn" data-tab="preview" id="tab-preview"></button><button class="tab-btn" data-tab="history" id="tab-history"></button></div>
+  <div class="tab-panel active" id="panel-edit"><div class="action-bar"><div class="action-bar-left"><button class="btn btn-secondary btn-sm" id="btn-load-sample"></button><button class="btn btn-secondary btn-sm" id="btn-clear"></button></div><div class="action-bar-right"><button class="btn btn-secondary btn-sm" id="btn-switch-preview"></button><button class="btn btn-primary" id="btn-pdf" data-pdf-btn></button></div></div><div id="form-container"></div></div>
+  <div class="tab-panel" id="panel-preview"><div class="action-bar"><div class="action-bar-left"><button class="btn btn-secondary btn-sm" id="btn-back-edit"></button><button class="btn btn-secondary btn-sm" id="btn-preview-lang"></button></div><div class="action-bar-right"><button class="btn btn-primary" id="btn-pdf-preview" data-pdf-btn></button></div></div><div id="preview-container"></div></div>
+  <div class="tab-panel" id="panel-history"><div class="history-search"><input class="input-field" id="history-search" type="text" placeholder=""></div><div id="history-container"></div></div>
+</div></main>
+<div class="clear-modal hidden" id="clear-modal"><div class="clear-modal-content"><div class="clear-modal-title" id="clear-title"></div><div class="clear-modal-msg" id="clear-msg"></div><div class="clear-modal-actions"><button class="btn btn-secondary btn-sm" id="btn-cancel-clear"></button><button class="btn btn-danger" id="btn-confirm-clear"></button></div></div></div>
+<script src="common.js"></script>
+<script>
+var DT='currency_converter',DT_META=DOC_META[DT],lang=getLang(),dark=isDark(),previewLang='en',data=null,showClearConfirm=false;
+function init(){applyTheme();var s=loadDocData(DT);data=s?s:getDefaultDoc(DT);renderAll();}
+  injectSpaButton();
+  injectBottomCta();
+  injectPageFaq();
+function renderAll(){renderTopBar();renderHeader();renderTabs();renderForm();renderPreview();renderHistory();renderClearModal();}
+function renderTopBar(){var tr=I18N[lang];document.documentElement.lang=lang;document.getElementById('back-icon').innerHTML=svg('ArrowLeft',16);document.getElementById('back-text').textContent=tr.backHome;document.getElementById('lang-icon').innerHTML=svg('Languages',16);document.getElementById('lang-label').textContent=lang==='zh'?'EN':'中文';document.getElementById('theme-icon').innerHTML=svg(dark?'Sun':'Moon',16);document.getElementById('theme-label').textContent=dark?'Light':'Dark';}
+function renderHeader(){document.getElementById('page-title').textContent=DT_META.title;document.getElementById('page-subtitle').textContent=DT_META.titleZh;}
+function renderTabs(){var tr=I18N[lang];document.getElementById('tab-edit').textContent=tr.formEditor;document.getElementById('tab-preview').textContent=tr.previewTab;document.getElementById('tab-history').textContent=tr.historyTab;var ps=['edit','preview','history'];ps.forEach(function(p){document.getElementById('tab-'+p).onclick=function(){ps.forEach(function(pp){document.getElementById('tab-'+pp).classList.toggle('active',pp===p);document.getElementById('panel-'+pp).classList.toggle('active',pp===p);});};});}
+function switchTab(t){['edit','preview','history'].forEach(function(p){document.getElementById('tab-'+p).classList.toggle('active',p===t);document.getElementById('panel-'+p).classList.toggle('active',p===t);});}
+function makeCurOpts(sel){var h='';CURRENCIES.forEach(function(c){h+='<option value="'+c+'"'+(c===sel?' selected':'')+'>'+c+'</option>';});return h;}
+function renderForm(){
+  var tr=I18N[lang],isZh=lang==='zh',d=data;
+  document.getElementById('btn-load-sample').textContent=tr.loadSample;document.getElementById('btn-clear').textContent=tr.clear;
+  document.getElementById('btn-switch-preview').textContent=tr.preview;document.getElementById('btn-pdf').textContent=tr.exportPdf;
+  document.getElementById('btn-back-edit').textContent=tr.backEdit;document.getElementById('btn-preview-lang').textContent=previewLang==='en'?'Switch to 中文':'Switch to English';
+  document.getElementById('btn-pdf-preview').textContent=tr.exportPdf;
+  document.getElementById('history-search').placeholder=tr.searchPlaceholder;
+  document.getElementById('btn-load-sample').onclick=loadSample;document.getElementById('btn-clear').onclick=function(){showClearConfirm=true;renderClearModal();};
+  document.getElementById('btn-switch-preview').onclick=function(){switchTab('preview');renderPreview();};document.getElementById('btn-back-edit').onclick=function(){switchTab('edit');};
+  document.getElementById('btn-pdf').onclick=function(){doExportPdf(DT,data,'preview-content');};document.getElementById('btn-pdf-preview').onclick=function(){doExportPdf(DT,data,'preview-content');};
+  document.getElementById('btn-preview-lang').onclick=function(){previewLang=previewLang==='en'?'zh':'en';renderPreview();};
+  var h='';
+  h+='<div class="section-card"><h3>'+fB(isZh?'单笔换算':'Single Conversion','')+'</h3><div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(150px, 1fr));">';
+  h+='<div><div class="form-label">'+(isZh?'源货币':'From Currency')+'</div><select class="input-field" onchange="window._ccSet(\'baseCurrency\',this.value)">'+makeCurOpts(d.baseCurrency)+'</select></div>';
+  h+='<div><div class="form-label">'+(isZh?'目标货币':'To Currency')+'</div><select class="input-field" onchange="window._ccSet(\'targetCurrency\',this.value)">'+makeCurOpts(d.targetCurrency)+'</select></div>';
+  h+='<div><div class="form-label">'+(isZh?'汇率':'Exchange Rate')+'</div><input class="input-field" type="number" step="0.0001" value="'+esc(d.exchangeRate)+'" onchange="window._ccSet(\'exchangeRate\',this.value)" placeholder="'+(isZh?'手动输入':'Enter rate')+'"></div>';
+  h+='<div><div class="form-label">'+(isZh?'金额':'Amount')+'</div><input class="input-field" type="number" step="0.01" value="'+esc(d.amount)+'" onchange="window._ccSet(\'amount\',this.value)" placeholder="1000"></div>';
+  var result=d.amount&&d.exchangeRate?(parseFloat(d.amount)*parseFloat(d.exchangeRate)).toFixed(2):'';
+  h+='<div><div class="form-label">'+(isZh?'换算结果':'Result')+'</div><div style="padding:10px;font-size:18px;font-weight:700;color:var(--primary);">'+(result||'—')+' '+esc(d.targetCurrency)+'</div></div>';
+  h+='</div></div>';
+  h+='<div class="section-card"><h3>'+fB(isZh?'批量换算':'Batch Conversion','')+'</h3>';
+  h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">';
+  h+='<p style="font-size:13px;color:var(--text-muted);">'+(isZh?'添加多组货币换算。':'Add multiple conversions.')+'</p>';
+  h+='<button class="btn btn-success btn-sm" onclick="window._ccAddItem()">'+tr.addItem+'</button></div>';
+  h+='<div class="items-table-container"><table class="items-table"><thead><tr>';
+  ['#',isZh?'源货币':'From',isZh?'目标货币':'To',isZh?'汇率':'Rate',isZh?'金额':'Amount',isZh?'结果':'Result',isZh?'操作':'Action'].forEach(function(th){h+='<th>'+th+'</th>';});
+  h+='</tr></thead><tbody>';
+  d.items.forEach(function(it,idx){
+    var res=it.amount&&it.rate?(parseFloat(it.amount)*parseFloat(it.rate)).toFixed(2):'';
+    h+='<tr><td class="row-number">'+(idx+1)+'</td>';
+    h+='<td><select class="input-field input-field-xs" onchange="window._ccItem('+idx+',\'fromCurrency\',this.value)">'+makeCurOpts(it.fromCurrency)+'</select></td>';
+    h+='<td><select class="input-field input-field-xs" onchange="window._ccItem('+idx+',\'toCurrency\',this.value)">'+makeCurOpts(it.toCurrency)+'</select></td>';
+    h+='<td><input class="input-field input-field-xs text-right" type="number" step="0.0001" value="'+esc(it.rate)+'" onchange="window._ccItem('+idx+',\'rate\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-right" type="number" step="0.01" value="'+esc(it.amount)+'" onchange="window._ccItem('+idx+',\'amount\',this.value)"></td>';
+    h+='<td style="font-weight:600;color:var(--primary);">'+(res||'—')+'</td>';
+    h+='<td class="actions"><button class="btn btn-danger" onclick="window._ccRemoveItem('+idx+')" '+(d.items.length<=1?'disabled':'')+'>&times;</button></td></tr>';
+  });
+  h+='</tbody></table></div></div>';
+  document.getElementById('form-container').innerHTML=h;
+}
+function renderPreview(){
+  var d=data,isZh2=previewLang==='zh';
+  function tr2(en,zh){return isZh2?zh:en;}
+  var h='<div class="invoice-preview" id="preview-content">';
+  h+='<div class="header-title">'+tr2('CURRENCY CONVERSION','汇率换算')+'</div>';
+  if(d.amount&&d.exchangeRate){
+    h+='<table><tbody><tr><th style="width:25%;">'+tr2('FROM','源货币')+'</th><th style="width:25%;">'+tr2('TO','目标货币')+'</th><th style="width:25%;">'+tr2('RATE','汇率')+'</th><th style="width:25%;">'+tr2('AMOUNT','金额')+'</th></tr>';
+    h+='<tr><td class="text-center">'+esc(d.baseCurrency)+' '+esc(d.amount)+'</td><td class="text-center">'+esc(d.targetCurrency)+'</td><td class="text-center">'+esc(d.exchangeRate)+'</td>';
+    h+='<td class="text-center font-bold" style="font-size:18px;">'+(parseFloat(d.amount)*parseFloat(d.exchangeRate)).toFixed(2)+' '+esc(d.targetCurrency)+'</td></tr></tbody></table>';
+  }
+  if(d.items&&d.items.length>0&&d.items[0].rate){
+    h+='<table class="mt-2"><thead><tr>';
+    h+='<th>#</th><th>'+tr2('FROM','源货币')+'</th><th>'+tr2('TO','目标货币')+'</th><th>'+tr2('RATE','汇率')+'</th><th>'+tr2('AMOUNT','金额')+'</th><th>'+tr2('RESULT','结果')+'</th>';
+    h+='</tr></thead><tbody>';
+    d.items.forEach(function(it,idx){
+      var res=it.amount&&it.rate?(parseFloat(it.amount)*parseFloat(it.rate)).toFixed(2):'';
+      if(!res)return;
+      h+='<tr><td class="text-center">'+(idx+1)+'</td><td>'+esc(it.fromCurrency)+'</td><td>'+esc(it.toCurrency)+'</td>';
+      h+='<td class="text-center">'+esc(it.rate)+'</td><td class="text-center">'+esc(it.amount)+'</td><td class="text-right font-bold">'+res+'</td></tr>';
+    });
+    h+='</tbody></table>';
+  }
+  h+='</div>';
+  document.getElementById('preview-container').innerHTML=h;
+}
+function renderHistory(){
+  var tr=I18N[lang],snaps=loadSnapshots(DT),search=(document.getElementById('history-search').value||'').toLowerCase();
+  if(search)snaps=snaps.filter(function(s){return(s.label||'').toLowerCase().indexOf(search)!==-1||(s.ref||'').toLowerCase().indexOf(search)!==-1;});
+  var h='';if(snaps.length===0){h+='<div class="history-empty">'+svg('Clock',48)+'<p>'+tr.noHistory+'</p></div>';}
+  else{h+='<div style="margin-bottom:12px;font-size:13px;color:var(--text-muted);">'+snaps.length+' '+tr.records+'</div><div class="history-list">';
+  snaps.forEach(function(s){h+='<div class="history-item"><div class="history-item-info"><div class="history-item-label">'+esc(s.label||'draft')+'</div>';
+  h+='<div class="history-item-ref">'+esc(s.ref||'')+' — '+formatDateTime(s.exportedAt)+'</div></div><div class="history-item-actions">';
+  h+='<button class="btn btn-secondary btn-sm" onclick="window._ccRestore(\''+s.id+'\')">'+tr.restore+'</button>';
+  h+='<button class="btn btn-danger btn-sm" onclick="window._ccDeleteSnap(\''+s.id+'\')">'+tr.delete+'</button></div></div>';});
+  h+='</div><div style="margin-top:16px;"><button class="btn btn-secondary btn-sm" onclick="window._ccClearAllHistory()">'+tr.clearAll+'</button></div>';}
+  document.getElementById('history-container').innerHTML=h;document.getElementById('history-search').oninput=function(){renderHistory();};
+}
+function renderClearModal(){var tr=I18N[lang],m=document.getElementById('clear-modal');if(showClearConfirm){m.classList.remove('hidden');
+document.getElementById('clear-title').textContent=tr.clearTitle;document.getElementById('clear-msg').textContent=tr.clearMsg;
+document.getElementById('btn-cancel-clear').textContent=tr.cancel;document.getElementById('btn-confirm-clear').textContent=tr.clear;}else m.classList.add('hidden');}
+document.getElementById('lang-btn').onclick=function(){lang=lang==='zh'?'en':'zh';setLang(lang);renderAll();};
+document.getElementById('theme-btn').onclick=function(){dark=!dark;setTheme(dark);applyTheme();renderAll();};
+  injectSpaButton();
+  injectBottomCta();
+  injectPageFaq();
+document.getElementById('btn-cancel-clear').onclick=function(){showClearConfirm=false;renderClearModal();};
+document.getElementById('btn-confirm-clear').onclick=function(){data=getDefaultDoc(DT);saveDocData(DT,data);showClearConfirm=false;renderClearModal();renderForm();renderPreview();};
+window._ccSet=function(f,v){data[f]=v;saveDocData(DT,data);};
+window._ccItem=function(idx,f,v){data.items[idx][f]=v;saveDocData(DT,data);};
+window._ccAddItem=function(){data.items.push({fromCurrency:'USD',toCurrency:'CNY',rate:'',amount:'',result:''});saveDocData(DT,data);renderForm();};
+window._ccRemoveItem=function(idx){if(data.items.length>1){data.items.splice(idx,1);saveDocData(DT,data);renderForm();}};
+window._ccRestore=function(id){var snaps=loadSnapshots(DT),s=snaps.find(function(x){return x.id===id;});if(s&&s.data){data=JSON.parse(JSON.stringify(s.data));saveDocData(DT,data);renderAll();}};
+window._ccDeleteSnap=function(id){deleteSnapshot(DT,id);renderHistory();};window._ccClearAllHistory=function(){clearAllSnapshots(DT);renderHistory();};
+function esc(str){if(!str)return'';return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function fB(t,s){return t+(s?' <span style="font-size:12px;color:var(--text-muted);font-weight:400;">'+s+'</span>':'');}
+function loadSample(){var s=getDefaultDoc(DT);s.baseCurrency='USD';s.targetCurrency='CNY';s.exchangeRate='7.2450';s.amount='10000';
+s.items=[{fromCurrency:'USD',toCurrency:'CNY',rate:'7.2450',amount:'10000',result:'72450.00'},
+{fromCurrency:'USD',toCurrency:'EUR',rate:'0.9200',amount:'10000',result:'9200.00'},
+{fromCurrency:'USD',toCurrency:'JPY',rate:'154.50',amount:'10000',result:'1545000.00'}];
+data=s;saveDocData(DT,data);renderAll();}
+init();
+</script>
+<!-- GoatCounter -->
+<script data-goatcounter="https://tradekit.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

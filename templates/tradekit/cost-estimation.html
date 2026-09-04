@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>成本估算单生成器 - TradeKit Cost Estimation</title>
+<meta name="description" content="面向出口报价的详细成本分解工具，自动叠加利润、税金、折扣，支持多币种核算。">
+<meta name="keywords" content="成本估算,cost estimation,出口报价,export pricing,成本核算,cost breakdown,利润计算,profit margin,多币种,multi-currency">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="http://tradekit.treedeep.cn/cost-estimation.html">
+<link rel="alternate" hreflang="zh" href="http://tradekit.treedeep.cn/cost-estimation.html">
+<link rel="alternate" hreflang="en" href="http://tradekit.treedeep.cn/cost-estimation.html?lang=en">
+<link rel="alternate" hreflang="x-default" href="http://tradekit.treedeep.cn/cost-estimation.html">
+<meta name="geo.region" content="CN">
+<meta name="geo.placename" content="China">
+<meta name="geo.position" content="35.8617;104.1954">
+<meta name="ICBM" content="35.8617, 104.1954">
+<meta name="language" content="zh-CN, en">
+<meta name="content-language" content="zh-CN">
+<meta name="distribution" content="global">
+<meta property="og:type" content="article">
+<meta property="og:title" content="成本估算单生成器 - TradeKit Cost Estimation">
+<meta property="og:description" content="面向出口报价的详细成本分解工具，自动叠加利润、税金、折扣，支持多币种核算。">
+<meta property="og:url" content="http://tradekit.treedeep.cn/cost-estimation.html">
+<meta property="og:site_name" content="TradeKit">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="article:section" content="Trade Documents">
+<meta property="article:tag" content="外贸单证">
+<meta property="article:tag" content="trade document">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="成本估算单生成器 - TradeKit Cost Estimation">
+<meta name="twitter:description" content="面向出口报价的详细成本分解工具，自动叠加利润、税金、折扣，支持多币种核算。">
+<meta name="twitter:label:1" content="文档类型">
+<meta name="twitter:data:1" content="成本估算单生成器 - TradeKit Cost Estimation">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📦</text></svg>">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "成本估算单生成器 - TradeKit Cost Estimation",
+  "alternateName": "Cost Estimation Generator - TradeKit",
+  "description": "面向出口报价的详细成本分解工具，自动叠加利润、税金、折扣，支持多币种核算。",
+  "url": "http://tradekit.treedeep.cn/cost-estimation.html",
+  "isPartOf": {
+    "@type": "SoftwareApplication",
+    "name": "TradeKit",
+    "url": "http://tradekit.treedeep.cn"
+  },
+  "inLanguage": [
+    "zh-CN",
+    "en-US"
+  ],
+  "about": {
+    "@type": "Thing",
+    "name": "成本估算单生成器 - TradeKit Cost Estimation",
+    "description": "面向出口报价的详细成本分解工具，自动叠加利润、税金、折扣，支持多币种核算。"
+  },
+  "mainEntity": {
+    "@type": "Service",
+    "name": "成本估算单生成器 - TradeKit Cost Estimation",
+    "description": "面向出口报价的详细成本分解工具，自动叠加利润、税金、折扣，支持多币种核算。",
+    "serviceType": "Trade Document Generation",
+    "provider": {
+      "@type": "Organization",
+      "name": "TradeKit",
+      "url": "http://tradekit.treedeep.cn"
+    },
+    "areaServed": "Worldwide",
+    "availableLanguage": [
+      "zh-CN",
+      "en-US"
+    ]
+  }
+}</script>
+<link rel="stylesheet" href="common.css">
+<script src="html2pdf.bundle.min.js"></script>
+</head>
+<body>
+<header class="top-bar">
+  <div class="top-bar-left">
+    <a href="index.html" class="toggle-btn" id="back-btn"><span id="back-icon"></span><span id="back-text"></span></a>
+  </div>
+  <div class="top-bar-right">
+    <button class="toggle-btn" id="lang-btn"><span id="lang-icon"></span><span id="lang-label">EN</span></button>
+    <button class="toggle-btn" id="theme-btn"><span id="theme-icon"></span><span id="theme-label">Light</span></button>
+  </div>
+</header>
+<main class="doc-page"><div class="doc-page-content">
+  <div class="doc-header"><h1 id="page-title">Cost Estimation Generator</h1><p id="page-subtitle">成本估算单</p></div>
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="edit" id="tab-edit"></button>
+    <button class="tab-btn" data-tab="preview" id="tab-preview"></button>
+    <button class="tab-btn" data-tab="history" id="tab-history"></button>
+  </div>
+  <div class="tab-panel active" id="panel-edit">
+    <div class="action-bar">
+      <div class="action-bar-left"><button class="btn btn-secondary btn-sm" id="btn-load-sample"></button><button class="btn btn-secondary btn-sm" id="btn-clear"></button></div>
+      <div class="action-bar-right"><button class="btn btn-secondary btn-sm" id="btn-switch-preview"></button><button class="btn btn-primary" id="btn-pdf" data-pdf-btn></button></div>
+    </div>
+    <div id="form-container"></div>
+  </div>
+  <div class="tab-panel" id="panel-preview">
+    <div class="action-bar">
+      <div class="action-bar-left"><button class="btn btn-secondary btn-sm" id="btn-back-edit"></button><button class="btn btn-secondary btn-sm" id="btn-preview-lang"></button></div>
+      <div class="action-bar-right"><button class="btn btn-primary" id="btn-pdf-preview" data-pdf-btn></button><button class="btn btn-secondary btn-sm" id="btn-print"></button></div>
+    </div>
+    <div id="preview-container"></div>
+  </div>
+  <div class="tab-panel" id="panel-history">
+    <div class="history-search"><input class="input-field" id="history-search" type="text" placeholder=""></div>
+    <div id="history-container"></div>
+  </div>
+</div></main>
+<div class="clear-modal hidden" id="clear-modal"><div class="clear-modal-content"><div class="clear-modal-title" id="clear-title"></div><div class="clear-modal-msg" id="clear-msg"></div><div class="clear-modal-actions"><button class="btn btn-secondary btn-sm" id="btn-cancel-clear"></button><button class="btn btn-danger" id="btn-confirm-clear"></button></div></div></div>
+<script src="common.js"></script>
+<script>
+var DT='cost_estimation',DT_META=DOC_META[DT],lang=getLang(),dark=isDark(),previewLang='en',data=null,showClearConfirm=false;
+function init(){applyTheme();var s=loadDocData(DT);data=s?s:getDefaultDoc(DT);renderAll();}
+  injectSpaButton();
+  injectBottomCta();
+  injectPageFaq();
+function renderAll(){renderTopBar();renderHeader();renderTabs();renderForm();renderPreview();renderHistory();renderClearModal();}
+function renderTopBar(){var tr=I18N[lang];document.documentElement.lang=lang;document.getElementById('back-icon').innerHTML=svg('ArrowLeft',16);document.getElementById('back-text').textContent=tr.backHome;document.getElementById('lang-icon').innerHTML=svg('Languages',16);document.getElementById('lang-label').textContent=lang==='zh'?'EN':'中文';document.getElementById('theme-icon').innerHTML=svg(dark?'Sun':'Moon',16);document.getElementById('theme-label').textContent=dark?'Light':'Dark';}
+function renderHeader(){document.getElementById('page-title').textContent=DT_META.title;document.getElementById('page-subtitle').textContent=DT_META.titleZh;}
+function renderTabs(){var tr=I18N[lang];document.getElementById('tab-edit').textContent=tr.formEditor;document.getElementById('tab-preview').textContent=tr.previewTab;document.getElementById('tab-history').textContent=tr.historyTab;var ps=['edit','preview','history'];ps.forEach(function(p){document.getElementById('tab-'+p).onclick=function(){ps.forEach(function(pp){document.getElementById('tab-'+pp).classList.toggle('active',pp===p);document.getElementById('panel-'+pp).classList.toggle('active',pp===p);});};});}
+function switchTab(t){['edit','preview','history'].forEach(function(p){document.getElementById('tab-'+p).classList.toggle('active',p===t);document.getElementById('panel-'+p).classList.toggle('active',p===t);});}
+function renderForm(){
+  var tr=I18N[lang],isZh=lang==='zh',d=data;
+  document.getElementById('btn-load-sample').textContent=tr.loadSample;document.getElementById('btn-clear').textContent=tr.clear;
+  document.getElementById('btn-switch-preview').textContent=tr.preview;document.getElementById('btn-pdf').textContent=tr.exportPdf;
+  document.getElementById('btn-back-edit').textContent=tr.backEdit;document.getElementById('btn-preview-lang').textContent=previewLang==='en'?'Switch to 中文':'Switch to English';
+  document.getElementById('btn-pdf-preview').textContent=tr.exportPdf;document.getElementById('btn-print').textContent=tr.print;
+  document.getElementById('history-search').placeholder=tr.searchPlaceholder;
+  document.getElementById('btn-load-sample').onclick=loadSample;document.getElementById('btn-clear').onclick=function(){showClearConfirm=true;renderClearModal();};
+  document.getElementById('btn-switch-preview').onclick=function(){switchTab('preview');renderPreview();};document.getElementById('btn-back-edit').onclick=function(){switchTab('edit');};
+  document.getElementById('btn-pdf').onclick=function(){doExportPdf(DT,data,'preview-content');};document.getElementById('btn-pdf-preview').onclick=function(){doExportPdf(DT,data,'preview-content');};
+  document.getElementById('btn-preview-lang').onclick=function(){previewLang=previewLang==='en'?'zh':'en';renderPreview();};document.getElementById('btn-print').onclick=function(){window.print();};
+  var sub=d.items.reduce(function(s,it){return s+(parseFloat(it.totalCost)||0);},0);
+  var pm=parseFloat(d.profitMargin)||0,tr_=parseFloat(d.taxRate)||0,dr=parseFloat(d.discountRate)||0;
+  var profit=(sub*pm/100),tax=(sub+profit)*tr_/100,discount=(sub+profit+tax)*dr/100,grand=sub+profit+tax-discount;
+  var h='',esc2=esc;
+  h+='<div class="section-card"><h3>'+fieldBlock(isZh?'项目信息':'Project Info','')+'</h3>';
+  h+='<div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));">';
+  h+=labelInput2(isZh?'项目参考':'Project Ref',d.projectRef,'projectRef','');
+  h+=labelInputDate2(isZh?'编制日期':'Preparation Date',d.preparationDate,'preparationDate');
+  h+=labelInput(isZh?'编制人':'Prepared By',d.preparedBy,'preparedBy','');
+  h+=labelInput(isZh?'公司名称':'Company Name',d.companyName,'companyName','');
+  h+=labelInput(isZh?'公司地址':'Company Address',d.companyAddress,'companyAddress','');
+  h+=labelInput(isZh?'联系电话':'Contact Phone',d.contactPhone,'contactPhone','');
+  h+='</div></div>';
+  h+='<div class="section-card"><h3>'+fieldBlock(isZh?'客户信息':'Client Info','')+'</h3>';
+  h+='<div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));">';
+  h+=labelInput(isZh?'客户名称':'Client Name',d.clientName,'clientName','');
+  h+=labelInput(isZh?'客户公司':'Client Company',d.clientCompany,'clientCompany','');
+  h+=labelInput(isZh?'客户地址':'Client Address',d.clientAddress,'clientAddress','');
+  h+=labelInput(isZh?'产品名称':'Product Name',d.productName,'productName','');
+  h+=labelInput(isZh?'产品规格':'Product Spec',d.productSpec,'productSpec','');
+  h+=labelSelect2(isZh?'币种':'Currency',d.currency,'currency',CURRENCIES.map(function(c){return[c,c+' - '+CURRENCY_NAMES[c]];}));
+  h+=labelInputDate2(isZh?'有效期至':'Validity Period',d.validityPeriod,'validityPeriod');
+  h+='</div></div>';
+  h+='<div class="section-card"><h3>'+fieldBlock(isZh?'成本明细':'Cost Items','')+'</h3>';
+  h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">';
+  h+='<p style="font-size:13px;color:var(--text-muted);">'+(isZh?'逐项添加成本项目，总成本 = 数量 × 单位成本。':'Add items. Total = quantity × unit cost.')+'</p>';
+  h+='<button class="btn btn-success btn-sm" onclick="window._ceAddItem()">'+tr.addItem+'</button></div>';
+  h+='<div class="items-table-container"><table class="items-table"><thead><tr>';
+  ['#','ITEM NAME'+(isZh?'<span class="col-label-cn">项目名称</span>':''),
+   'SPEC'+(isZh?'<span class="col-label-cn">规格</span>':''),
+   'QTY'+(isZh?'<span class="col-label-cn">数量</span>':''),
+   'UNIT COST'+(isZh?'<span class="col-label-cn">单位成本</span>':''),
+   'TOTAL'+(isZh?'<span class="col-label-cn">总价</span>':''),
+   'NOTES'+(isZh?'<span class="col-label-cn">备注</span>':''),
+   isZh?'操作':'Action'].forEach(function(th){h+='<th>'+th+'</th>';});
+  h+='</tr></thead><tbody>';
+  d.items.forEach(function(it,idx){
+    h+='<tr><td class="row-number">'+(idx+1)+'</td>';
+    h+='<td><input class="input-field input-field-xs" value="'+esc2(it.itemName)+'" onchange="window._ceItem('+idx+',\'itemName\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs" value="'+esc2(it.specification)+'" onchange="window._ceItem('+idx+',\'specification\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-center" type="number" min="0" value="'+esc2(it.quantity)+'" onchange="window._ceItem('+idx+',\'quantity\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-right" type="number" min="0" step="0.01" value="'+esc2(it.unitCost)+'" onchange="window._ceItem('+idx+',\'unitCost\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs text-right font-medium" type="number" min="0" step="0.01" value="'+esc2(it.totalCost)+'" onchange="window._ceItem('+idx+',\'totalCost\',this.value)"></td>';
+    h+='<td><input class="input-field input-field-xs" value="'+esc2(it.notes)+'" onchange="window._ceItem('+idx+',\'notes\',this.value)"></td>';
+    h+='<td class="actions"><button class="btn btn-danger" onclick="window._ceRemoveItem('+idx+')" '+(d.items.length<=1?'disabled':'')+'>&times;</button></td></tr>';
+  });
+  h+='</tbody></table></div>';
+  h+='<div class="totals-summary"><div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));gap:12px;">';
+  h+='<div><span style="font-size:12px;color:#6b7280;">'+(isZh?'成本小计':'Subtotal Cost')+' ('+d.currency+')</span><br><span style="font-size:18px;font-weight:700;color:#4a0e4e;">'+(sub>0?sub.toFixed(2):'—')+'</span></div>';
+  h+='<div><span style="font-size:12px;color:#6b7280;">'+(isZh?'利润':'Profit')+' ('+pm+'%)</span><br><span style="font-size:18px;font-weight:700;color:#4a0e4e;">'+profit.toFixed(2)+'</span></div>';
+  h+='<div><span style="font-size:12px;color:#6b7280;">'+(isZh?'税金':'Tax')+' ('+tr_+'%)</span><br><span style="font-size:18px;font-weight:700;color:#4a0e4e;">'+tax.toFixed(2)+'</span></div>';
+  h+='<div><span style="font-size:12px;color:#6b7280;">'+(isZh?'折扣':'Discount')+' ('+dr+'%)</span><br><span style="font-size:18px;font-weight:700;color:#4a0e4e;">'+discount.toFixed(2)+'</span></div>';
+  h+='<div><span style="font-size:12px;color:#6b7280;">'+(isZh?'总计':'Grand Total')+'</span><br><span style="font-size:18px;font-weight:700;color:#4a0e4e;">'+grand.toFixed(2)+'</span></div>';
+  h+='</div></div>';
+  h+='<div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(120px, 1fr));margin-top:16px;">';
+  h+=labelInput(isZh?'利润率(%)':'Profit Margin (%)',d.profitMargin,'profitMargin','10');
+  h+=labelInput(isZh?'税率(%)':'Tax Rate (%)',d.taxRate,'taxRate','13');
+  h+=labelInput(isZh?'折扣率(%)':'Discount Rate (%)',d.discountRate,'discountRate','0');
+  h+='</div></div>';
+  h+='<div class="section-card"><h3>'+fieldBlock(isZh?'条款与签名':'Terms & Signature','')+'</h3>';
+  h+='<div class="form-label">'+(isZh?'条款':'Terms & Conditions')+'</div>';
+  h+='<textarea class="input-field" rows="2" onchange="window._ceSet(\'termsAndConditions\',this.value)">'+esc2(d.termsAndConditions)+'</textarea>';
+  h+='<div class="field-grid" style="grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));margin-top:12px;">';
+  h+=labelInput(isZh?'签名姓名':'Signature Name',d.signatureName,'signatureName','');
+  h+=labelInput(isZh?'职务':'Title',d.signatureTitle,'signatureTitle','');
+  h+=labelInputDate2(isZh?'日期':'Date',d.signatureDate,'signatureDate');
+  h+='</div></div>';
+  document.getElementById('form-container').innerHTML=h;
+}
+function renderPreview(){
+  var d=data,isZh2=previewLang==='zh',sub=d.items.reduce(function(s,it){return s+(parseFloat(it.totalCost)||0);},0);
+  var pm=parseFloat(d.profitMargin)||0,tr_=parseFloat(d.taxRate)||0,dr=parseFloat(d.discountRate)||0;
+  var profit=(sub*pm/100),tax=(sub+profit)*tr_/100,discount=(sub+profit+tax)*dr/100,grand=sub+profit+tax-discount;
+  function tr2(en,zh){return isZh2?zh:en;}
+  var h='<div class="invoice-preview" id="preview-content">';
+  h+='<div class="header-title">'+tr2('COST ESTIMATION','成本估算单')+'</div>';
+  h+='<table><tbody>';
+  h+='<tr><td style="width:50%;"><div class="section-label2">'+tr2('PROJECT','项目信息')+'</div>';
+  h+='<div class="section-value">'+tr2('Ref','参考')+': '+esc(d.projectRef||'—')+'</div>';
+  h+='<div class="section-value">'+tr2('Date','日期')+': '+esc(d.preparationDate||'—')+'</div>';
+  h+='<div class="section-value">'+tr2('Prepared By','编制人')+': '+esc(d.preparedBy||'—')+'</div></td>';
+  h+='<td style="width:50%;"><div class="section-label2">'+tr2('CLIENT','客户信息')+'</div>';
+  h+='<div class="section-value">'+esc(d.clientName||'—')+'</div>';
+  if(d.clientCompany)h+='<div class="section-value">'+esc(d.clientCompany)+'</div>';
+  h+='<div class="section-value">'+esc(d.clientAddress||'—')+'</div></td></tr>';
+  h+='<tr><td colspan="2"><div class="section-label2">'+tr2('PRODUCT','产品信息')+'</div>';
+  h+='<div class="section-value">'+esc(d.productName||'—')+' — '+esc(d.productSpec||'—')+'</div></td></tr>';
+  h+='</tbody></table>';
+  h+='<table class="mt-2"><thead><tr>';
+  ['#',tr2('ITEM','项目'),tr2('SPEC','规格'),tr2('QTY','数量'),tr2('UNIT COST','单位成本'),tr2('TOTAL','总价'),tr2('NOTES','备注')].forEach(function(t){h+='<th>'+t+'</th>';});
+  h+='</tr></thead><tbody>';
+  d.items.forEach(function(it,idx){
+    h+='<tr><td class="text-center">'+(idx+1)+'</td><td>'+esc(it.itemName||'—')+'</td><td>'+esc(it.specification||'—')+'</td>';
+    h+='<td class="text-center">'+esc(it.quantity||'—')+'</td><td class="text-right">'+(it.unitCost?parseFloat(it.unitCost).toFixed(2):'—')+'</td>';
+    h+='<td class="text-right font-medium">'+(it.totalCost?parseFloat(it.totalCost).toFixed(2):'—')+'</td><td>'+esc(it.notes||'—')+'</td></tr>';
+  });
+  h+='</tbody></table>';
+  h+='<table class="mt-2"><tbody>';
+  h+='<tr><th style="width:25%;">'+tr2('SUBTOTAL','成本小计')+'</th><td class="text-right">'+sub.toFixed(2)+' '+d.currency+'</td></tr>';
+  h+='<tr><th>'+tr2('PROFIT','利润')+' ('+pm+'%)</th><td class="text-right">'+profit.toFixed(2)+'</td></tr>';
+  h+='<tr><th>'+tr2('TAX','税金')+' ('+tr_+'%)</th><td class="text-right">'+tax.toFixed(2)+'</td></tr>';
+  h+='<tr><th>'+tr2('DISCOUNT','折扣')+' ('+dr+'%)</th><td class="text-right">-'+discount.toFixed(2)+'</td></tr>';
+  h+='<tr style="background:#f0f0f0;"><th class="font-bold">'+tr2('GRAND TOTAL','总计')+'</th><td class="text-right font-bold" style="font-size:14px;">'+grand.toFixed(2)+' '+d.currency+'</td></tr>';
+  h+='</tbody></table>';
+  if(d.termsAndConditions){h+='<div style="margin-top:12px;"><div class="section-label2">'+tr2('TERMS & CONDITIONS','条款')+'</div><div class="section-value whitespace-pre-wrap">'+esc(d.termsAndConditions)+'</div></div>';}
+  h+='<div style="margin-top:20px;border-top:1px solid #9ca3af;padding-top:12px;"><table><tbody><tr>';
+  h+='<td style="width:33%;"><div class="section-label">'+tr2('SIGNATURE','签名')+'</div><div style="margin-top:24px;border-bottom:1px solid #000;width:192px;"></div>';
+  h+='<div class="text-xs mt-1">'+esc(d.signatureName||'—')+' / '+esc(d.signatureTitle||'—')+' / '+esc(d.signatureDate||'—')+'</div></td></tr></tbody></table></div>';
+  h+='</div>';
+  document.getElementById('preview-container').innerHTML=h;
+}
+function renderHistory(){
+  var tr=I18N[lang],snaps=loadSnapshots(DT),search=(document.getElementById('history-search').value||'').toLowerCase();
+  if(search)snaps=snaps.filter(function(s){return(s.label||'').toLowerCase().indexOf(search)!==-1||(s.ref||'').toLowerCase().indexOf(search)!==-1;});
+  var h='';if(snaps.length===0){h+='<div class="history-empty">'+svg('Clock',48)+'<p>'+tr.noHistory+'</p></div>';}
+  else{h+='<div style="margin-bottom:12px;font-size:13px;color:var(--text-muted);">'+snaps.length+' '+tr.records+'</div><div class="history-list">';
+  snaps.forEach(function(s){h+='<div class="history-item"><div class="history-item-info"><div class="history-item-label">'+esc(s.label||'draft')+'</div>';
+  h+='<div class="history-item-ref">'+esc(s.ref||'')+' — '+formatDateTime(s.exportedAt)+'</div></div><div class="history-item-actions">';
+  h+='<button class="btn btn-secondary btn-sm" onclick="window._ceRestore(\''+s.id+'\')">'+tr.restore+'</button>';
+  h+='<button class="btn btn-danger btn-sm" onclick="window._ceDeleteSnap(\''+s.id+'\')">'+tr.delete+'</button></div></div>';});
+  h+='</div><div style="margin-top:16px;"><button class="btn btn-secondary btn-sm" onclick="window._ceClearAllHistory()">'+tr.clearAll+'</button></div>';}
+  document.getElementById('history-container').innerHTML=h;document.getElementById('history-search').oninput=function(){renderHistory();};
+}
+function renderClearModal(){var tr=I18N[lang],m=document.getElementById('clear-modal');if(showClearConfirm){m.classList.remove('hidden');
+document.getElementById('clear-title').textContent=tr.clearTitle;document.getElementById('clear-msg').textContent=tr.clearMsg;
+document.getElementById('btn-cancel-clear').textContent=tr.cancel;document.getElementById('btn-confirm-clear').textContent=tr.clear;}else m.classList.add('hidden');}
+document.getElementById('lang-btn').onclick=function(){lang=lang==='zh'?'en':'zh';setLang(lang);renderAll();};
+document.getElementById('theme-btn').onclick=function(){dark=!dark;setTheme(dark);applyTheme();renderAll();};
+  injectSpaButton();
+  injectBottomCta();
+  injectPageFaq();
+document.getElementById('btn-cancel-clear').onclick=function(){showClearConfirm=false;renderClearModal();};
+document.getElementById('btn-confirm-clear').onclick=function(){data=getDefaultDoc(DT);saveDocData(DT,data);showClearConfirm=false;renderClearModal();renderForm();renderPreview();};
+window._ceSet=function(f,v){data[f]=v;saveDocData(DT,data);};
+window._ceItem=function(idx,f,v){data.items[idx][f]=v;autoCalcItem(DT,data.items[idx]);saveDocData(DT,data);renderForm();};
+window._ceAddItem=function(){data.items.push(getEmptyItem(DT));saveDocData(DT,data);renderForm();};
+window._ceRemoveItem=function(idx){if(data.items.length>1){data.items.splice(idx,1);saveDocData(DT,data);renderForm();}};
+window._ceRestore=function(id){var snaps=loadSnapshots(DT),s=snaps.find(function(x){return x.id===id;});if(s&&s.data){data=JSON.parse(JSON.stringify(s.data));saveDocData(DT,data);renderAll();}};
+window._ceDeleteSnap=function(id){deleteSnapshot(DT,id);renderHistory();};window._ceClearAllHistory=function(){clearAllSnapshots(DT);renderHistory();};
+function esc(str){if(!str)return'';return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function fieldBlock(t,s){return t+(s?' <span style="font-size:12px;color:var(--text-muted);font-weight:400;">'+s+'</span>':'');};
+function labelInput(l,v,f,p){return '<div><div class="form-label">'+l+'</div><input class="input-field" value="'+esc(v)+'" onchange="window._ceSet(\''+f+'\',this.value)" placeholder="'+(p||'')+'"></div>';}
+function labelInputDate(l,v,f){return '<div><div class="form-label">'+l+'</div><input class="input-field" type="date" value="'+esc(v)+'" onchange="window._ceSet(\''+f+'\',this.value)"></div>';}
+function labelSelect2(l,v,f,opts){var o=opts.map(function(x){return '<option value="'+x[0]+'"'+(v===x[0]?' selected':'')+'>'+x[1]+'</option>';}).join('');return '<div><div class="form-label">'+l+'</div><select class="input-field" onchange="window._ceSet(\''+f+'\',this.value)">'+o+'</select></div>';}
+function loadSample(){var s=getDefaultDoc(DT);s.projectRef='CE-2026-001';s.preparationDate='2026-05-15';s.preparedBy=lang==='zh'?'张经理':'Mgr. Zhang';
+s.companyName='Shanghai Export Co.';s.clientName=lang==='zh'?'约翰':'John';s.clientCompany='ABC Trading';
+s.productName='Stainless Steel Water Bottle';s.productSpec='500ml, 304 grade';s.currency='USD';
+s.items=[{itemName:'Raw Material (304 SS)',specification:'Sheet 1mm',quantity:'500',unitCost:'1.20',totalCost:'600.00',notes:''},
+{itemName:'Processing',specification:'Forming + Welding',quantity:'500',unitCost:'0.80',totalCost:'400.00',notes:''},
+{itemName:'Surface Treatment',specification:'Polishing + Coating',quantity:'500',unitCost:'0.50',totalCost:'250.00',notes:''},
+{itemName:'Packaging',specification:'Gift box + carton',quantity:'500',unitCost:'0.30',totalCost:'150.00',notes:''}];
+s.profitMargin='15';s.taxRate='13';s.discountRate='5';data=s;saveDocData(DT,data);renderAll();}
+init();
+</script>
+<!-- GoatCounter -->
+<script data-goatcounter="https://tradekit.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
