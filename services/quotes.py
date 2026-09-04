@@ -198,9 +198,33 @@ def parse_pdf(path):
     m = re.search(r'(?:S/?C\s*Date|日期)\s*[.：:（(]*\s*(\d{4}[.\-/]\d{1,2}[.\-/]\d{1,2})', text, re.I)
     if m:
         meta['quote_date'] = norm_date(m.group(1))
-    m = re.search(r'Consignee[^\n]*\n?([^\n]{3,90})', text, re.I)
-    if m and not re.search(r'公司|contact|address|电话', m.group(1), re.I):
-        meta['customer_text'] = m.group(1).strip()
+    # PDF 格式：标签块(Consignee/Contact/Address/Phone)在前，值块在 Bank Info 之后
+    # 值块格式：公司名 → 供应商信息(多行) → 联系人 → 地址 → 电话 → Sum
+    m = re.search(r'SWIFT\s*CODE[^\n]*\n', text, re.I)
+    if m:
+        after_swift = text[m.end():]
+        lines_after = [ln.strip() for ln in after_swift.splitlines() if ln.strip()]
+        # 过滤掉供应商行(含SHENZHEN/Add:/Email:/T：/SWIFT等)
+        cust_lines = [ln for ln in lines_after
+                      if not re.match(r'^(?:SHENZHEN|Add:|Email:|M:|T[：:π]|Benificiary|Bank\s|SWIFT)', ln, re.I)
+                      and not re.match(r'^(?:Sum|总|Project|PO\b|PI\b)', ln, re.I)
+                      and not ln.startswith('（')
+                      and not re.match(r'^[（(]', ln)
+                      and len(ln) >= 3]
+        if len(cust_lines) >= 1:
+            meta['customer_text'] = cust_lines[0]
+        if len(cust_lines) >= 2:
+            meta['contact'] = cust_lines[1]
+        if len(cust_lines) >= 3:
+            meta['address'] = cust_lines[2]
+        if len(cust_lines) >= 4:
+            phone_m = re.search(r'(\d[\d\s\-+()]{6,20})', cust_lines[3])
+            if phone_m:
+                meta['phone'] = phone_m.group(1).strip()
+    # 从 PI/项目 行提取项目名
+    m = re.search(r'(?:Project|项目名称)\s*[（(]([^)）]+)[)）]\s*\n([^\n]{3,80})', text, re.I)
+    if m:
+        meta['project_name'] = m.group(2).strip()
     has_bank = bool(re.search(r'benificiary|bank\s+account|swift', text, re.I))
     is_contract = bool(re.search(r'采购合同|销售合同|购销合同|contract|agreement', text, re.I)) and not has_bank \
         and not re.search(r'proforma|quotation|报价单|pi\b', text, re.I)
@@ -211,19 +235,58 @@ def parse_pdf(path):
         kind = 'pi'
     elif re.search(r'quotation|报价单|quote', text, re.I):
         kind = 'quotation'
-    # 明细行尽力解析：序号 名称... 数量 单位 单价 金额
+    # 明细行解析：支持单行和多行两种格式
     rows = []
-    line_re = re.compile(r'^\s*(\d{1,3})\s+(\S[^\n]*?)\s+(\d+(?:,\d{3})*(?:\.\d+)?)\s*'
-                         r'(pcs|set|m|pc|pcs\.?)?\s+([\d.]+)\s+([\d,]+\.\d+)\s*$', re.I)
-    for ln in text.splitlines():
-        mm = line_re.match(ln.strip())
-        if not mm:
+    lines = text.splitlines()
+    # 单行格式：序号 名称(多空格)描述 数量 单位 $单价 $金额
+    line_re = re.compile(r'^\s*(\d{1,3})\s+(\S[^\n]*?)\s{2,}(.+?)\s+(\d+(?:,\d{3})*(?:\.\d+)?)\s*'
+                         r'(pcs|set|m|pc|pcs\.?)?\s+\$?([\d,.]+)\s+\$?([\d,]+\.\d+)\s*$', re.I)
+    # 多行格式：序号 + 名称 单独一行，后续行是描述，最后行是 数量 单位 $单价 $金额
+    qty_line_re = re.compile(r'^\s*(\d+(?:,\d{3})*(?:\.\d+)?)\s*(pcs|set|m|pc|pcs\.?)?\s+\$?([\d,.]+)\s+\$?([\d,]+\.\d+)\s*$', re.I)
+    item_start_re = re.compile(r'^\s*(\d{1,3})\s+(\S[^\n]*?)\s*$', re.I)
+    i = 0
+    while i < len(lines):
+        ln = lines[i].strip()
+        # 尝试单行匹配
+        mm = line_re.match(ln)
+        if mm:
+            no, name, desc, qty, unit, up, amt = mm.groups()
+            rows.append({'sheet_name': 'PDF', 'project_name': meta.get('project_name', ''),
+                         'item_name': name.strip(), 'description': desc.strip(), 'quantity': to_num(qty),
+                         'unit': unit or 'pcs', 'unit_price': to_num(up), 'amount': to_num(amt.replace(',', '')),
+                         'source_row': i, 'raw_json': json.dumps({'line': ln}, ensure_ascii=False)})
+            i += 1
             continue
-        no, name, qty, unit, up, amt = mm.groups()
-        rows.append({'sheet_name': 'PDF', 'project_name': meta.get('project_name', ''),
-                     'item_name': name.strip(), 'description': '', 'quantity': to_num(qty),
-                     'unit': unit or 'pcs', 'unit_price': to_num(up), 'amount': to_num(amt.replace(',', '')),
-                     'source_row': 0, 'raw_json': json.dumps({'line': ln}, ensure_ascii=False)})
+        # 尝试多行匹配：序号+名称行
+        ms = item_start_re.match(ln)
+        if ms and i + 1 < len(lines):
+            no, name = ms.groups()
+            # 收集描述行直到找到数量行
+            desc_parts = []
+            j = i + 1
+            found_qty = None
+            while j < len(lines) and j < i + 10:
+                ml = lines[j].strip()
+                mq = qty_line_re.match(ml)
+                if mq:
+                    qty, unit, up, amt = mq.groups()
+                    found_qty = (qty, unit or 'pcs', up, amt)
+                    break
+                if ml and not re.match(r'^(?:bank|benificiary|swift|总|sum)', ml, re.I):
+                    desc_parts.append(ml)
+                else:
+                    break
+                j += 1
+            if found_qty:
+                qty, unit, up, amt = found_qty
+                rows.append({'sheet_name': 'PDF', 'project_name': meta.get('project_name', ''),
+                             'item_name': name.strip(), 'description': ' '.join(desc_parts).strip(),
+                             'quantity': to_num(qty), 'unit': unit, 'unit_price': to_num(up),
+                             'amount': to_num(amt.replace(',', '')),
+                             'source_row': i, 'raw_json': json.dumps({'lines': lines[i:j+1]}, ensure_ascii=False)})
+                i = j + 1
+                continue
+        i += 1
     if rows and not kind:
         kind = 'pi' if has_bank else 'quotation'
     return {'kind': kind, 'rows': rows, 'meta': meta, 'text': text[:3000]}
@@ -304,7 +367,7 @@ def get_or_create_customer(c, text, contact='', address='', phone=''):
     code = 'CIMP' + hashlib.sha1(company.encode('utf-8', 'ignore')).hexdigest()[:8].upper()
     c.execute('INSERT OR IGNORE INTO customers(customer_code,company,country,contact,address,phone,currency,active) '
               'VALUES (?,?,?,?,?,?,?,1)',
-              (code, company, '', '; '.join(parts[1:]), address or None, phone or None, 'USD'))
+              (code, company, '', contact or '; '.join(parts[1:]) or None, address or None, phone or None, 'USD'))
     return c.execute('SELECT id FROM customers WHERE customer_code=?', (code,)).fetchone()['id']
 
 
@@ -350,7 +413,7 @@ def _guess_category(name, desc):
 # 描述解析出的字段 → products 固定列映射
 _PARSE_COL_MAP = ['model', 'voltage', 'power', 'cct_color', 'cct', 'control', 'ip_rating', 'beam_angle',
                   'length_size', 'led_count', 'pixel_count', 'led_chip', 'material', 'body_color',
-                  'hs_code', 'notes']
+                  'hs_code', 'notes', 'ext1', 'ext2', 'ext3']
 
 
 def get_or_create_product(c, item_name, description, unit_price, source='', doc_type='quotation'):
@@ -359,7 +422,7 @@ def get_or_create_product(c, item_name, description, unit_price, source='', doc_
     2) 按 商品名称+商品描述 匹配
     3) 新建：解析字段写入固定列，其余进 spec_json，描述按 PI 风格重建
     返回 (product_id, is_new)。"""
-    from services.spec_fields import SPEC_KEYS, parse_description_safe
+    from services.spec_fields import SPEC_KEYS, parse_description_safe, build_description
     nm = _norm_prod_text(item_name)
     desc = _norm_prod_text(description)
     if not nm:
@@ -397,11 +460,12 @@ def get_or_create_product(c, item_name, description, unit_price, source='', doc_
     spec = {k: fields[k] for k in SPEC_KEYS if fields.get(k)}
     core_vals = {k: fields.get(k) for k in _PARSE_COL_MAP}
     notes = core_vals.pop('notes', None) or None
-    new_desc = fields.get('_desc') or desc
+    new_desc = build_description(fields) or desc
     c.execute('INSERT INTO products(product_code,series,model,product_name,description,'
               'voltage,power,cct_color,cct,control,ip_rating,beam_angle,length_size,led_count,pixel_count,'
-              'led_chip,material,body_color,hs_code,currency,category,standard_price_usd,notes,spec_json,active) '
-              'VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1)',
+              'led_chip,material,body_color,hs_code,currency,category,standard_price_usd,notes,spec_json,'
+              'ext1,ext2,ext3,active) '
+              'VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1)',
               (code, 'Imported', core_vals.get('model'), nm, new_desc,
                core_vals.get('voltage'), core_vals.get('power'), core_vals.get('cct_color'), core_vals.get('cct'),
                core_vals.get('control'), core_vals.get('ip_rating'), core_vals.get('beam_angle'),
@@ -409,7 +473,8 @@ def get_or_create_product(c, item_name, description, unit_price, source='', doc_
                core_vals.get('led_chip'), core_vals.get('material'), core_vals.get('body_color'),
                core_vals.get('hs_code'), 'USD', _guess_category(nm, desc),
                price if price > 0 else 0, notes,
-               json.dumps(spec, ensure_ascii=False) if spec else None))
+               json.dumps(spec, ensure_ascii=False) if spec else None,
+               core_vals.get('ext1'), core_vals.get('ext2'), core_vals.get('ext3')))
     pid = c.execute('SELECT id FROM products WHERE product_code=?', (code,)).fetchone()['id']
     return pid, True
 
@@ -509,13 +574,17 @@ def import_blob(c, name, relpath, blob, rows, meta, sha, doc_type='quotation'):
     c.execute('UPDATE quotations SET provider_id=COALESCE(provider_id,?), expiry_date=COALESCE(expiry_date,?) '
               'WHERE id=?', (provider_id, expiry, qid))
     # 报价历史：记录来源类型与文件位置（只查询展示用）
+    # 相同报价号但不同文件（不同来源）时仍创建历史记录
     source_type = '导入-PI' if doc_type == 'pi' else '导入-报价单'
-    if not c.execute('SELECT 1 FROM quotation_history WHERE quotation_id=? LIMIT 1', (qid,)).fetchone():
+    if not c.execute('SELECT 1 FROM quotation_history WHERE quotation_id=? AND source_file=? LIMIT 1',
+                     (qid, relpath)).fetchone():
         c.execute('INSERT INTO quotation_history(quotation_id,quote_no,quote_date,customer_id,project_id,'
                   'provider_id,expiry_date,currency,total_usd,status,notes,source_type,source_file) '
                   'VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',
                   (qid, qno, qdate, customer_id, project_id, provider_id, expiry, 'USD', total, '正式版本',
                    '导入来源：' + relpath, source_type, relpath))
+        c.execute('UPDATE quotation_history SET total_usd=?,quote_date=?,notes=? WHERE quotation_id=? AND source_file=?',
+                  (total, qdate, '导入来源：' + relpath, qid, relpath))
     return {'status': 'imported', 'file_id': fid, 'quotation_id': qid, 'quote_no': qno,
             'rows': len(rows), 'products_new': new_products, 'doc_type': doc_type}
 
