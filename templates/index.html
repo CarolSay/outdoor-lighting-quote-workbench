@@ -1,7 +1,103 @@
 <!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>酷睿创显 · 报价工作台 V5</title><style>
 *{box-sizing:border-box}body{margin:0;background:#f0f2f5;color:#1a1a2e;font:14px -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'PingFang SC','Microsoft YaHei',sans-serif}.app{display:flex;min-height:100vh}.side{width:220px;background:linear-gradient(180deg,#0f172a 0%,#1e293b 100%);color:#b0b9c6;padding:16px 10px;position:fixed;inset:0 auto 0 0;display:flex;flex-direction:column;z-index:100}.brand{font-size:18px;font-weight:800;color:#fff;padding:10px 12px 16px;letter-spacing:0.5px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:6px;display:flex;align-items:center;gap:8px}.brand::before{content:'💡';font-size:20px}.nav{padding:10px 12px;border-radius:8px;margin:2px 0;cursor:pointer;transition:all .2s ease;font-size:13.5px;display:flex;align-items:center;gap:8px;position:relative}.nav:hover{background:rgba(255,255,255,0.08);color:#e2e8f0;transform:translateX(2px)}.nav.active{background:linear-gradient(135deg,rgba(23,105,170,0.3),rgba(23,105,170,0.15));color:#fff;font-weight:600;box-shadow:inset 3px 0 0 #1769aa}.main{margin-left:220px;width:calc(100% - 220px);padding:20px 24px;max-width:1400px}.top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;flex-wrap:wrap;gap:10px}.top h1{margin:0;font-size:22px;font-weight:700}.muted{color:#64748b;font-size:12.5px}.actions,.toolbar,.filters{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.toolbar{justify-content:space-between;margin-bottom:10px}.filters{justify-content:flex-start}.btn{border:1px solid #d1d5db;background:#fff;border-radius:7px;padding:7px 14px;cursor:pointer;font-size:13px;font-weight:600;color:#374151;transition:all .15s ease;white-space:nowrap}.btn:hover{background:#f9fafb;border-color:#9ca3af;box-shadow:0 1px 3px rgba(0,0,0,0.06)}.btn.primary{background:linear-gradient(135deg,#1769aa,#1a73b5);color:#fff;border-color:#1769aa}.btn.primary:hover{background:linear-gradient(135deg,#155a94,#1769aa);box-shadow:0 2px 8px rgba(23,105,170,0.25)}.btn.danger{color:#dc2626;border-color:#f5c6cb}.btn.danger:hover{background:#fef2f2;border-color:#dc2626}.btn.small{padding:5px 10px;font-size:12px;border-radius:6px}.grid4{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}.kpi,.card{background:#fff;border:1px solid #e5e7eb;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,0.04)}.kpi{padding:14px 16px;transition:box-shadow .2s}.kpi:hover{box-shadow:0 2px 8px rgba(0,0,0,0.08)}.kpi small{color:#6b7280;font-size:11px;text-transform:uppercase;letter-spacing:0.3px}.kpi b{display:block;font-size:22px;margin-top:4px;font-weight:700;color:#111827}.card{padding:16px;margin-top:12px}.card h2{margin:0 0 12px;font-size:16px;font-weight:700}.toolbar input,.toolbar select,.filters input,.filters select,.form input,.form select,.form textarea,td input,td select{border:1px solid #d1d5db;border-radius:6px;padding:7px 10px;width:auto;min-width:140px;font-size:13px;transition:border-color .15s}.toolbar input:focus,.toolbar select:focus,.filters input:focus,.filters select:focus,.form input:focus,.form select:focus,.form textarea:focus{border-color:#1769aa;outline:none;box-shadow:0 0 0 3px rgba(23,105,170,0.1)}.tablewrap{overflow:auto;border-radius:8px}table{border-collapse:collapse;width:100%;min-width:1100px}th,td{padding:9px 10px;border-bottom:1px solid #f1f5f9;text-align:left;white-space:nowrap;vertical-align:middle;font-size:13px}th{background:#f8fafc;color:#475569;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:0.3px}.pill{padding:3px 10px;border-radius:99px;background:#eef2ff;font-size:12px;font-weight:500;display:inline-flex;align-items:center;gap:3px}.pill.ok{background:#dcfce7;color:#166534}.pill.warn{background:#fff7ed;color:#c2410c}.pill.gray{background:#f1f5f9;color:#64748b}.pill.blue{background:#dbeafe;color:#1e40af}.form{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.field label{display:block;font-size:12px;color:#4b5563;font-weight:600;margin-bottom:4px}.field.full{grid-column:1/-1}.field input,.field select,.field textarea{width:100%}.modal{position:fixed;inset:0;background:rgba(0,0,0,0.4);display:none;align-items:center;justify-content:center;padding:20px;z-index:200}.modal.open{display:flex;animation:fadeIn .2s ease}.modalbox{background:#fff;border-radius:12px;width:min(1100px,96vw);max-height:92vh;overflow:auto;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,0.15)}.modalhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.modalfoot{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}.toast{position:fixed;right:20px;bottom:20px;background:#1e293b;color:#fff;padding:10px 18px;border-radius:8px;display:none;z-index:300;font-size:13px;box-shadow:0 4px 16px rgba(0,0,0,0.2);animation:slideUp .3s ease}.hidden{display:none}.check{width:18px;height:18px}.hint{font-size:12px;color:#64748b}.searchbox{min-width:300px!important}.summary{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}.quote-search{background:#f8fafc;border:1px solid #e5e7eb;border-radius:8px;padding:10px;margin-bottom:10px}.result{max-height:300px;overflow:auto;border:1px solid #e5e7eb;border-radius:8px}.result table{min-width:950px}.prodSuggest{position:fixed;display:none;background:#fff;border:1px solid #cbd5e1;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,0.12);z-index:60;max-height:300px;overflow:auto;width:470px}.prodRow{padding:9px 12px;border-bottom:1px solid #f1f5f9;cursor:pointer;font-size:13px;transition:background .1s}.prodRow:hover{background:#f0f5ff}.link{color:#1769aa;cursor:pointer;text-decoration:none;font-weight:500}.link:hover{text-decoration:underline}.verChanges{max-height:340px;overflow:auto;border:1px solid #e5e7eb;border-radius:8px;padding:8px}.verItem{padding:7px 9px;border-bottom:1px solid #f1f5f9;font-size:13px}.verItem:last-child{border-bottom:none}.verItem .old{color:#dc2626;text-decoration:line-through;margin-right:4px}.verItem .new{color:#16a34a;margin-left:4px}.empty{text-align:center;padding:20px;color:#9ca3af;font-size:13px}.tab-bar{display:flex;gap:0;margin-bottom:14px;border-bottom:2px solid #e5e7eb}.tab-btn{background:none;border:none;padding:9px 18px;font-weight:600;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;color:#6b7280;font-size:13px;transition:all .15s ease}.tab-btn:hover{color:#374151;background:rgba(0,0,0,0.02)}.tab-btn.active{color:#1769aa;border-bottom-color:#1769aa}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes slideUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}@media(max-width:900px){.side{width:60px;padding:10px 6px}.brand{font-size:0;padding:10px 0}.brand::before{font-size:24px}.nav{font-size:0;padding:10px;justify-content:center}.nav::first-letter{font-size:18px}.main{margin-left:60px;width:calc(100% - 60px);padding:16px}.grid4,.form{grid-template-columns:repeat(2,1fr)}}
-</style></head><body><div class="app"><aside class="side"><div class="brand">CM · 报价工作台 V5</div><div class="nav active" data-page="quote">🧾 快速报价</div><div class="nav" data-page="quotations">📋 报价列表</div><div class="nav" data-page="customers">👥 客户管理</div><div class="nav" data-page="projects">📁 项目管理</div><div class="nav" data-page="products">📦 产品数据库</div><div class="nav" data-page="imports">📥 数据库导入</div><div class="nav" data-page="history">🕘 报价历史</div><div class="nav" data-page="mail">✉️ 邮件<span id="mailBadge"></span></div><div class="nav" data-page="customer_profile">🎯 客户画像</div></aside><main class="main"><div class="top"><div><h1 id="title">快速报价</h1><div class="muted">客户 → 项目 → 产品 → 报价 → 审核 → 正式Excel</div></div><div class="actions"><button class="btn" onclick="loadAll()">↻ 刷新</button><button class="btn primary" onclick="newQuote();showPage('quote')">＋ 快速报价</button></div></div>
-<section id="quote" class="page"><div id="ratebar" class="card" style="margin-top:0"><b>实时汇率（联网）</b><span id="rates" class="muted" style="margin-left:14px">获取中…</span></div><div class="card"><h2>① 报价基本信息</h2><div class="form"><div class="field"><label>报价编号</label><input id="qno"></div><div class="field"><label>Date</label><input id="qdate" type="date"></div><div class="field"><label>Provider</label><select id="qprovider"></select></div><div class="field"><label>客户</label><select id="qcustomer" onchange="quoteCustomerChanged()"></select></div><div class="field"><label>项目</label><select id="qproject"></select></div><div class="field"><label>币种</label><select id="qcurrency"><option>USD</option><option>AED</option><option>SAR</option><option>EUR</option></select></div><div class="field"><label>贸易条款</label><select id="qincoterm"><option>EXW</option><option>FOB</option><option>CIF</option><option>DDP</option></select></div><div class="field"><label>付款条款</label><select id="qpayment"><option value="">(未设置)</option><option>100% T/T in advance</option><option>30% T/T deposit, 70% balance before shipment</option><option>50% T/T deposit, 50% balance against B/L copy</option><option>T/T (Telegraphic Transfer)</option><option>100% L/C at sight (irrevocable)</option><option>D/P (Documents against Payment)</option><option>Western Union</option></select></div><div class="field"><label>有效期（天）</label><input id="qvalid" type="number" value="30"></div></div></div><div class="card"><div class="toolbar"><h2>② 产品报价明细</h2><div class="actions"><button class="btn" onclick="addProductRow()">＋ 添加产品</button><button class="btn" onclick="addQuoteRow()">＋ 添加明细</button></div></div><div class="hint" style="margin:-4px 0 10px">产品列支持模糊搜索：像填报价单一样输入商品名称 / 型号（可多个关键词，空格分隔），按 Enter 弹出匹配列表，点击选择后自动带出描述与标准单价，可继续修改数量 / 单价 / 描述。</div><div class="tablewrap"><table><thead><tr><th>#</th><th>产品</th><th>描述</th><th>数量</th><th>单位</th><th>单价USD</th><th>金额USD</th><th>内部参考价</th><th>操作</th></tr></thead><tbody id="qitems"></tbody></table></div><div style="text-align:right;font-size:22px;font-weight:800;margin-top:15px">TOTAL <span id="qtotal">$0.00</span></div></div><div class="card"><h2>③ 技术 / 商务备注</h2><textarea id="qnotes" style="width:100%;min-height:100px;border:1px solid #d7dee8;border-radius:8px;padding:10px" placeholder="IES / DIALux / DMX512 / IP66 / customized length / lead time / warranty..."></textarea><div class="modalfoot"><span class="hint" style="margin-right:auto" id="qverHint">保存会记录一个新版本；导出 Excel 不改变状态。审核在「报价列表」中操作。</span><button class="btn" onclick="saveQuote(false)">仅保存报价</button><button class="btn primary" onclick="saveQuote(true)">保存并导出 Excel</button></div></div></section>
+
+/* ===== WhatsApp 分析页面 (Scoped) ===== */
+#whatsapp .wa-app{display:flex;height:calc(100vh - 100px);background:#0a1014;color:#e9edef;border-radius:12px;overflow:hidden;border:1px solid #222d34}
+#whatsapp .wa-sidebar{width:35%;min-width:280px;max-width:400px;background:#111b21;display:flex;flex-direction:column;border-right:1px solid #222d34}
+#whatsapp .wa-sidebar-header{height:50px;min-height:50px;background:#202c33;display:flex;align-items:center;justify-content:space-between;padding:0 12px}
+#whatsapp .wa-sidebar-title{font-size:16px;font-weight:600;color:#e9edef}
+#whatsapp .wa-sidebar-actions{display:flex;gap:4px}
+#whatsapp .wa-icon-btn{background:transparent;border:none;color:#aebac1;cursor:pointer;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;transition:background .15s}
+#whatsapp .wa-icon-btn:hover{background:rgba(255,255,255,0.08)}
+#whatsapp .wa-panel{background:#111b21;padding:10px;border-bottom:1px solid #222d34}
+#whatsapp .wa-search-bar{background:#202c33;padding:8px 12px;border-radius:8px;display:flex;align-items:center}
+#whatsapp .wa-search-bar input{background:transparent;border:none;color:#d1d7db;outline:none;width:100%;font-size:14px}
+#whatsapp .wa-search-bar input::placeholder{color:#8696a0}
+#whatsapp .wa-search-results{max-height:260px;overflow-y:auto}
+#whatsapp .wa-search-result{padding:8px 12px;border-bottom:1px solid #222d34;cursor:pointer}
+#whatsapp .wa-search-result:hover{background:#202c33}
+#whatsapp .wa-search-date{float:right;font-size:11px;color:#8696a0}
+#whatsapp .wa-search-sender{font-weight:500;font-size:13px}
+#whatsapp .wa-search-text{font-size:12px;color:#aebac1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#whatsapp .wa-search-more{padding:8px;text-align:center;color:#8696a0;font-size:12px}
+#whatsapp .wa-cal-header{color:#00a884;font-weight:500;margin-bottom:8px;font-size:14px}
+#whatsapp .wa-date-input{width:100%;background:#202c33;color:#d1d7db;border:1px solid #2a3942;padding:8px;border-radius:6px;outline:none}
+#whatsapp .wa-sidebar-content{flex:1;overflow-y:auto}
+#whatsapp .wa-chat-list{flex:1}
+#whatsapp .wa-empty-hint{padding:30px 20px;text-align:center;color:#aebac1;font-size:13px}
+#whatsapp .wa-chat-item{display:flex;align-items:center;padding:10px 14px;cursor:pointer;border-bottom:1px solid #202c33;transition:background .15s}
+#whatsapp .wa-chat-item:hover{background:#202c33}
+#whatsapp .wa-chat-item.active{background:#2a3942}
+#whatsapp .wa-chat-avatar{width:45px;height:45px;border-radius:50%;background:#dfe5e7;display:flex;align-items:center;justify-content:center;margin-right:12px;flex-shrink:0}
+#whatsapp .wa-chat-avatar svg{fill:#fff;width:26px;height:26px}
+#whatsapp .wa-chat-info{flex:1;overflow:hidden}
+#whatsapp .wa-chat-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:2px}
+#whatsapp .wa-chat-name{color:#e9edef;font-size:15px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#whatsapp .wa-chat-time{color:#8696a0;font-size:11px;flex-shrink:0;margin-left:8px}
+#whatsapp .wa-chat-preview{color:#8696a0;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#whatsapp .wa-main{flex:1;display:flex;flex-direction:column;position:relative;background:#0b141a;min-width:0}
+#whatsapp .wa-chat-header{height:50px;min-height:50px;background:#202c33;display:flex;align-items:center;padding:0 16px;z-index:10;gap:12px}
+#whatsapp .wa-chat-avatar-circle{width:36px;height:36px;border-radius:50%;background:#6a7175;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+#whatsapp .wa-chat-title{font-size:15px;font-weight:500;color:#e9edef;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+#whatsapp .wa-chat-stats{font-size:12px;color:#8696a0;flex-shrink:0}
+#whatsapp .wa-user-banner{background:#202c33;padding:8px 16px;display:flex;align-items:center;justify-content:space-between;z-index:10;border-bottom:1px solid #2a3942;gap:8px;flex-wrap:wrap}
+#whatsapp .wa-user-banner span{color:#e9edef;font-size:13px}
+#whatsapp .wa-user-banner select{background:#2a3942;color:#d1d7db;border:1px solid #2a3942;padding:5px 8px;border-radius:5px;outline:none;font-size:13px;min-width:120px}
+#whatsapp .wa-bg{position:absolute;top:50px;left:0;right:0;bottom:0;background-image:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><circle cx="10" cy="10" r="1" fill="%23ffffff" opacity="0.03"/><circle cx="30" cy="20" r="1.5" fill="%23ffffff" opacity="0.03"/><circle cx="50" cy="5" r="1" fill="%23ffffff" opacity="0.03"/><circle cx="20" cy="40" r="1" fill="%23ffffff" opacity="0.03"/><circle cx="45" cy="35" r="1.5" fill="%23ffffff" opacity="0.03"/></svg>');background-size:60px;opacity:0.5;z-index:0;pointer-events:none}
+#whatsapp .wa-chat-container{flex:1;padding:16px 8%;overflow-y:auto;display:flex;flex-direction:column;z-index:1;position:relative}
+#whatsapp .wa-empty-state{text-align:center;padding:60px 20px;color:#8696a0;font-size:15px;margin:auto}
+#whatsapp .wa-date-divider-wrapper{display:flex;justify-content:center;margin:10px 0;width:100%}
+#whatsapp .wa-date-divider{background:#182229;color:#8696a0;font-size:12px;padding:4px 12px;border-radius:7px;box-shadow:0 1px 0.5px rgba(0,0,0,.13)}
+#whatsapp .wa-msg-wrapper{display:flex;margin-bottom:2px;width:100%}
+#whatsapp .wa-msg{padding:5px 7px 7px 8px;border-radius:7px;max-width:70%;position:relative;font-size:13.5px;line-height:18px;box-shadow:0 1px 0.5px rgba(0,0,0,.13);word-wrap:break-word;color:#e9edef}
+#whatsapp .wa-msg-text{white-space:pre-wrap}
+#whatsapp .wa-msg-spacer{display:inline-block;width:65px;height:8px}
+#whatsapp .wa-user-wrapper{justify-content:flex-end}
+#whatsapp .wa-user-msg{background:#005c4b;border-top-right-radius:0}
+#whatsapp .wa-other-wrapper{justify-content:flex-start}
+#whatsapp .wa-other-msg{background:#202c33;border-top-left-radius:0}
+#whatsapp .wa-no-tail{border-radius:7px}
+#whatsapp .wa-msg-content{display:inline}
+#whatsapp .wa-sender{font-size:12px;font-weight:500;margin-bottom:1px;display:block;color:#53bdeb}
+#whatsapp .wa-timestamp{font-size:10px;color:rgba(255,255,255,0.55);position:absolute;bottom:3px;right:6px}
+#whatsapp .wa-system-msg-wrapper{justify-content:center;margin:10px 0}
+#whatsapp .wa-system-msg{background:#182229;color:#8696a0;font-size:12px;padding:4px 12px;border-radius:7px;text-align:center;max-width:85%}
+#whatsapp .wa-input-bar{height:50px;min-height:50px;background:#202c33;display:flex;align-items:center;padding:0 16px;z-index:10}
+#whatsapp .wa-input-placeholder{flex:1;background:#2a3942;border-radius:8px;height:36px;display:flex;align-items:center;padding:0 14px;color:#8696a0;font-size:13px}
+#whatsapp .wa-modal{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.6);display:none;justify-content:center;align-items:center;z-index:1000}
+#whatsapp .wa-modal-content{background:#202c33;padding:24px;border-radius:10px;min-width:320px;max-width:500px;color:#e9edef;box-shadow:0 5px 15px rgba(0,0,0,0.3);max-height:80vh;overflow-y:auto}
+#whatsapp .wa-modal-btn{background:#00a884;color:#111b21;border:none;padding:8px 16px;border-radius:5px;cursor:pointer;margin-top:16px;font-weight:600;width:100%}
+#whatsapp .wa-modal-btn:hover{background:#018a6d}
+#whatsapp .wa-stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+#whatsapp .wa-stat-card{background:#111b21;padding:12px;border-radius:8px;text-align:center}
+#whatsapp .wa-stat-card small{display:block;color:#8696a0;font-size:11px;margin-bottom:4px}
+#whatsapp .wa-stat-card b{display:block;font-size:20px;color:#e9edef}
+#whatsapp .wa-wordcloud{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;background:#111b21;padding:16px;border-radius:8px;min-height:120px}
+#whatsapp .wa-wordcloud span{display:inline-block;font-weight:500;line-height:1.2}
+#whatsapp .wa-hint{color:#8696a0;font-size:12px}
+#whatsapp .wa-drag{border:2px dashed #00a884!important;background:rgba(0,168,132,0.08)!important}
+#whatsapp ::-webkit-scrollbar{width:5px}
+#whatsapp ::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.12);border-radius:3px}
+@keyframes waHighlight{0%{background-color:rgba(0,168,132,0.4)}100%{background-color:transparent}}
+#whatsapp .wa-highlight{animation:waHighlight 2s ease-out}
+</style></head><body><div class="app"><aside class="side"><div class="brand" style="cursor:pointer" onclick="showPage('dashboard')">CM · 报价工作台 V5</div><div class="nav" data-page="dashboard">📊 仪表盘</div><div class="nav" data-page="quote">🧾 快速报价</div><div class="nav" data-page="quotations">📋 报价列表</div><div class="nav" data-page="customers">👥 客户管理</div><div class="nav" data-page="projects">📁 项目管理</div><div class="nav" data-page="products">📦 产品数据库</div><div class="nav" data-page="imports">📥 数据库导入</div><div class="nav" data-page="history">🕘 报价历史</div><div class="nav" data-page="mail">✉️ 邮件<span id="mailBadge"></span></div><div class="nav" data-page="customer_profile">🎯 客户画像</div><div class="nav" data-page="whatsapp">💬 WhatsApp分析</div></aside><main class="main"><div class="top"><div><h1 id="title">📊 仪表盘</h1><div class="muted" id="subtitle">业务概览，快速掌握全局</div></div><div class="actions"><button class="btn" onclick="loadAll()">↻ 刷新</button><button class="btn primary" onclick="newQuote();showPage('quote')">＋ 快速报价</button></div></div>
+<section id="dashboard" class="page">
+<div class="grid4" style="margin-bottom:12px">
+  <div class="kpi"><small>客户总数</small><b id="dash_customers">—</b></div>
+  <div class="kpi"><small>报价单数</small><b id="dash_quotes">—</b></div>
+  <div class="kpi"><small>项目总数</small><b id="dash_projects">—</b></div>
+  <div class="kpi"><small>产品总数</small><b id="dash_products">—</b></div>
+</div>
+<div class="grid4" style="margin-bottom:12px">
+  <div class="kpi"><small>本月报价</small><b id="dash_month_quotes">—</b></div>
+  <div class="kpi"><small>本月项目</small><b id="dash_month_projects">—</b></div>
+  <div class="kpi"><small>待审核报价</small><b id="dash_pending_review">—</b></div>
+  <div class="kpi" style="cursor:pointer" onclick="showPage('customer_profile')"><small>客户画像</small><b>→ 查看</b></div>
+</div>
+<div class="card"><h2>📋 最近报价</h2><div class="tablewrap"><table style="min-width:800px"><thead><tr><th>报价号</th><th>客户</th><th>金额USD</th><th>状态</th><th>日期</th><th>操作</th></tr></thead><tbody id="dash_recent_quotes"></tbody></table></div></div>
+<div class="card"><h2>📁 最近项目</h2><div class="tablewrap"><table style="min-width:800px"><thead><tr><th>项目</th><th>客户</th><th>状态</th><th>金额USD</th><th>跟进日期</th><th>操作</th></tr></thead><tbody id="dash_recent_projects"></tbody></table></div></div>
+</section>
+<section id="quote" class="page hidden"><div id="ratebar" class="card" style="margin-top:0"><b>实时汇率（联网）</b><span id="rates" class="muted" style="margin-left:14px">获取中…</span></div><div class="card"><h2>① 报价基本信息</h2><div class="form"><div class="field"><label>报价编号</label><input id="qno"></div><div class="field"><label>Date</label><input id="qdate" type="date"></div><div class="field"><label>Provider</label><select id="qprovider"></select></div><div class="field"><label>客户</label><select id="qcustomer" onchange="quoteCustomerChanged()"></select></div><div class="field"><label>项目</label><select id="qproject"></select></div><div class="field"><label>币种</label><select id="qcurrency"><option>USD</option><option>AED</option><option>SAR</option><option>EUR</option></select></div><div class="field"><label>贸易条款</label><select id="qincoterm"><option>EXW</option><option>FOB</option><option>CIF</option><option>DDP</option></select></div><div class="field"><label>付款条款</label><select id="qpayment"><option value="">(未设置)</option><option>100% T/T in advance</option><option>30% T/T deposit, 70% balance before shipment</option><option>50% T/T deposit, 50% balance against B/L copy</option><option>T/T (Telegraphic Transfer)</option><option>100% L/C at sight (irrevocable)</option><option>D/P (Documents against Payment)</option><option>Western Union</option></select></div><div class="field"><label>有效期（天）</label><input id="qvalid" type="number" value="30"></div></div></div><div class="card"><div class="toolbar"><h2>② 产品报价明细</h2><div class="actions"><button class="btn" onclick="addProductRow()">＋ 添加产品</button><button class="btn" onclick="addQuoteRow()">＋ 添加明细</button></div></div><div class="hint" style="margin:-4px 0 10px">产品列支持模糊搜索：像填报价单一样输入商品名称 / 型号（可多个关键词，空格分隔），按 Enter 弹出匹配列表，点击选择后自动带出描述与标准单价，可继续修改数量 / 单价 / 描述。</div><div class="tablewrap"><table><thead><tr><th>#</th><th>产品</th><th>描述</th><th>数量</th><th>单位</th><th>单价USD</th><th>金额USD</th><th>内部参考价</th><th>操作</th></tr></thead><tbody id="qitems"></tbody></table></div><div style="text-align:right;font-size:22px;font-weight:800;margin-top:15px">TOTAL <span id="qtotal">$0.00</span></div></div><div class="card"><h2>③ 技术 / 商务备注</h2><textarea id="qnotes" style="width:100%;min-height:100px;border:1px solid #d7dee8;border-radius:8px;padding:10px" placeholder="IES / DIALux / DMX512 / IP66 / customized length / lead time / warranty..."></textarea><div class="modalfoot"><span class="hint" style="margin-right:auto" id="qverHint">保存会记录一个新版本；导出 Excel 不改变状态。审核在「报价列表」中操作。</span><button class="btn" onclick="saveQuote(false)">仅保存报价</button><button class="btn primary" onclick="saveQuote(true)">保存并导出 Excel</button></div></div></section>
 <section id="quotations" class="page hidden"><div class="card"><div class="toolbar"><div class="filters"><select id="qf_customer" onchange="loadQuotes()"><option value="">全部客户</option></select><select id="qf_project" onchange="loadQuotes()"><option value="">全部项目</option></select><select id="qf_status" onchange="loadQuotes()"><option value="">全部状态</option><option>报价草稿</option><option>正式版本</option></select><input id="qf_from" type="date" onchange="loadQuotes()"><span>至</span><input id="qf_to" type="date" onchange="loadQuotes()"><label class="pill"><input id="qf_unexpired" type="checkbox" checked onchange="loadQuotes()"> 未到期</label><button class="btn" onclick="clearQuoteFilters()">重置筛选</button></div><button class="btn primary" onclick="newQuote();showPage('quote')">＋ 快速报价</button></div><div class="muted" style="margin-bottom:10px">默认显示最近三个月；“未到期”默认勾选。审核后再次编辑会自动退回草稿，需重新审核；导出 Excel 任何状态都可用、不改变状态。</div><div class="tablewrap"><table><thead><tr><th>报价号</th><th>Date</th><th>到期时间</th><th>客户</th><th>项目</th><th>Provider</th><th>状态</th><th>金额USD</th><th>审核时间</th><th>操作</th><th>Excel</th></tr></thead><tbody id="qt"></tbody></table></div></div></section>
 <section id="customers" class="page hidden"><div class="card"><div class="toolbar"><input class="searchbox" id="cs" placeholder="搜索公司 / 国家 / 联系人" oninput="renderCustomers()"><button class="btn primary" onclick="openCustomer()">＋ 添加客户</button></div><div class="tablewrap"><table><thead><tr><th>客户编码</th><th>公司</th><th>国家</th><th>城市</th><th>客户类型</th><th>联系人</th><th>Email</th><th>电话</th><th>币种</th><th>等级</th><th>操作</th></tr></thead><tbody id="ct"></tbody></table></div></div></section>
 <section id="projects" class="page hidden"><div class="card"><div class="toolbar"><div class="filters"><select id="pf_customer" onchange="loadProjects()"><option value="">全部客户</option></select><select id="pf_status" onchange="loadProjects()"><option value="">全部状态</option></select><input id="pf_quote_filter" placeholder="报价号" oninput="loadProjectsDebounced()"><button class="btn" onclick="clearProjectFilters()">清除筛选</button></div><button class="btn primary" onclick="openProject()">＋ 添加项目</button></div><div class="toolbar"><div class="muted">默认按修改日期从新到旧排序；状态修改请在列表上方批量执行</div><div class="actions"><span id="projectSelected" class="hint">已选择 0 项</span><select id="bulk_status"><option value="">批量修改状态…</option></select><button class="btn primary" onclick="bulkStatus()">应用</button></div></div><div class="tablewrap"><table><thead><tr><th><input class="check" type="checkbox" id="projectAll" onchange="toggleAllProjects(this)"></th><th>项目</th><th>客户</th><th>状态</th><th>预计金额USD</th><th>报价号</th><th>下一步</th><th>跟进日期</th><th>修改日期</th><th>操作</th></tr></thead><tbody id="pt"></tbody></table></div></div></section>
@@ -109,11 +205,80 @@
   </div>
 </div>
 </section>
+<section id="whatsapp" class="page hidden">
+<div class="wa-app">
+  <div class="wa-sidebar" id="wa_sidebar">
+    <div class="wa-sidebar-header">
+      <span class="wa-sidebar-title">💬 WhatsApp</span>
+      <div class="wa-sidebar-actions">
+        <button class="wa-icon-btn" id="wa_searchToggle" title="搜索">🔍</button>
+        <button class="wa-icon-btn" id="wa_calToggle" title="日历">📅</button>
+        <button class="wa-icon-btn" id="wa_statsBtn" title="统计">📊</button>
+        <button class="wa-icon-btn" id="wa_loadBtn" title="加载聊天">＋</button>
+      </div>
+    </div>
+    <input type="file" id="wa_fileInput" accept=".txt" multiple style="display:none">
+    <!-- Search Panel -->
+    <div class="wa-panel" id="wa_searchPanel" style="display:none">
+      <div class="wa-search-bar">
+        <input id="wa_searchInput" placeholder="搜索消息…">
+      </div>
+      <div id="wa_searchResults" class="wa-search-results"></div>
+    </div>
+    <!-- Calendar Panel -->
+    <div class="wa-panel" id="wa_calendarPanel" style="display:none">
+      <div class="wa-cal-header">📅 跳转日期</div>
+      <input type="date" id="wa_dateInput" class="wa-date-input">
+      <div class="wa-hint" id="wa_calendarStatus" style="padding:8px 0">选择日期跳转</div>
+    </div>
+    <!-- Chat List -->
+    <div class="wa-sidebar-content" id="wa_sidebarContent">
+      <div class="wa-chat-list" id="wa_chatList">
+        <div class="wa-empty-hint">点击 + 按钮或拖拽 .txt 文件加载聊天记录</div>
+      </div>
+    </div>
+  </div>
+  <div class="wa-main">
+    <div class="wa-chat-header">
+      <div class="wa-chat-avatar-circle">💬</div>
+      <div class="wa-chat-title" id="wa_chatTitle">选择聊天查看</div>
+      <div class="wa-chat-stats" id="wa_statsTotal">暂无消息</div>
+    </div>
+    <div class="wa-user-banner" id="wa_userBanner" style="display:none">
+      <span>你是谁？（用于标记你的消息）</span>
+      <select id="wa_userSelect"><option value="">选择你的身份…</option></select>
+    </div>
+    <div class="wa-bg"></div>
+    <div class="wa-chat-container" id="wa_chatContainer">
+      <div class="wa-empty-state">加载聊天文件开始分析 💬</div>
+    </div>
+    <div class="wa-input-bar">
+      <div class="wa-input-placeholder">聊天文件浏览器本地分析，数据不上传服务器 🔒</div>
+    </div>
+  </div>
+</div>
+<!-- Stats Modal -->
+<div class="wa-modal" id="wa_statsModal">
+  <div class="wa-modal-content">
+    <h3 style="color:#00a884;margin-top:0">📊 聊天统计</h3>
+    <div id="wa_statsContent"></div>
+    <button class="wa-modal-btn" id="wa_closeStats">关闭</button>
+  </div>
+</div>
+<div class="wa-hint" style="text-align:right;padding:6px 12px;color:#64748b;font-size:11px">
+  数据仅本地浏览器分析，不上传服务器。导出聊天：WhatsApp → 更多 → 导出聊天(不含媒体)
+</div>
+</section>
 </main></div><div class="modal" id="modal"><div class="modalbox"><div class="modalhead"><h2 id="mtitle">编辑</h2><button class="btn" onclick="closeModal()">×</button></div><div id="mbody"></div><div class="modalfoot"><button class="btn" onclick="closeModal()">取消</button><button class="btn primary" id="msave">保存</button></div></div></div>
 <div class="toast" id="toast"></div>
 <script>
 let customers=[],products=[],projects=[],quotes=[],providers=[],qrows=[],scanFiles=[],importFiles=[],projectTimer,qEditId=null;const $=id=>document.getElementById(id);const esc=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(Number(n)||0);async function api(url,opt={}){let r=await fetch(url,opt);let d=await r.json();if(!r.ok)throw Error(d.error||'请求失败');return d}function toast(s){$('toast').textContent=s;$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',2600)}
-const titles={quote:'快速报价',quotations:'报价列表',customers:'客户管理',projects:'项目管理',products:'产品数据库',imports:'数据库导入',history:'报价历史',mail:'邮件',customer_profile:'客户画像'};function showPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));$(p).classList.remove('hidden');document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('active',x.dataset.page===p));$('title').textContent=titles[p];if(p==='quotations')loadQuotes();if(p==='projects')loadProjects();if(V4.has(p))V4.trigger(p)};document.querySelectorAll('.nav').forEach(x=>x.onclick=()=>showPage(x.dataset.page));
+const titles={dashboard:'📊 仪表盘',quote:'快速报价',quotations:'报价列表',customers:'客户管理',projects:'项目管理',products:'产品数据库',imports:'数据库导入',history:'报价历史',mail:'邮件',customer_profile:'客户画像',whatsapp:'💬 WhatsApp分析'};
+const subtitles={dashboard:'业务概览，快速掌握全局',quote:'客户 → 项目 → 产品 → 报价 → 审核 → 正式Excel',quotations:'筛选、查看、审核、导出报价单',customers:'管理客户信息',projects:'跟踪项目进度',products:'管理产品数据库',imports:'批量导入报价Excel',history:'查询历史报价变更',mail:'邮件收发管理',customer_profile:'报价决策辅助：看统计 + 风险备忘，快速查阅',whatsapp:'本地浏览器分析WhatsApp聊天记录，数据不上传服务器'};
+function showPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));$(p).classList.remove('hidden');document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('active',x.dataset.page===p));$('title').textContent=titles[p]||p;$('subtitle').textContent=subtitles[p]||'';if(p==='dashboard')renderDashboard();if(p==='quotations')loadQuotes();if(p==='projects')loadProjects();if(p==='whatsapp'){setTimeout(()=>{if(window.WhatsAppAnalyzer)window.WhatsAppAnalyzer.init()},100)}if(V4.has(p))V4.trigger(p)};
+document.querySelectorAll('.nav').forEach(x=>x.onclick=()=>showPage(x.dataset.page));
+// Keyboard shortcuts
+document.addEventListener('keydown',function(e){if(e.ctrlKey||e.metaKey){switch(e.key){case '1':e.preventDefault();showPage('dashboard');break;case '2':e.preventDefault();newQuote();showPage('quote');break;case '3':e.preventDefault();showPage('quotations');break;case '4':e.preventDefault();showPage('customers');break;case '5':e.preventDefault();showPage('projects');break;case '6':e.preventDefault();showPage('products');break;}}});
 async function loadAll(){try{[customers,products,projects,providers]=await Promise.all([api('/api/customers'),api('/api/products'),api('/api/projects'),api('/api/providers')]);loadProjectStatuses()}catch(e){toast('⚠️ 基础数据加载失败：'+e.message);return}
 try{fillCustomerFilters();renderCustomers()}catch(e){console.error(e)}
 try{renderProducts()}catch(e){console.error(e)}
@@ -177,6 +342,24 @@ async function loadImports(){try{importFiles=await api('/api/import-files');$('i
 function closeModal(){$('modal').classList.remove('open')}
 function newQuote(){qEditId=null;qrows=[];$('qno').value='CM-QT-'+new Date().toISOString().slice(0,10).replaceAll('-','')+'-C01';$('qprovider').value=providers[0]?.id||'';$('qdate').value=new Date().toISOString().slice(0,10);$('qnotes').value='';$('qverHint').textContent='保存会记录一个新版本；导出 Excel 不改变状态。审核在「报价列表」中操作。';addQuoteRow()}
 function dateSlash(v){let m=String(v||'').match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);return m?`${Number(m[1])}/${Number(m[2])}/${Number(m[3])}`:String(v||'')}
-loadAll().then(()=>newQuote());
-</script><script src="assets/common.js"></script><script src="assets/mail.js"></script><script src="assets/history.js"></script><script src="assets/singleimport.js"></script><script src="assets/profile.js"></script>
+function renderDashboard(){
+  $('dash_customers').textContent=customers.filter(c=>c.active).length;
+  $('dash_quotes').textContent=quotes.length;
+  $('dash_projects').textContent=projects.filter(p=>p.status!=='项目终止'&&p.status!=='项目失败').length;
+  $('dash_products').textContent=products.filter(p=>p.active).length;
+  // Monthly stats
+  const now=new Date(),ym=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');
+  $('dash_month_quotes').textContent=quotes.filter(q=>String(q.quote_date||'').startsWith(ym)).length;
+  $('dash_month_projects').textContent=projects.filter(p=>String(p.created_at||'').startsWith(ym)).length;
+  $('dash_pending_review').textContent=quotes.filter(q=>q.status==='报价草稿').length;
+  // Recent quotes (top 5)
+  const recentQ=quotes.slice(0,5);
+  $('dash_recent_quotes').innerHTML=recentQ.length?recentQ.map(q=>`<tr><td><b>${esc(q.quote_no)}</b></td><td>${esc(q.company)}</td><td>${money(q.total_usd)}</td><td><span class="pill ${q.status==='正式版本'?'ok':'warn'}">${esc(q.status)}</span></td><td>${dateSlash(q.quote_date)}</td><td><button class="btn small" onclick="editQuote(${q.id});showPage('quote')">编辑</button></td></tr>`).join(''):'<tr><td colspan="6">暂无报价数据</td></tr>';
+  // Recent projects (top 5)
+  const recentP=projects.filter(p=>p.status!=='项目终止').slice(0,5);
+  $('dash_recent_projects').innerHTML=recentP.length?recentP.map(p=>`<tr><td>${esc(p.project_name)}</td><td>${esc(p.company)}</td><td><span class="pill">${esc(p.status)}</span></td><td>${money(p.estimated_value_usd)}</td><td>${esc(p.next_followup||'—')}</td><td><button class="btn small" onclick="openProject(${p.id})">编辑</button></td></tr>`).join(''):'<tr><td colspan="6">暂无项目数据</td></tr>';
+}
+// Initial load - show dashboard by default
+loadAll().then(()=>{newQuote();showPage('dashboard');});
+</script><script src="assets/common.js"></script><script src="assets/mail.js"></script><script src="assets/history.js"></script><script src="assets/singleimport.js"></script><script src="assets/profile.js"></script><script src="assets/whatsapp-page.js"></script>
 </body></html>
