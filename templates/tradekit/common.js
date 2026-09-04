@@ -924,3 +924,24 @@ function generateInvoiceNumber() {
   const seq = String(Math.floor(Math.random()*9000)+1000);
   return 'INV' + '-' + y + m + d + '-' + seq;
 }
+
+/* ===== iframe postMessage 数据注入支持 =====
+ * 父页面 (报价工作台) 通过 postMessage 注入报价数据，
+ * 减少手动填写。支持提前或延迟到达的消息。 */
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.type === 'tradekit_data') {
+    var dt = e.data.docType;
+    var incomingData = e.data.data;
+    if (dt && incomingData) {
+      // 保存到 localStorage（优先于默认数据，但晚于 loadDocData 也不怕）
+      saveDocData(dt, incomingData);
+      // 如果页面已初始化完毕，直接更新并重绘
+      if (window.DT === dt && typeof window.data !== 'undefined') {
+        window.data = incomingData;
+        if (typeof renderAll === 'function') {
+          renderAll();
+        }
+      }
+    }
+  }
+});

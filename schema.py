@@ -129,7 +129,6 @@ CREATE INDEX IF NOT EXISTS idx_cp_customer ON customer_profiles(customer_id);
 CREATE INDEX IF NOT EXISTS idx_cqe_customer ON customer_quote_excels(customer_id);
 CREATE INDEX IF NOT EXISTS idx_cqi_excel ON customer_quote_items(excel_id);
 CREATE INDEX IF NOT EXISTS idx_ca_customer ON customer_attachments(customer_id);
-ALTER TABLE products ADD COLUMN image_path TEXT;
 '''
 
 # 兼容列：存量库需要补齐时使用(重复执行被 except 吞掉)
