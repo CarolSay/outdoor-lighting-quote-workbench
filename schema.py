@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS products(
  cct TEXT, category TEXT, body_color TEXT, hs_code TEXT, currency TEXT, moq TEXT, trade_terms TEXT,
  spec_json TEXT DEFAULT '{}',
  lifespan TEXT, working_temperature TEXT, storage_temperature TEXT, weight TEXT, brightness TEXT,
- data_cable TEXT, controller TEXT, notes TEXT,
+ data_cable TEXT, controller TEXT, notes TEXT, ext1 TEXT, ext2 TEXT, ext3 TEXT,
  cost_usd REAL DEFAULT 0, standard_price_usd REAL DEFAULT 0, active INTEGER DEFAULT 1, source_page INTEGER,
  created_at TEXT DEFAULT CURRENT_TIMESTAMP, updated_at TEXT DEFAULT CURRENT_TIMESTAMP);
 CREATE TABLE IF NOT EXISTS projects(
@@ -105,7 +105,8 @@ COMPAT_COLS = {
     'projects': [('status', "TEXT DEFAULT '报价中'"), ('modified_at', 'TEXT')],
     'products': [('led_count', 'TEXT'), ('pixel_count', 'TEXT'), ('cct', 'TEXT'), ('category', 'TEXT'),
                  ('body_color', 'TEXT'), ('hs_code', 'TEXT'), ('currency', 'TEXT'), ('moq', 'TEXT'),
-                 ('trade_terms', 'TEXT'), ("spec_json", "TEXT DEFAULT '{}'")],
+                 ('trade_terms', 'TEXT'), ("spec_json", "TEXT DEFAULT '{}'"),
+                 ('ext1', 'TEXT'), ('ext2', 'TEXT'), ('ext3', 'TEXT')],
     'quotations': [('provider_id', 'INTEGER'), ('expiry_date', 'TEXT'), ('reviewed_at', 'TEXT')],
     'quotation_history': [('provider_id', 'INTEGER'), ('expiry_date', 'TEXT'),
                           ('source_type', "TEXT DEFAULT '手动创建'"), ('source_file', 'TEXT')],
