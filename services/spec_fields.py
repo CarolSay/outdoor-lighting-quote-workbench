@@ -251,10 +251,10 @@ def parse_description(desc):
     # 31) 产品类别：LED洗墙灯 → 洗墙灯
     take(r'(?:LED\s*)?(?:洗墙灯|线条灯|投光灯|点光源|轮廓灯|地埋灯|草坪灯|投射灯|灯带|控制器|电源)', 'category')
 
-    # 剩余文本 → notes（不丢信息）
+    # 剩余文本 → ext1（全部未匹配文本，不分割）；ext2/ext3 留给用户手动填写
     rest = _clean_rest(rest)
     if rest:
-        out['notes'] = rest
+        out['ext1'] = rest
     return out
 
 
@@ -286,8 +286,10 @@ def build_description(f, for_pi=True, extra_notes=''):
     line1 = [g('model'), g('length_size'), g('voltage'), g('power'), g('led_count'), g('led_chip'),
              _fmt_cct_color(f), g('control'), g('ip_rating')]
     line2 = [g('pixel_count'), g('beam_angle'), g('material'), g('body_color'), g('driver_brand')]
+    ext_vals = [g('ext1'), g('ext2'), g('ext3')]
     lines = [', '.join([x for x in line1 if x])]
-    l2 = ', '.join([x for x in line2 if x])
+    l2_parts = [x for x in line2 if x] + [x for x in ext_vals if x]
+    l2 = ', '.join(l2_parts)
     if l2:
         lines.append(l2)
     notes = '\n'.join([x for x in [g('notes'), extra_notes] if x])
@@ -307,7 +309,7 @@ def merge_spec(row, spec_json_str):
             d.update(json.loads(spec_json_str))
         except Exception:
             pass
-    for k in CORE_KEYS:
+    for k in CORE_KEYS + ['ext1', 'ext2', 'ext3']:
         v = row.get(k)
         if v is not None and str(v).strip() != '':
             d[k] = v
