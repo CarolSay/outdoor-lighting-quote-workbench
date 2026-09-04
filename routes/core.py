@@ -8,6 +8,9 @@ from datetime import datetime, timedelta
 from db import query_all, query_one, tx, log
 from services import quotes as Q
 from services.spec_fields import CATALOG_JSON, CORE_KEYS, SPEC_KEYS, parse_description_safe, build_description
+
+# ext1-3 不属于九类字段，但在产品表/描述中参与合并与生成
+EXT_KEYS = ['ext1', 'ext2', 'ext3']
 import config as C
 
 
@@ -248,7 +251,8 @@ PRODUCT_FIELDS = ['series', 'model', 'product_name', 'description', 'power', 'vo
                   'control', 'ip_rating', 'beam_angle', 'length_size', 'led_count', 'pixel_count', 'led_chip',
                   'material', 'cct', 'category', 'body_color', 'hs_code', 'currency', 'moq', 'trade_terms',
                   'lifespan', 'working_temperature', 'storage_temperature', 'weight', 'brightness',
-                  'data_cable', 'controller', 'notes', 'cost_usd', 'standard_price_usd', 'source_page']
+                  'data_cable', 'controller', 'notes', 'cost_usd', 'standard_price_usd', 'source_page',
+                  'ext1', 'ext2', 'ext3']
 PRODUCT_CODE = 'product_code'
 
 
@@ -306,16 +310,17 @@ def _merge_notes(a, b_):
 def _rebuild_desc(d, spec, old=None):
     """合并字段并重建描述（编辑保存后自动执行）：
     合并优先级 提交值 > 描述解析补空 > 旧值；备注 = 解析剩余文本 + 提交/旧备注（去重）。
-    返回 (description, notes)。"""
+    ext1-3 同核心字段参与合并与描述生成。返回 (description, notes)。"""
     merged = {}
+    all_keys = CORE_KEYS + EXT_KEYS
     if old:
-        for k in CORE_KEYS:
+        for k in all_keys:
             v = old.get(k)
             if v not in (None, ''):
                 merged[k] = v
     merged.update(spec)
     parsed = parse_description_safe(d.get('description') or '') if d.get('description') else {}
-    for k in CORE_KEYS:
+    for k in all_keys:
         v = d.get(k)
         if v in (None, ''):
             v = parsed.get(k)
