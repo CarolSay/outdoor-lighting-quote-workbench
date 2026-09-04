@@ -20,7 +20,7 @@ schema.ensure_schema()
 
 MODULES = [
     'routes.core', 'routes.config_routes', 'routes.mail_routes',
-    'routes.backup_routes',
+    'routes.backup_routes', 'routes.profile_routes',
 ]
 
 

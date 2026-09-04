@@ -98,6 +98,37 @@ CREATE INDEX IF NOT EXISTS idx_emails_received ON emails(received_at);
 CREATE INDEX IF NOT EXISTS idx_emails_customer ON emails(customer_id);
 CREATE INDEX IF NOT EXISTS idx_qv_quotation ON quotation_versions(quotation_id);
 CREATE INDEX IF NOT EXISTS idx_products_model ON products(model);
+CREATE TABLE IF NOT EXISTS customer_profiles(
+ id INTEGER PRIMARY KEY AUTOINCREMENT, customer_id INTEGER UNIQUE NOT NULL,
+ company_scale TEXT, main_products TEXT, website TEXT,
+ comm_best_time TEXT, comm_style TEXT, is_urgent_order INTEGER DEFAULT 0,
+ own_forwarder TEXT, custom_level TEXT, certification TEXT, trade_terms_detail TEXT,
+ risk_notes TEXT, profile_notes TEXT, quote_summary TEXT,
+ website_checked INTEGER DEFAULT 0,
+ updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+ FOREIGN KEY(customer_id) REFERENCES customers(id) ON DELETE CASCADE);
+CREATE TABLE IF NOT EXISTS customer_quote_excels(
+ id INTEGER PRIMARY KEY AUTOINCREMENT, customer_id INTEGER NOT NULL,
+ file_name TEXT, file_blob BLOB, row_count INTEGER DEFAULT 0,
+ uploaded_at TEXT DEFAULT CURRENT_TIMESTAMP,
+ FOREIGN KEY(customer_id) REFERENCES customers(id) ON DELETE CASCADE);
+CREATE TABLE IF NOT EXISTS customer_quote_items(
+ id INTEGER PRIMARY KEY AUTOINCREMENT, excel_id INTEGER NOT NULL,
+ quote_date TEXT, quote_no TEXT, is_closed INTEGER DEFAULT 0,
+ original_price REAL DEFAULT 0, final_price REAL DEFAULT 0,
+ modification_count INTEGER DEFAULT 0, is_sample INTEGER DEFAULT 0,
+ order_type TEXT, currency TEXT DEFAULT 'USD', exchange_rate REAL,
+ notes TEXT, raw_json TEXT,
+ FOREIGN KEY(excel_id) REFERENCES customer_quote_excels(id) ON DELETE CASCADE);
+CREATE TABLE IF NOT EXISTS customer_attachments(
+ id INTEGER PRIMARY KEY AUTOINCREMENT, customer_id INTEGER NOT NULL,
+ file_name TEXT, attachment_type TEXT, file_blob BLOB,
+ uploaded_at TEXT DEFAULT CURRENT_TIMESTAMP,
+ FOREIGN KEY(customer_id) REFERENCES customers(id) ON DELETE CASCADE);
+CREATE INDEX IF NOT EXISTS idx_cp_customer ON customer_profiles(customer_id);
+CREATE INDEX IF NOT EXISTS idx_cqe_customer ON customer_quote_excels(customer_id);
+CREATE INDEX IF NOT EXISTS idx_cqi_excel ON customer_quote_items(excel_id);
+CREATE INDEX IF NOT EXISTS idx_ca_customer ON customer_attachments(customer_id);
 '''
 
 # 兼容列：存量库需要补齐时使用(重复执行被 except 吞掉)

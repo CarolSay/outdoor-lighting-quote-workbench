@@ -1,6 +1,6 @@
 <!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>酷睿创显 · 报价工作台 V5</title><style>
 *{box-sizing:border-box}body{margin:0;background:#f4f7fb;color:#172033;font:14px Segoe UI,Arial,sans-serif}.app{display:flex;min-height:100vh}.side{width:235px;background:#101827;color:#cbd5e1;padding:20px 13px;position:fixed;inset:0 auto 0 0}.brand{font-size:18px;font-weight:800;color:#fff;padding:8px 10px 20px}.nav{padding:11px 12px;border-radius:8px;margin:4px 0;cursor:pointer}.nav.active,.nav:hover{background:#263449;color:#fff}.main{margin-left:235px;width:calc(100% - 235px);padding:24px 28px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.top h1{margin:0;font-size:24px}.muted{color:#718096}.actions,.toolbar,.filters{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.toolbar{justify-content:space-between;margin-bottom:12px}.filters{justify-content:flex-start}.btn{border:1px solid #dbe2ea;background:#fff;border-radius:8px;padding:8px 12px;cursor:pointer;font-weight:700}.btn.primary{background:#1769aa;color:#fff;border-color:#1769aa}.btn.danger{color:#b42318}.btn.small{padding:6px 9px;font-size:12px}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.kpi,.card{background:#fff;border:1px solid #e4e9f0;border-radius:12px;box-shadow:0 4px 16px rgba(15,23,42,.04)}.kpi{padding:16px}.kpi small{color:#748094}.kpi b{display:block;font-size:24px;margin-top:6px}.card{padding:17px;margin-top:15px}.card h2{margin:0 0 13px;font-size:17px}.toolbar input,.toolbar select,.filters input,.filters select,.form input,.form select,.form textarea,td input,td select{border:1px solid #d7dee8;border-radius:7px;padding:8px;width:auto;min-width:145px}.tablewrap{overflow:auto}table{border-collapse:collapse;width:100%;min-width:1100px}th,td{padding:9px;border-bottom:1px solid #edf0f4;text-align:left;white-space:nowrap;vertical-align:middle}th{background:#f7f9fc;color:#5d6b7d;font-size:12px}.pill{padding:4px 8px;border-radius:99px;background:#eef3f8}.pill.ok{background:#e8f5e9;color:#1b5e20}.pill.warn{background:#fff3e0;color:#e65100}.form{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}.field label{display:block;font-size:12px;color:#697586;font-weight:700;margin-bottom:5px}.field.full{grid-column:1/-1}.field input,.field select,.field textarea{width:100%}.modal{position:fixed;inset:0;background:rgba(15,23,42,.45);display:none;align-items:center;justify-content:center;padding:20px}.modal.open{display:flex}.modalbox{background:#fff;border-radius:14px;width:min(1100px,96vw);max-height:92vh;overflow:auto;padding:22px}.modalhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.modalfoot{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.toast{position:fixed;right:20px;bottom:20px;background:#172033;color:#fff;padding:12px 16px;border-radius:8px;display:none;z-index:10}.hidden{display:none}.check{width:18px;height:18px}.hint{font-size:12px;color:#718096}.searchbox{min-width:330px!important}.summary{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}.quote-search{background:#f8fafc;border:1px solid #e4e9f0;border-radius:10px;padding:12px;margin-bottom:12px}.result{max-height:300px;overflow:auto;border:1px solid #e4e9f0;border-radius:8px}.result table{min-width:950px}.prodSuggest{position:fixed;display:none;background:#fff;border:1px solid #c9d4e3;border-radius:10px;box-shadow:0 10px 30px rgba(15,23,42,.16);z-index:60;max-height:300px;overflow:auto;width:470px}.prodRow{padding:9px 12px;border-bottom:1px solid #f0f3f7;cursor:pointer;font-size:13px}.prodRow:hover{background:#f2f6fb}.link{color:#1769aa;cursor:pointer;text-decoration:underline}.verChanges{max-height:340px;overflow:auto;border:1px solid #e4e9f0;border-radius:8px;padding:8px}.verItem{padding:7px 9px;border-bottom:1px solid #f0f3f7;font-size:13px}.verItem:last-child{border-bottom:none}.verItem .old{color:#b42318;text-decoration:line-through;margin-right:4px}.verItem .new{color:#1b5e20;margin-left:4px}@media(max-width:900px){.side{width:70px}.brand{font-size:0}.nav{font-size:0;text-align:center}.nav::first-letter{font-size:20px}.main{margin-left:70px;width:calc(100% - 70px)}.grid4,.form{grid-template-columns:repeat(2,1fr)}}
-</style></head><body><div class="app"><aside class="side"><div class="brand">CM · 报价工作台 V5</div><div class="nav active" data-page="quote">🧾 快速报价</div><div class="nav" data-page="quotations">📋 报价列表</div><div class="nav" data-page="customers">👥 客户管理</div><div class="nav" data-page="projects">📁 项目管理</div><div class="nav" data-page="products">📦 产品数据库</div><div class="nav" data-page="imports">📥 数据库导入</div><div class="nav" data-page="history">🕘 报价历史</div><div class="nav" data-page="mail">✉️ 邮件<span id="mailBadge"></span></div></aside><main class="main"><div class="top"><div><h1 id="title">快速报价</h1><div class="muted">客户 → 项目 → 产品 → 报价 → 审核 → 正式Excel</div></div><div class="actions"><button class="btn" onclick="loadAll()">↻ 刷新</button><button class="btn primary" onclick="newQuote();showPage('quote')">＋ 快速报价</button></div></div>
+</style></head><body><div class="app"><aside class="side"><div class="brand">CM · 报价工作台 V5</div><div class="nav active" data-page="quote">🧾 快速报价</div><div class="nav" data-page="quotations">📋 报价列表</div><div class="nav" data-page="customers">👥 客户管理</div><div class="nav" data-page="projects">📁 项目管理</div><div class="nav" data-page="products">📦 产品数据库</div><div class="nav" data-page="imports">📥 数据库导入</div><div class="nav" data-page="history">🕘 报价历史</div><div class="nav" data-page="mail">✉️ 邮件<span id="mailBadge"></span></div><div class="nav" data-page="customer_profile">🎯 客户画像</div></aside><main class="main"><div class="top"><div><h1 id="title">快速报价</h1><div class="muted">客户 → 项目 → 产品 → 报价 → 审核 → 正式Excel</div></div><div class="actions"><button class="btn" onclick="loadAll()">↻ 刷新</button><button class="btn primary" onclick="newQuote();showPage('quote')">＋ 快速报价</button></div></div>
 <section id="quote" class="page"><div id="ratebar" class="card" style="margin-top:0"><b>实时汇率（联网）</b><span id="rates" class="muted" style="margin-left:14px">获取中…</span></div><div class="card"><h2>① 报价基本信息</h2><div class="form"><div class="field"><label>报价编号</label><input id="qno"></div><div class="field"><label>Date</label><input id="qdate" type="date"></div><div class="field"><label>Provider</label><select id="qprovider"></select></div><div class="field"><label>客户</label><select id="qcustomer" onchange="quoteCustomerChanged()"></select></div><div class="field"><label>项目</label><select id="qproject"></select></div><div class="field"><label>币种</label><select id="qcurrency"><option>USD</option><option>AED</option><option>SAR</option><option>EUR</option></select></div><div class="field"><label>贸易条款</label><select id="qincoterm"><option>EXW</option><option>FOB</option><option>CIF</option><option>DDP</option></select></div><div class="field"><label>付款条款</label><select id="qpayment"><option value="">(未设置)</option><option>100% T/T in advance</option><option>30% T/T deposit, 70% balance before shipment</option><option>50% T/T deposit, 50% balance against B/L copy</option><option>T/T (Telegraphic Transfer)</option><option>100% L/C at sight (irrevocable)</option><option>D/P (Documents against Payment)</option><option>Western Union</option></select></div><div class="field"><label>有效期（天）</label><input id="qvalid" type="number" value="30"></div></div></div><div class="card"><div class="toolbar"><h2>② 产品报价明细</h2><div class="actions"><button class="btn" onclick="addProductRow()">＋ 添加产品</button><button class="btn" onclick="addQuoteRow()">＋ 添加明细</button></div></div><div class="hint" style="margin:-4px 0 10px">产品列支持模糊搜索：像填报价单一样输入商品名称 / 型号（可多个关键词，空格分隔），按 Enter 弹出匹配列表，点击选择后自动带出描述与标准单价，可继续修改数量 / 单价 / 描述。</div><div class="tablewrap"><table><thead><tr><th>#</th><th>产品</th><th>描述</th><th>数量</th><th>单位</th><th>单价USD</th><th>金额USD</th><th>内部参考价</th><th>操作</th></tr></thead><tbody id="qitems"></tbody></table></div><div style="text-align:right;font-size:22px;font-weight:800;margin-top:15px">TOTAL <span id="qtotal">$0.00</span></div></div><div class="card"><h2>③ 技术 / 商务备注</h2><textarea id="qnotes" style="width:100%;min-height:100px;border:1px solid #d7dee8;border-radius:8px;padding:10px" placeholder="IES / DIALux / DMX512 / IP66 / customized length / lead time / warranty..."></textarea><div class="modalfoot"><span class="hint" style="margin-right:auto" id="qverHint">保存会记录一个新版本；导出 Excel 不改变状态。审核在「报价列表」中操作。</span><button class="btn" onclick="saveQuote(false)">仅保存报价</button><button class="btn primary" onclick="saveQuote(true)">保存并导出 Excel</button></div></div></section>
 <section id="quotations" class="page hidden"><div class="card"><div class="toolbar"><div class="filters"><select id="qf_customer" onchange="loadQuotes()"><option value="">全部客户</option></select><select id="qf_project" onchange="loadQuotes()"><option value="">全部项目</option></select><select id="qf_status" onchange="loadQuotes()"><option value="">全部状态</option><option>报价草稿</option><option>正式版本</option></select><input id="qf_from" type="date" onchange="loadQuotes()"><span>至</span><input id="qf_to" type="date" onchange="loadQuotes()"><label class="pill"><input id="qf_unexpired" type="checkbox" checked onchange="loadQuotes()"> 未到期</label><button class="btn" onclick="clearQuoteFilters()">重置筛选</button></div><button class="btn primary" onclick="newQuote();showPage('quote')">＋ 快速报价</button></div><div class="muted" style="margin-bottom:10px">默认显示最近三个月；“未到期”默认勾选。审核后再次编辑会自动退回草稿，需重新审核；导出 Excel 任何状态都可用、不改变状态。</div><div class="tablewrap"><table><thead><tr><th>报价号</th><th>Date</th><th>到期时间</th><th>客户</th><th>项目</th><th>Provider</th><th>状态</th><th>金额USD</th><th>审核时间</th><th>操作</th><th>Excel</th></tr></thead><tbody id="qt"></tbody></table></div></div></section>
 <section id="customers" class="page hidden"><div class="card"><div class="toolbar"><input class="searchbox" id="cs" placeholder="搜索公司 / 国家 / 联系人" oninput="renderCustomers()"><button class="btn primary" onclick="openCustomer()">＋ 添加客户</button></div><div class="tablewrap"><table><thead><tr><th>客户编码</th><th>公司</th><th>国家</th><th>城市</th><th>客户类型</th><th>联系人</th><th>Email</th><th>电话</th><th>币种</th><th>等级</th><th>操作</th></tr></thead><tbody id="ct"></tbody></table></div></div></section>
@@ -9,11 +9,111 @@
 <section id="history" class="page hidden"><div class="card"><div id="historyPage">加载中…</div></div></section>
 <section id="imports" class="page hidden"><div class="card"><h2>Quotation 数据库导入</h2><p class="muted">支持两种方式：① 选择文件夹递归扫描全部子文件夹；② 直接多选 Excel 文件（见下方“单文件导入”卡片）。系统先扫描、解析、去重，再由你确认后正式写入数据库。</p><div class="toolbar"><button class="btn primary" onclick="scanQuotationFolder()">📂 选择文件夹并扫描</button><button class="btn" id="confirmImportBtn" onclick="confirmImport()" disabled>✓ 确认导入选中文件</button><span id="importStatus" class="muted"></span></div><div id="scanSummary" class="summary"></div><div class="tablewrap"><table><thead><tr><th><input class="check" type="checkbox" id="scanAll" onchange="toggleAllScan(this)"></th><th>文件</th><th>路径</th><th>类型</th><th>大小</th><th>扫描状态</th><th>报价号</th><th>客户</th><th>项目</th><th>明细数</th><th>说明</th></tr></thead><tbody id="scanTable"></tbody></table></div></div><div class="card"><h2>导入历史</h2><div class="tablewrap"><table><thead><tr><th>文件</th><th>路径</th><th>类型</th><th>大小</th><th>状态</th><th>报价号</th><th>导入时间</th></tr></thead><tbody id="it"></tbody></table></div></div></section>
 <section id="mail" class="page hidden"><div class="card"><div id="mailPage">加载中…</div></div></section>
+<section id="customer_profile" class="page hidden">
+<div class="top" style="margin-bottom:10px"><div><h1>个人工作台 · 客户画像</h1><div class="muted">报价决策辅助：看统计 + 风险备忘，快速查阅</div></div><div class="actions"><select id="pf_customer_sel" onchange="selectCustomer(this.value)" style="min-width:260px;border:1px solid #d7dee8;border-radius:8px;padding:8px 12px;font-size:14px"></select><button class="btn primary" onclick="openNewCustomer()">＋ 新增客户</button></div></div>
+<div class="toolbar" style="margin-bottom:10px"><div class="actions"><button class="btn" onclick="refreshStats()">↻ 刷新报价统计</button><button class="btn primary" onclick="openAIPrompt()">🤖 复制AI提示词</button><button class="btn" onclick="exportProfile('md')">📥 导出画像 MD</button><button class="btn" onclick="exportProfile('json')">📥 导出画像 JSON</button></div></div>
+<div style="display:flex;gap:12px;align-items:flex-start">
+  <!-- 左侧：基础档案 -->
+  <div style="flex:0 0 380px">
+    <div class="card" style="margin-top:0"><h2>📋 基础档案 <span class="hint">（手填）</span></h2>
+      <div class="form" style="grid-template-columns:1fr">
+        <div class="field"><label>客户名称</label><div style="font-size:16px;font-weight:700;padding:8px 0" id="pf_company">—</div></div>
+        <div class="field"><label>国家</label><div style="padding:8px 0" id="pf_country">—</div></div>
+        <div class="field"><label>官网</label><input id="pf_website" placeholder="https://..."></div>
+        <div class="field"><label>联系方式</label><input id="pf_contact" placeholder="WhatsApp / Email"></div>
+        <div class="field"><label>公司规模</label><input id="pf_scale" placeholder="如：50人，年营收$5M"></div>
+        <div class="field"><label>主营产品</label><input id="pf_main_products" placeholder="如：LED路灯、工矿灯"></div>
+        <div class="field"><label>客户类型</label><div style="padding:8px 0" id="pf_type">—</div></div>
+        <div class="field full"><label>备注</label><textarea id="pf_notes" style="min-height:60px" placeholder="其他补充信息..."></textarea></div>
+      </div>
+      <div class="modalfoot"><button class="btn primary" onclick="saveProfile()">💾 保存画像</button></div>
+    </div>
+  </div>
+  <!-- 右侧：画像卡片 Tab -->
+  <div style="flex:1">
+    <div class="card" style="margin-top:0">
+      <div style="display:flex;gap:0;margin-bottom:14px;border-bottom:2px solid #e4e9f0">
+        <button class="tab-btn active" data-tab="tab_stats" onclick="switchTab('tab_stats')" style="background:none;border:none;padding:8px 16px;font-weight:700;cursor:pointer;border-bottom:2px solid #1769aa;margin-bottom:-2px;color:#1769aa">📊 报价统计</button>
+        <button class="tab-btn" data-tab="tab_comm" onclick="switchTab('tab_comm')" style="background:none;border:none;padding:8px 16px;font-weight:700;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;color:#718096">💬 沟通习惯</button>
+        <button class="tab-btn" data-tab="tab_logistics" onclick="switchTab('tab_logistics')" style="background:none;border:none;padding:8px 16px;font-weight:700;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;color:#718096">🚚 定制物流</button>
+        <button class="tab-btn" data-tab="tab_risk" onclick="switchTab('tab_risk')" style="background:none;border:none;padding:8px 16px;font-weight:700;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;color:#718096">⚠️ 风险备忘</button>
+      </div>
+
+      <!-- Tab: 报价统计 -->
+      <div id="tab_stats">
+        <div class="grid4" style="margin-bottom:12px">
+          <div class="kpi"><small>报价单数</small><b id="pf_total_quotes">0</b></div>
+          <div class="kpi"><small>成交折扣区间</small><b id="pf_discount_range">—</b></div>
+          <div class="kpi"><small>平均修改次数</small><b id="pf_avg_mods">0</b></div>
+          <div class="kpi"><small>样品单数</small><b id="pf_sample_count">0</b></div>
+        </div>
+        <div class="grid4" style="margin-bottom:12px">
+          <div class="kpi"><small>大单数</small><b id="pf_large_count">0</b></div>
+          <div class="kpi"><small>小单数</small><b id="pf_small_count">0</b></div>
+        </div>
+        <div style="margin-bottom:12px">
+          <b>汇率历史</b>
+          <div class="tablewrap" style="max-height:200px"><table style="min-width:300px"><thead><tr><th>日期</th><th>汇率</th></tr></thead><tbody id="pf_rate_table"></tbody></table></div>
+        </div>
+        <div style="margin-bottom:12px">
+          <div class="toolbar"><b>导入的报价Excel</b><button class="btn small primary" onclick="importQuoteExcel()">＋ 导入Excel</button></div>
+          <div class="hint" style="margin-bottom:6px">Excel格式：报价日期 | 报价单号 | 是否成交 | 原价 | 成交价 | 修改次数 | 是否样品 | 订单类型(大/小) | 币种 | 汇率 | 备注</div>
+          <div id="pf_excel_list"></div>
+        </div>
+      </div>
+
+      <!-- Tab: 沟通习惯 -->
+      <div id="tab_comm" class="hidden">
+        <div class="form" style="grid-template-columns:1fr 1fr">
+          <div class="field"><label>最佳联系时间</label><input id="pf_comm_time" placeholder="如：UTC+4 10:00-12:00"></div>
+          <div class="field"><label>沟通风格</label><input id="pf_comm_style" placeholder="如：直接型、技术型、价格敏感型"></div>
+          <div class="field full"><label style="display:inline"><input type="checkbox" id="pf_is_urgent" style="min-width:auto;width:auto"> 急单型客户</label></div>
+        </div>
+      </div>
+
+      <!-- Tab: 定制物流 -->
+      <div id="tab_logistics" class="hidden">
+        <div class="form" style="grid-template-columns:1fr 1fr">
+          <div class="field"><label>自有货代</label><input id="pf_forwarder" placeholder="货代公司名称"></div>
+          <div class="field"><label>定制等级</label><input id="pf_custom_level" placeholder="如：标准/OEM/ODM"></div>
+          <div class="field"><label>认证要求</label><input id="pf_certification" placeholder="如：CE, RoHS, UL"></div>
+          <div class="field"><label>贸易术语</label><input id="pf_trade_terms" placeholder="如：EXW/FOB/CIF"></div>
+        </div>
+      </div>
+
+      <!-- Tab: 风险备忘（高亮） -->
+      <div id="tab_risk" class="hidden">
+        <div id="pf_risk_box" style="border:2px solid #e4e9f0;border-radius:10px;padding:14px;margin-bottom:14px">
+          <div class="field full"><label style="font-size:14px;color:#e65100">⚠️ 风险备忘（坑点、丢单记录、价格敏感点）</label>
+          <textarea id="pf_risk_notes" style="min-height:120px;background:#fff;border-color:#f0c0a0" placeholder="记录坑点：如客户曾因交期延迟取消订单；价格敏感点：折扣超过8%可能丢单；特殊要求：必须提供CE证书..."></textarea></div>
+        </div>
+        <div class="field full"><label>一句话报价摘要（手填）</label>
+        <textarea id="pf_quote_summary" style="min-height:50px" placeholder="例：价格敏感，需CE，最大接受8%折扣，货期第一"></textarea></div>
+      </div>
+    </div>
+
+    <!-- 附件标记 -->
+    <div class="card">
+      <div class="toolbar"><b>附件标记</b><div class="actions"><button class="btn small" onclick="uploadAttachment('quotation_file')">＋ 报价单</button><button class="btn small" onclick="uploadAttachment('whatsapp_file')">＋ WhatsApp</button></div></div>
+      <div style="display:flex;gap:8px;margin-bottom:10px">
+        <span class="pill gray" id="badge_quotation">报价单</span>
+        <span class="pill gray" id="badge_whatsapp">WhatsApp文件</span>
+        <span class="pill gray" id="badge_website" style="cursor:pointer">官网已查阅</span>
+      </div>
+      <div class="hint" style="margin-bottom:10px">仅存附件不解析内容；点击"官网已查阅"标记切换状态</div>
+      <div id="pf_attach_list"></div>
+    </div>
+
+    <!-- 画像更新时间 -->
+    <div style="text-align:right;color:#718096;font-size:12px;margin-top:6px">画像更新时间：<span id="pf_updated_at">—</span></div>
+  </div>
+</div>
+</section>
 </main></div><div class="modal" id="modal"><div class="modalbox"><div class="modalhead"><h2 id="mtitle">编辑</h2><button class="btn" onclick="closeModal()">×</button></div><div id="mbody"></div><div class="modalfoot"><button class="btn" onclick="closeModal()">取消</button><button class="btn primary" id="msave">保存</button></div></div></div>
 <div class="toast" id="toast"></div>
 <script>
 let customers=[],products=[],projects=[],quotes=[],providers=[],qrows=[],scanFiles=[],importFiles=[],projectTimer,qEditId=null;const $=id=>document.getElementById(id);const esc=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');const money=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(Number(n)||0);async function api(url,opt={}){let r=await fetch(url,opt);let d=await r.json();if(!r.ok)throw Error(d.error||'请求失败');return d}function toast(s){$('toast').textContent=s;$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',2600)}
-const titles={quote:'快速报价',quotations:'报价列表',customers:'客户管理',projects:'项目管理',products:'产品数据库',imports:'数据库导入',history:'报价历史',mail:'邮件'};function showPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));$(p).classList.remove('hidden');document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('active',x.dataset.page===p));$('title').textContent=titles[p];if(p==='quotations')loadQuotes();if(p==='projects')loadProjects()};document.querySelectorAll('.nav').forEach(x=>x.onclick=()=>showPage(x.dataset.page));
+const titles={quote:'快速报价',quotations:'报价列表',customers:'客户管理',projects:'项目管理',products:'产品数据库',imports:'数据库导入',history:'报价历史',mail:'邮件',customer_profile:'客户画像'};function showPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));$(p).classList.remove('hidden');document.querySelectorAll('.nav').forEach(x=>x.classList.toggle('active',x.dataset.page===p));$('title').textContent=titles[p];if(p==='quotations')loadQuotes();if(p==='projects')loadProjects();if(V4.has(p))V4.trigger(p)};document.querySelectorAll('.nav').forEach(x=>x.onclick=()=>showPage(x.dataset.page));
 async function loadAll(){try{[customers,products,projects,providers]=await Promise.all([api('/api/customers'),api('/api/products'),api('/api/projects'),api('/api/providers')]);loadProjectStatuses()}catch(e){toast('⚠️ 基础数据加载失败：'+e.message);return}
 try{fillCustomerFilters();renderCustomers()}catch(e){console.error(e)}
 try{renderProducts()}catch(e){console.error(e)}
@@ -78,5 +178,5 @@ function closeModal(){$('modal').classList.remove('open')}
 function newQuote(){qEditId=null;qrows=[];$('qno').value='CM-QT-'+new Date().toISOString().slice(0,10).replaceAll('-','')+'-C01';$('qprovider').value=providers[0]?.id||'';$('qdate').value=new Date().toISOString().slice(0,10);$('qnotes').value='';$('qverHint').textContent='保存会记录一个新版本；导出 Excel 不改变状态。审核在「报价列表」中操作。';addQuoteRow()}
 function dateSlash(v){let m=String(v||'').match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);return m?`${Number(m[1])}/${Number(m[2])}/${Number(m[3])}`:String(v||'')}
 loadAll().then(()=>newQuote());
-</script><script src="assets/common.js"></script><script src="assets/mail.js"></script><script src="assets/history.js"></script><script src="assets/singleimport.js"></script>
+</script><script src="assets/common.js"></script><script src="assets/mail.js"></script><script src="assets/history.js"></script><script src="assets/singleimport.js"></script><script src="assets/profile.js"></script>
 </body></html>
