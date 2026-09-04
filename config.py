@@ -9,8 +9,6 @@ STATIC = os.path.join(BASE, 'templates')
 DATA = os.path.join(BASE, 'data')            # 备份/导出 根目录
 BACKUP_DIR = os.path.join(DATA, 'backups')
 
-STATUSES = ['报价中', '样品确认', '订单确认', '项目终止', '项目失败']
-
 PORT = int(os.environ.get('PORT', '5100'))
 HOST = os.environ.get('HOST', '127.0.0.1')
 
@@ -32,6 +30,8 @@ CONFIG_META = {
     'backup_dir': (BACKUP_DIR, 'backup', 'DB备份目录', 0),
     'backup_retention': ('14', 'backup', '备份保留份数', 0),
     'backup_interval_days': ('7', 'backup', '自动备份间隔(天)', 0),
+    # 项目
+    'project_statuses': ('报价中,样品确认,订单确认,项目终止,项目失败', 'project', '项目状态列表(逗号分隔)', 0),
 }
 SECRET_KEYS = {k for k, v in CONFIG_META.items() if v[3] == 1}
 
@@ -101,3 +101,9 @@ def set_cfg(key, value):
 def set_cfg_many(items):
     for k, v in items.items():
         set_cfg(k, v)
+
+
+def get_statuses():
+    """从 config 表读取项目状态列表，逗号分隔。"""
+    val = get_cfg('project_statuses') or '报价中,样品确认,订单确认,项目终止,项目失败'
+    return [s.strip() for s in val.split(',') if s.strip()]

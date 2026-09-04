@@ -282,46 +282,7 @@ def convert_to_customer(email_id):
         return cid
     cid = tx(f)
     log('customer', cid, 'create', 'from email#%s %s' % (email_id, company))
-    _auto_comm(email_id, cid, direction='in', note='邮件转客户')
     return {'ok': True, 'customer_id': cid, 'company': company, 'exists': False}
-
-
-def _auto_comm(email_id, customer_id, direction='in', note=''):
-    from services import history_svc
-    e = query_one('SELECT * FROM emails WHERE id=?', (email_id,))
-    if not e:
-        return
-    history_svc.add_record(customer_id, 'email', direction,
-                           subject='[%s] %s' % (note, e['subject'] or '(无主题)') if note else (e['subject'] or '(无主题)'),
-                           content='发件人:%s\n%s' % (e['from_addr'], (e['body_text'] or '')[:2000]),
-                           contact=e['from_name'], ref_type='email', ref_id=email_id)
-
-
-def suggest_replies(email_id):
-    """基于规则表关键词 + 模板 + AI 生成 3 条建议回复。AI 不可用时退回规则模板匹配。"""
-    e = query_one('SELECT * FROM emails WHERE id=?', (email_id,))
-    if not e:
-        return {'error': '邮件不存在'}
-    rules = query_all("SELECT keyword,suggestion FROM rules WHERE kind='mail_reply' AND active=1 "
-                      "ORDER BY sort,id")
-    rules_txt = '\n'.join('关键词[%s] → 模板[%s]' % (r['keyword'], r['suggestion']) for r in rules) or '(无)'
-    fallback = [r['suggestion'] for r in rules
-                if r['keyword'] and (r['keyword'] in (e['body_text'] or '') or r['keyword'] in (e['subject'] or ''))]
-    prompt = (
-        '你是外贸业务助理。下面是一封客户发来的邮件。请结合“公司回复规则与模板”给出 3 条可直接发送的建议回复，'
-        '要求：语气专业友好、每条约 40-100 字、逐条编号（1. 2. 3.）。\n'
-        '客户姓名：%s\n主题：%s\n邮件正文：\n%s\n\n公司回复规则与模板：\n%s'
-        % (e['from_name'] or e['from_addr'], e['subject'] or '', (e['body_text'] or '')[:3000], rules_txt))
-    try:
-        out = ai_svc.chat([{'role': 'user', 'content': prompt}], temperature=0.6, max_tokens=800)
-        lines = [re.sub(r'^\s*\d+[.、)]\s*', '', ln).strip()
-                 for ln in out.splitlines() if ln.strip()]
-        lines = [ln for ln in lines if ln][:3]
-        if not lines:
-            lines = fallback
-        return {'ok': True, 'suggestions': lines[:3], 'source': 'ai'}
-    except ai_svc.AIError as err:
-        return {'ok': True, 'suggestions': fallback[:3], 'source': 'rule', 'warn': str(err)}
 
 
 def send_reply(email_id, content):
@@ -353,10 +314,5 @@ def send_reply(email_id, content):
     except Exception as e2:
         raise MailError('发送失败(%s:%s)：%s' % (host, port, e2))
     tx(lambda c: c.execute('UPDATE emails SET is_read=1 WHERE id=?', (email_id,)))
-    if e.get('customer_id'):
-        from services import history_svc
-        history_svc.add_record(e['customer_id'], 'email', 'out',
-                   subject='[回复] ' + (e['subject'] or ''), content=content,
-                   contact=e['from_name'], ref_type='email', ref_id=email_id)
     log('email', email_id, 'reply', 'to ' + e['from_addr'])
     return {'ok': True}

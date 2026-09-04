@@ -10,7 +10,9 @@ from services import quotes as Q
 from services.spec_fields import CATALOG_JSON, CORE_KEYS, SPEC_KEYS, parse_description_safe, build_description
 import config as C
 
-STATUSES = C.STATUSES
+
+def _statuses():
+    return C.get_statuses()
 
 
 def _get_exchange():
@@ -48,6 +50,7 @@ def routes():
         ('POST', r'/api/products', h_post_product),
         ('POST', r'/api/products/parse-description', h_parse_description),
         ('GET', r'/api/product-fields', h_product_fields),
+        ('GET', r'/api/project-statuses', h_project_statuses),
         ('POST', r'/api/projects', h_post_project),
         ('POST', r'/api/quotations', h_post_quotation),
         ('POST', r'/api/quotations/(?P<id>\d+)/audit', h_audit_quotation),
@@ -330,6 +333,11 @@ def h_product_fields(p, q, b, http):
     return CATALOG_JSON
 
 
+def h_project_statuses(p, q, b, http):
+    """项目状态列表（从 config 表读取，前端下拉用）。"""
+    return _statuses()
+
+
 def h_parse_description(p, q, b, http):
     """从描述解析结构化字段（产品表单"从描述解析"按钮用），只解析不保存。"""
     desc = str(b.get('description') or '')
@@ -605,7 +613,7 @@ def h_audit_quotation(p, q, b, http):
 def h_bulk_status(p, q, b, http):
     ids = [int(x) for x in b.get('ids', [])]
     status = b.get('status')
-    if status not in STATUSES:
+    if status not in _statuses():
         return http.send_json({'error': '无效项目状态'}, 400)
 
     def f(c):
@@ -649,7 +657,7 @@ def h_put_project(p, q, b, http):
 def h_put_project_status(p, q, b, http):
     i = int(p['id'])
     status = b.get('status')
-    if status not in STATUSES:
+    if status not in _statuses():
         return http.send_json({'error': '无效项目状态'}, 400)
     tx(lambda c: c.execute('UPDATE projects SET status=?,updated_at=CURRENT_TIMESTAMP,modified_at=CURRENT_TIMESTAMP '
                            'WHERE id=?', (status, i)))
