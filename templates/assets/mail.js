@@ -15,6 +15,7 @@
     h += '<span>未读 <b id="mUnread">' + (s.unread || 0) + '</b> / 共 ' + (s.total || 0) + '</span>' + conf;
     h += '<span class="mini" id="mLast">' + (s.last_sync ? '上次同步：' + V4.dt(s.last_sync) : '') + '</span>';
     h += '<span class="sp"></span>';
+    h += '<button class="btn primary" onclick="V4Mail.compose()">✉️ 写邮件</button>';
     h += '<button class="btn" onclick="V4Mail.openConfig()">⚙️ 邮件设置</button>';
     h += '<button class="btn" onclick="V4Mail.load()">↻ 刷新</button></div>';
     h += '<div class="split"><div class="pane-sm"><div id="mailList">' +
@@ -199,9 +200,106 @@
       });
   }
 
+  function compose() {
+    var h = '<div class="form" style="grid-template-columns:1fr">';
+    h += '<div class="field full"><label>收件人（逗号分隔多人，支持手动输入+导入）</label>';
+    h += '<input id="mc_to" placeholder="a@b.com, c@d.com" style="width:100%">';
+    h += '<div style="margin-top:4px">';
+    h += '<input type="file" id="mc_to_file" accept=".txt,.csv,.xlsx,.xls" style="display:none" onchange="V4Mail.importEmails(this)">';
+    h += '<button class="btn small" onclick="document.getElementById(\'mc_to_file\').click()">📂 导入收件人文件</button>';
+    h += '<span class="mini" id="mc_to_hint" style="margin-left:6px">支持 txt/csv/xlsx，自动提取邮箱地址</span>';
+    h += '</div></div>';
+    h += '<div class="field full"><label>抄送（可选）</label><input id="mc_cc" placeholder="可留空" style="width:100%"></div>';
+    h += '<div class="field full"><label>主题</label><input id="mc_subject" value="From CM Quote Workbench" style="width:100%"></div>';
+    h += '<div class="field full"><label>正文</label><textarea id="mc_content" rows="6" style="width:100%;min-height:120px;font-family:inherit"></textarea></div>';
+    h += '</div><div class="mini" style="margin-top:8px">邮件将从配置的邮箱账号发出，SMTP SSL 加密传输。发送前请确认主题和正文内容。</div>';
+    document.getElementById('mtitle').textContent = '写邮件';
+    document.getElementById('mbody').innerHTML = h;
+    document.getElementById('modal').classList.add('open');
+    document.getElementById('msave').textContent = '📤 发送';
+    document.getElementById('msave').onclick = function () {
+      var body = {
+        to: V4.el('mc_to').value,
+        cc: V4.el('mc_cc').value,
+        subject: V4.el('mc_subject').value,
+        content: V4.el('mc_content').value
+      };
+      if (!body.to.trim()) { toast('请先填写或导入收件人'); return; }
+      if (!body.content.trim()) { toast('请先输入邮件正文'); return; }
+      document.getElementById('msave').disabled = true;
+      V4.api('/api/mail/send', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+        .then(function (r) {
+          toast('✅ 邮件已发送至 ' + (r.to || ''));
+          document.getElementById('modal').classList.remove('open');
+          document.getElementById('msave').disabled = false;
+        })
+        .catch(function (e) {
+          toast('❌ 发送失败：' + e.message);
+          document.getElementById('msave').disabled = false;
+        });
+    };
+  }
+
+  /* 导入收件人文件：读取 txt/csv，正则提取邮箱地址追加到收件人输入框 */
+  function importEmails(input) {
+    var file = input.files[0];
+    if (!file) return;
+    var hint = V4.el('mc_to_hint');
+    hint.textContent = '正在读取 ' + file.name + ' ...';
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      var text = '';
+      var raw = e.target.result;
+      /* xlsx/xls 二进制：尝试简单提取文本（非Excel专用库，仅尽力提取可见文本） */
+      if (/\.(xlsx|xls)$/i.test(file.name)) {
+        /* 二进制中提取可见 ASCII 文本片段 */
+        var decoded = '';
+        try {
+          /* 尝试 TextDecoder 解码 UTF-8 字节序列 */
+          var bytes = new Uint8Array(raw);
+          for (var i = 0; i < bytes.length; i++) {
+            var b = bytes[i];
+            if ((b >= 32 && b < 127) || b === 10 || b === 13 || b >= 128) decoded += String.fromCharCode(b);
+          }
+        } catch (ex) {}
+        text = decoded;
+      } else {
+        text = typeof raw === 'string' ? raw : '';
+      }
+      /* 正则提取邮箱地址 */
+      var emailRe = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
+      var matches = text.match(emailRe) || [];
+      /* 去重 */
+      var seen = {};
+      var emails = [];
+      matches.forEach(function (m) {
+        var lc = m.toLowerCase();
+        if (!seen[lc]) { seen[lc] = 1; emails.push(m); }
+      });
+      var inp = V4.el('mc_to');
+      var existing = inp.value.trim();
+      /* 合并已有手动输入的邮箱 */
+      if (existing) {
+        existing.split(/[,;\n]/).forEach(function (e2) {
+          var t = e2.trim();
+          if (t && !seen[t.toLowerCase()]) { seen[t.toLowerCase()] = 1; emails.unshift(t); }
+        });
+      }
+      inp.value = emails.join(', ');
+      hint.textContent = '已从 ' + file.name + ' 提取 ' + emails.length + ' 个邮箱地址';
+    };
+    /* txt/csv 用文本读取，xlsx/xls 用 ArrayBuffer */
+    if (/\.(xlsx|xls)$/i.test(file.name)) {
+      reader.readAsArrayBuffer(file);
+    } else {
+      reader.readAsText(file, 'utf-8');
+    }
+  }
+
   window.V4Mail = {
     load: load, sync: sync, open: open, convert: convert, relate: relate,
-    showRelate: showRelate, reply: reply, openConfig: openConfig, saveConfig: saveConfig
+    showRelate: showRelate, reply: reply, openConfig: openConfig, saveConfig: saveConfig,
+    compose: compose, importEmails: importEmails
   };
   V4.register('mail', load);
 })();
