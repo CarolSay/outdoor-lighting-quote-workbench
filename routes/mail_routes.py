@@ -19,6 +19,7 @@ def routes():
         ('POST', r'/api/mail/(?P<id>\d+)/convert', h_convert),
         ('POST', r'/api/mail/(?P<id>\d+)/relate', h_relate),
         ('POST', r'/api/mail/(?P<id>\d+)/reply', h_reply),
+        ('POST', r'/api/mail/send', h_send),
     ]
 
 
@@ -93,5 +94,17 @@ def h_relate(p, q, b, http):
 def h_reply(p, q, b, http):
     try:
         return mail_svc.send_reply(int(p['id']), b.get('content', ''))
+    except mail_svc.MailError as e:
+        return http.send_json({'error': str(e)}, 400)
+
+
+def h_send(p, q, b, http):
+    try:
+        return mail_svc.send_new(
+            b.get('to', ''),
+            b.get('content', ''),
+            b.get('cc', ''),
+            b.get('subject', 'From CM Quote Workbench'),
+        )
     except mail_svc.MailError as e:
         return http.send_json({'error': str(e)}, 400)
