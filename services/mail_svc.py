@@ -306,7 +306,10 @@ def send_reply(email_id, content):
         msg['References'] = '<%s>' % e['message_id']
     msg.set_content(content)
     try:
-        with smtplib.SMTP_SSL(host, port, timeout=30, context=ssl.create_default_context()) as s:
+        ctx = ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
+        with smtplib.SMTP_SSL(host, port, timeout=30, context=ctx) as s:
             s.login(user, auth)
             s.send_message(msg)
     except smtplib.SMTPAuthenticationError as e2:
@@ -316,3 +319,38 @@ def send_reply(email_id, content):
     tx(lambda c: c.execute('UPDATE emails SET is_read=1 WHERE id=?', (email_id,)))
     log('email', email_id, 'reply', 'to ' + e['from_addr'])
     return {'ok': True}
+
+
+def send_new(to, content, cc='', subject='From CM Quote Workbench'):
+    """发送新邮件（非回复），用于主动联系客户。"""
+    if not (to or '').strip():
+        raise MailError('收件人不能为空')
+    if not (content or '').strip():
+        raise MailError('邮件内容不能为空')
+    host = C.get_cfg('mail_smtp_host') or 'smtp.163.com'
+    port = C.get_int('mail_smtp_port', 465)
+    user = C.get_cfg('mail_user')
+    auth = C.get_cfg('mail_auth_code')
+    if not user or not auth:
+        raise MailError('未配置邮箱账号/授权码，请在 邮件→设置 中填写')
+    msg = email.message.EmailMessage()
+    msg['From'] = user
+    msg['To'] = to
+    if cc:
+        msg['Cc'] = cc
+    msg['Subject'] = subject
+    msg.set_content(content)
+    try:
+        ctx = ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
+        with smtplib.SMTP_SSL(host, port, timeout=30, context=ctx) as s:
+            s.login(user, auth)
+            s.send_message(msg)
+    except smtplib.SMTPAuthenticationError as e2:
+        raise MailError('SMTP 登录失败：%s（检查授权码）' % e2)
+    except Exception as e2:
+        raise MailError('发送失败(%s:%s)：%s' % (host, port, e2))
+    recipients = to + (',' + cc if cc else '')
+    log('email', 0, 'send', 'to ' + recipients)
+    return {'ok': True, 'to': to, 'cc': cc}
