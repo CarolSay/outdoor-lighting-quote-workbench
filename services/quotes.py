@@ -16,6 +16,97 @@ from datetime import datetime, timedelta
 import config as C
 from db import tx, query_all, query_one
 
+# ---------- 产品图片提取 ----------
+def _extract_images_from_xlsx(path):
+    """从 Excel 提取图片，返回 {row_number: [(img_data, ext), ...]}。"""
+    from openpyxl import load_workbook
+    from openpyxl.utils import get_column_letter
+    wb = load_workbook(path, data_only=False)
+    result = {}
+    for ws in wb.worksheets:
+        if not ws._images:
+            continue
+        for img in ws._images:
+            try:
+                anchor = img.anchor
+                row = None
+                if anchor._from:
+                    row = anchor._from.row + 1  # 0-based to 1-based
+                elif hasattr(anchor, 'row'):
+                    row = anchor.row
+                if row is None:
+                    continue
+                data = img._data()
+                ext = os.path.splitext(img.path or '')[-1] or '.png'
+                if not ext.startswith('.'):
+                    ext = '.png'
+                result.setdefault(row, []).append((data, ext))
+            except Exception:
+                pass
+    return result
+
+
+def _extract_images_from_pdf(path):
+    """从 PDF 提取图片，返回 {page_number: [(img_data, ext), ...]}。"""
+    try:
+        from pypdf import PdfReader
+        reader = PdfReader(path)
+        result = {}
+        for pn, page in enumerate(reader.pages, 1):
+            if '/XObject' in (page.get('/Resources', {}) or {}):
+                try:
+                    for img_key in page['/Resources']['/XObject']:
+                        xobj = page['/Resources']['/XObject'][img_key]
+                        if xobj.get('/Subtype') == '/Image':
+                            data = xobj.get_data()
+                            ft = xobj.get('/Filter', '')
+                            ext = '.png'
+                            if 'DCTDecode' in str(ft) or 'JPXDecode' in str(ft):
+                                ext = '.jpg'
+                            result.setdefault(pn, []).append((data, ext))
+                except Exception:
+                    pass
+        return result
+    except Exception:
+        return {}
+
+
+def _extract_images_from_blob(name, blob):
+    """从文件 blob 提取所有图片，返回 {row_or_page: [(img_data, ext), ...]}。"""
+    ext = os.path.splitext(name)[1].lower()
+    fd, temp = tempfile.mkstemp(suffix=ext)
+    os.close(fd)
+    try:
+        with open(temp, 'wb') as f:
+            f.write(blob)
+        if ext in ('.xlsx', '.xls'):
+            return _extract_images_from_xlsx(temp)
+        elif ext == '.pdf':
+            return _extract_images_from_pdf(temp)
+        return {}
+    finally:
+        try:
+            os.remove(temp)
+        except Exception:
+            pass
+
+
+def _save_product_images(product_id, images, row_idx):
+    """保存产品图片到 product_images/{product_id}/ 目录，返回相对路径列表。"""
+    import config as C
+    img_dir = os.path.join(C.PRODUCT_IMG_DIR, str(product_id))
+    os.makedirs(img_dir, exist_ok=True)
+    paths = []
+    for i, (data, ext) in enumerate(images):
+        fname = 'img_{:03d}{}'.format(i + 1, ext)
+        fpath = os.path.join(img_dir, fname)
+        with open(fpath, 'wb') as f:
+            f.write(data)
+        # 相对路径
+        paths.append('product_images/{}/{}'.format(product_id, fname))
+    return paths
+
+
 # ---------- 基础文本工具 ----------
 def cell_text(v):
     return '' if v is None else str(v).strip()
@@ -416,11 +507,13 @@ _PARSE_COL_MAP = ['model', 'voltage', 'power', 'cct_color', 'cct', 'control', 'i
                   'hs_code', 'notes', 'ext1', 'ext2', 'ext3']
 
 
-def get_or_create_product(c, item_name, description, unit_price, source='', doc_type='quotation'):
-    """把报价明细当作产品入库：
+def get_or_create_product(c, item_name, description, unit_price, source='', doc_type='quotation',
+                          images=None):
+    """把报价明细当作产品入库。
     1) 描述解析出型号 → 按 model 匹配，命中复用（补空字段+更新价格）
     2) 按 商品名称+商品描述 匹配
     3) 新建：解析字段写入固定列，其余进 spec_json，描述按 PI 风格重建
+    4) 如有图片，保存到 product_images/{product_id}/ 并记录相对路径
     返回 (product_id, is_new)。"""
     from services.spec_fields import SPEC_KEYS, parse_description_safe, build_description
     nm = _norm_prod_text(item_name)
@@ -461,11 +554,20 @@ def get_or_create_product(c, item_name, description, unit_price, source='', doc_
     core_vals = {k: fields.get(k) for k in _PARSE_COL_MAP}
     notes = core_vals.pop('notes', None) or None
     new_desc = build_description(fields) or desc
+    # 保存图片
+    image_path = None
+    if images:
+        try:
+            paths = _save_product_images(code, images, 0)
+            if paths:
+                image_path = ';'.join(paths)
+        except Exception:
+            pass
     c.execute('INSERT INTO products(product_code,series,model,product_name,description,'
               'voltage,power,cct_color,cct,control,ip_rating,beam_angle,length_size,led_count,pixel_count,'
               'led_chip,material,body_color,hs_code,currency,category,standard_price_usd,notes,spec_json,'
-              'ext1,ext2,ext3,active) '
-              'VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1)',
+              'ext1,ext2,ext3,image_path,active) '
+              'VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,1)',
               (code, 'Imported', core_vals.get('model'), nm, new_desc,
                core_vals.get('voltage'), core_vals.get('power'), core_vals.get('cct_color'), core_vals.get('cct'),
                core_vals.get('control'), core_vals.get('ip_rating'), core_vals.get('beam_angle'),
@@ -474,7 +576,8 @@ def get_or_create_product(c, item_name, description, unit_price, source='', doc_
                core_vals.get('hs_code'), 'USD', _guess_category(nm, desc),
                price if price > 0 else 0, notes,
                json.dumps(spec, ensure_ascii=False) if spec else None,
-               core_vals.get('ext1'), core_vals.get('ext2'), core_vals.get('ext3')))
+               core_vals.get('ext1'), core_vals.get('ext2'), core_vals.get('ext3'),
+               image_path))
     pid = c.execute('SELECT id FROM products WHERE product_code=?', (code,)).fetchone()['id']
     return pid, True
 
@@ -556,11 +659,16 @@ def import_blob(c, name, relpath, blob, rows, meta, sha, doc_type='quotation'):
                         (qno, qdate, customer_id, project_id, provider_id, expiry, 'USD', '正式版本', total,
                          '导入来源：' + relpath)).lastrowid
     new_products = 0
+    # 提取文件中的图片，按行号索引
+    row_images = _extract_images_from_blob(name, blob)
     for n, x in enumerate(rows, 1):
         pid = None
+        # 获取该行对应的图片（Excel 行号从 source_row 获取）
+        src_row = x.get('source_row', n)
+        imgs = row_images.get(src_row, [])
         if not _is_blank_line(x['quantity'], x['unit_price'], x['amount']):
             pid, is_new = get_or_create_product(c, x['item_name'], x['description'], x['unit_price'],
-                                                relpath, doc_type)
+                                                relpath, doc_type, imgs if imgs else None)
             if is_new:
                 new_products += 1
         c.execute('INSERT INTO quotation_items(quotation_id,item_no,product_id,product_name,description,qty,unit,'

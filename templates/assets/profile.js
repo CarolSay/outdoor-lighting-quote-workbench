@@ -81,7 +81,7 @@
 
     // 基础档案
     $('pf_company').textContent = cust.company || '-';
-    $('pf_country').textContent = cust.country || '-';
+    $('pf_country').textContent = (cust.country || '') + (cust.city ? ' / ' + cust.city : '') || '-';
     $('pf_website').value = p.website || '';
     $('pf_contact').value = cust.whatsapp_phone || cust.email || '';
     $('pf_scale').value = p.company_scale || '';
@@ -447,7 +447,52 @@
     $('ai_result').value = result;
   };
 
-  // ==================== 导出 ====================
+  // ==================== 同步报价历史统计 ====================
+  window.syncFromQuotations = async function () {
+    if (!profileState.currentCustomerId) return;
+    try {
+      var qs = await V4.api('/api/customer-profiles/' + profileState.currentCustomerId + '/quotation-stats');
+      // 合并到已有的 stats 对象中
+      profileState.quotationStats = qs;
+      renderQuotationStats(qs);
+      toast('✅ 已从报价历史同步，共 ' + qs.total_quotes + ' 条报价，总额 $' + qs.total_amount_usd.toFixed(2));
+    } catch (e) {
+      toast('⚠️ 同步失败：' + e.message);
+    }
+  };
+
+  function renderQuotationStats(qs) {
+    // 在报价统计 tab 中追加历史报价数据
+    var html = '';
+    if (qs.total_quotes > 0) {
+      html += '<div style="margin-top:12px;padding-top:12px;border-top:1px dashed #e5e7eb">'
+        + '<b>📋 报价历史（系统同步）</b>'
+        + '<div class="grid4" style="margin-top:8px">'
+        + '<div class="kpi"><small>报价次数</small><b>' + qs.total_quotes + '</b></div>'
+        + '<div class="kpi"><small>累计金额USD</small><b>$' + qs.total_amount_usd.toFixed(2) + '</b></div>'
+        + '<div class="kpi"><small>平均金额USD</small><b>$' + qs.avg_amount_usd.toFixed(2) + '</b></div>'
+        + '<div class="kpi"><small>产品总数</small><b>' + qs.total_qty + '</b></div>'
+        + '</div>';
+
+      if (qs.recent_quotes && qs.recent_quotes.length > 0) {
+        html += '<div style="margin-top:10px"><b>最近报价</b>'
+          + '<div class="tablewrap" style="max-height:180px"><table style="min-width:400px">'
+          + '<thead><tr><th>报价号</th><th>日期</th><th>金额USD</th><th>状态</th></tr></thead><tbody>';
+        qs.recent_quotes.forEach(function (q) {
+          html += '<tr><td>' + esc(q.quote_no) + '</td><td>' + esc(q.date) + '</td>'
+            + '<td>$' + (q.total_usd || 0).toFixed(2) + '</td><td>' + esc(q.status) + '</td></tr>';
+        });
+        html += '</tbody></table></div></div>';
+      }
+      html += '</div>';
+    }
+    var existing = $('pf_quotation_stats');
+    if (existing) existing.remove();
+    var el = document.createElement('div');
+    el.id = 'pf_quotation_stats';
+    el.innerHTML = html;
+    $('tab_stats').appendChild(el);
+  }
   window.exportProfile = function (fmt) {
     if (!profileState.currentCustomerId) return;
     window.location = '/api/customer-profiles/' + profileState.currentCustomerId + '/export/' + fmt;

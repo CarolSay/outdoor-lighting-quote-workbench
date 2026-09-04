@@ -8,6 +8,7 @@ TEMPLATE = os.path.join(BASE, 'quotation_template.xlsx')
 STATIC = os.path.join(BASE, 'templates')
 DATA = os.path.join(BASE, 'data')            # 备份/导出 根目录
 BACKUP_DIR = os.path.join(DATA, 'backups')
+PRODUCT_IMG_DIR = os.path.join(DATA, 'product_images')
 
 PORT = int(os.environ.get('PORT', '5100'))
 HOST = os.environ.get('HOST', '127.0.0.1')
@@ -49,7 +50,7 @@ def env_or_default(key, dflt=''):
 
 
 def ensure_dirs():
-    for d in (DATA, BACKUP_DIR):
+    for d in (DATA, BACKUP_DIR, PRODUCT_IMG_DIR):
         try:
             os.makedirs(d, exist_ok=True)
         except Exception:

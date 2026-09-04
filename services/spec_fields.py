@@ -177,9 +177,9 @@ def parse_description(desc):
     if 'length_size' not in out:
         take(r'[φΦ]\s*\d+(?:\.\d+)?(?:\s*[*×xX]\s*\d+(?:\.\d+)?)?\s*mm\b', 'length_size')
     if 'length_size' not in out:
-        take(r'\b\d+(?:\.\d+)?\s*mm\b', 'length_size')
+        take(r'\b\d+(?:\.\d+)?\s*mm\b(?!\s*(?:for|with|to|by|per|of|x|in|at|length|long|wide|width|height)\b)', 'length_size')
     if 'length_size' not in out:
-        take(r'\b\d+(?:\.\d+)?\s*m\b(?!\w)', 'length_size')
+        take(r'\b\d+(?:\.\d+)?\s*m\b(?!\s*(?:for|with|to|by|per|of|x|in|at|length|long|wide|width|height)\b)', 'length_size')
     # 5) 电压：AC220V / DC24V / AC100-277V / DC48V / 24V（裸写法）
     take(r'\b[ACD]{2}\s?\d{2,3}(?:-\d{2,3})?V\b|\b\d{2,3}V\b', 'voltage')
     # 6) 功率：12W / 4.8W / 240W（独立词）

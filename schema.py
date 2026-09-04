@@ -129,6 +129,7 @@ CREATE INDEX IF NOT EXISTS idx_cp_customer ON customer_profiles(customer_id);
 CREATE INDEX IF NOT EXISTS idx_cqe_customer ON customer_quote_excels(customer_id);
 CREATE INDEX IF NOT EXISTS idx_cqi_excel ON customer_quote_items(excel_id);
 CREATE INDEX IF NOT EXISTS idx_ca_customer ON customer_attachments(customer_id);
+ALTER TABLE products ADD COLUMN image_path TEXT;
 '''
 
 # 兼容列：存量库需要补齐时使用(重复执行被 except 吞掉)
@@ -137,7 +138,7 @@ COMPAT_COLS = {
     'products': [('led_count', 'TEXT'), ('pixel_count', 'TEXT'), ('cct', 'TEXT'), ('category', 'TEXT'),
                  ('body_color', 'TEXT'), ('hs_code', 'TEXT'), ('currency', 'TEXT'), ('moq', 'TEXT'),
                  ('trade_terms', 'TEXT'), ("spec_json", "TEXT DEFAULT '{}'"),
-                 ('ext1', 'TEXT'), ('ext2', 'TEXT'), ('ext3', 'TEXT')],
+                 ('ext1', 'TEXT'), ('ext2', 'TEXT'), ('ext3', 'TEXT'), ('image_path', 'TEXT')],
     'quotations': [('provider_id', 'INTEGER'), ('expiry_date', 'TEXT'), ('reviewed_at', 'TEXT')],
     'quotation_history': [('provider_id', 'INTEGER'), ('expiry_date', 'TEXT'),
                           ('source_type', "TEXT DEFAULT '手动创建'"), ('source_file', 'TEXT')],

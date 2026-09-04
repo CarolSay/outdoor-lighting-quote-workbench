@@ -23,6 +23,8 @@ def routes():
         ('GET', r'/api/customer-profiles/(?P<customer_id>\d+)/stats', h_get_stats),
         ('GET', r'/api/customer-profiles/(?P<customer_id>\d+)/excel-list', h_excel_list),
         ('DELETE', r'/api/customer-quote-excels/(?P<id>\d+)', h_delete_excel),
+        # 报价历史同步统计
+        ('GET', r'/api/customer-profiles/(?P<customer_id>\d+)/quotation-stats', h_quotation_stats),
         # 附件管理
         ('POST', r'/api/customer-profiles/(?P<customer_id>\d+)/attachments', h_upload_attachment),
         ('GET', r'/api/customer-profiles/(?P<customer_id>\d+)/attachments', h_list_attachments),
@@ -43,12 +45,15 @@ def h_get_profile(p, q, b, http):
         return http.send_json({'error': '客户不存在'}, 404)
     pf = query_one('SELECT * FROM customer_profiles WHERE customer_id=?', (cid,))
     if not pf:
+        # 自动从 customers 表预填基础字段
         pf = {
             'id': None, 'customer_id': cid,
             'company_scale': '', 'main_products': '', 'website': '',
             'comm_best_time': '', 'comm_style': '', 'is_urgent_order': 0,
-            'own_forwarder': '', 'custom_level': '', 'certification': '',
-            'trade_terms_detail': '', 'risk_notes': '', 'profile_notes': '',
+            'own_forwarder': cust.get('incoterm', '') or '',
+            'custom_level': '', 'certification': '',
+            'trade_terms_detail': cust.get('incoterm', '') or '',
+            'risk_notes': '', 'profile_notes': cust.get('notes', '') or '',
             'quote_summary': '', 'website_checked': 0, 'updated_at': ''
         }
     pf['customer'] = cust
@@ -234,6 +239,58 @@ def h_get_stats(p, q, b, http):
         'large_order_count': large_count,
         'exchange_rate_history': rate_history,
         'item_count': total
+    }
+
+
+def h_quotation_stats(p, q, b, http):
+    """从报价历史(quotations + quotation_items)拉取统计，不依赖Excel导入。"""
+    cid = int(p['customer_id'])
+    cust = query_one('SELECT * FROM customers WHERE id=?', (cid,))
+    if not cust:
+        return http.send_json({'error': '客户不存在'}, 404)
+
+    # 该客户的所有报价
+    quotes = query_all(
+        'SELECT id, quote_no, quote_date, total_usd, status, currency '
+        'FROM quotations WHERE customer_id=? ORDER BY quote_date DESC', (cid,))
+
+    total_quotes = len(quotes)
+    if total_quotes == 0:
+        return {
+            'total_quotes': 0, 'total_amount_usd': 0,
+            'avg_amount_usd': 0, 'latest_quote_date': None,
+            'quotes': [], 'source': 'quotation_history'
+        }
+
+    total_amount = sum(q['total_usd'] for q in quotes if q['total_usd'])
+    avg_amount = round(total_amount / total_quotes, 2) if total_quotes > 0 else 0
+
+    # 获取所有报价明细的产品统计
+    qids = [q['id'] for q in quotes]
+    if qids:
+        placeholders = ','.join('?' * len(qids))
+        items = query_all(
+            'SELECT product_name, description, qty, unit_price_usd, amount_usd '
+            'FROM quotation_items WHERE quotation_id IN (%s)' % placeholders,
+            qids)
+        total_items = len(items)
+        total_qty = sum(i['qty'] for i in items if i['qty'])
+    else:
+        items = []
+        total_items = 0
+        total_qty = 0
+
+    return {
+        'total_quotes': total_quotes,
+        'total_amount_usd': round(total_amount, 2),
+        'avg_amount_usd': avg_amount,
+        'total_items': total_items,
+        'total_qty': round(total_qty, 2),
+        'latest_quote_date': quotes[0]['quote_date'] if quotes else None,
+        'recent_quotes': [{'quote_no': q['quote_no'], 'date': q['quote_date'],
+                           'total_usd': q['total_usd'], 'status': q['status']}
+                          for q in quotes[:10]],
+        'source': 'quotation_history'
     }
 
 
