@@ -1,0 +1,19 @@
+# Database
+*.db
+*.db-journal
+
+# Backups & exports
+data/backups/
+data/exports/
+
+# Python
+__pycache__/
+*.pyc
+
+# OS
+Thumbs.db
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
